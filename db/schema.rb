@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_08_192453) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_08_205433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "phrases", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "english"
+    t.string "french"
+    t.string "translation"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "saved_items", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "saveable_id"
+    t.string "saveable_type"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["saveable_type", "saveable_id"], name: "index_saved_items_on_saveable"
+    t.index ["user_id"], name: "index_saved_items_on_user_id"
+  end
 
   create_table "solid_cable_messages", force: :cascade do |t|
     t.binary "channel", null: false
@@ -168,6 +186,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_08_192453) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "words", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "definition"
+    t.string "english"
+    t.string "french"
+    t.string "type"
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "saved_items", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
