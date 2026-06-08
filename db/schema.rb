@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_08_203056) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_08_203721) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -173,6 +173,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_08_203056) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "user_conversation_messages", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.string "translation"
+    t.datetime "updated_at", null: false
+    t.string "user_id"
+  end
+
+  create_table "user_conversations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id_1", null: false
+    t.bigint "user_id_2", null: false
+    t.index ["user_id_1", "user_id_2"], name: "index_user_conversations_on_user_id_1_and_user_id_2", unique: true
+    t.index ["user_id_1"], name: "index_user_conversations_on_user_id_1"
+    t.index ["user_id_2"], name: "index_user_conversations_on_user_id_2"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
@@ -193,4 +211,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_08_203056) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "user_conversations", "users", column: "user_id_1"
+  add_foreign_key "user_conversations", "users", column: "user_id_2"
 end
