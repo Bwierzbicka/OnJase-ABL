@@ -14,22 +14,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_144152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
-  create_table "phrases", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "english"
-    t.string "french"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "saved_items", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.bigint "saveable_id"
-    t.string "saveable_type"
-    t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["saveable_type", "saveable_id"], name: "index_saved_items_on_saveable"
-    t.index ["user_id"], name: "index_saved_items_on_user_id"
-
   create_table "chats", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "title"
@@ -45,6 +29,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_144152) do
     t.string "role"
     t.datetime "updated_at", null: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
+  end
+
+  create_table "phrases", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "english"
+    t.string "french"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "saved_items", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "saveable_id"
+    t.string "saveable_type"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["saveable_type", "saveable_id"], name: "index_saved_items_on_saveable"
+    t.index ["user_id"], name: "index_saved_items_on_user_id"
   end
 
   create_table "solid_cable_messages", force: :cascade do |t|
@@ -228,9 +229,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_144152) do
     t.string "word_type"
   end
 
-  add_foreign_key "saved_items", "users"
   add_foreign_key "chats", "users"
   add_foreign_key "messages", "chats"
+  add_foreign_key "saved_items", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
