@@ -8,13 +8,15 @@ class ChatsController < ApplicationController
   end
 
   def create
-    @chat = Chat.new
+    @chat = Chat.new(title: Chat::DEFAULT_TITLE)
     @chat.user = current_user
 
     @chat.save
+    redirect_to chat_path(@chat)
   end
 
   def show
     @chat = Chat.find(params[:id])
+    @message = Message.new
   end
 end

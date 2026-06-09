@@ -1,0 +1,11 @@
+<h1>All Chats</h1>
+
+<% if @chats.any? %>
+  <% @chats.each do |chat| %>
+    <ul>
+      <li><%= link_to chat.title, chat_path(chat) %></li>
+    </ul>
+  <% end %>
+<% end %>
+
+<%= button_to "New Chat", chats_path %>
