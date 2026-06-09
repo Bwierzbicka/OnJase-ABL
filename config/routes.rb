@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get "user_conversations/new"
+  get "user_conversations/create"
+  get "user_conversations/show"
+  get "user_conversations/destroy"
+  get "user_conversation_messages/create"
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
