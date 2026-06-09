@@ -7,4 +7,10 @@ class User < ApplicationRecord
   has_many :saved_items, dependent: :destroy
   has_many :saved_words, through: :saved_items, source: :saveable, source_type: 'Word'
   has_many :saved_phrases, through: :saved_items, source: :saveable, source_type: 'Phrase'
+  has_many :user_conversations_as_user1, class_name: "UserConversation", foreign_key: :user_id_1, dependent: :destroy
+  has_many :user_conversations_as_user2, class_name: "UserConversation", foreign_key: :user_id_2, dependent: :destroy
+
+  def user_conversations
+    UserConversation.where("user_id_1 = ? OR user_id_2 = ?", id, id)
+  end
 end

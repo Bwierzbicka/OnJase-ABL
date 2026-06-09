@@ -195,9 +195,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_180931) do
     t.datetime "created_at", null: false
     t.string "translation"
     t.datetime "updated_at", null: false
-    t.bigint "user_conversations_id", null: false
+    t.bigint "user_conversation_id", null: false
     t.string "user_id"
-    t.index ["user_conversations_id"], name: "index_user_conversation_messages_on_user_conversations_id"
+    t.index ["user_conversation_id"], name: "index_user_conversation_messages_on_user_conversation_id"
   end
 
   create_table "user_conversations", force: :cascade do |t|
@@ -240,7 +240,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_180931) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
-  add_foreign_key "user_conversation_messages", "user_conversations", column: "user_conversations_id"
+  add_foreign_key "user_conversation_messages", "user_conversations"
   add_foreign_key "user_conversations", "users", column: "user_id_1"
   add_foreign_key "user_conversations", "users", column: "user_id_2"
 end
