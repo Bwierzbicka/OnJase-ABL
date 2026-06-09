@@ -29,6 +29,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_144152) do
     t.bigint "user_id", null: false
     t.index ["saveable_type", "saveable_id"], name: "index_saved_items_on_saveable"
     t.index ["user_id"], name: "index_saved_items_on_user_id"
+
+  create_table "chats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_chats_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "chat_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.string "role"
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
   end
 
   create_table "solid_cable_messages", force: :cascade do |t|
@@ -173,6 +189,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_144152) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "user_conversation_messages", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.string "translation"
+    t.datetime "updated_at", null: false
+    t.string "user_id"
+  end
+
+  create_table "user_conversations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id_1", null: false
+    t.bigint "user_id_2", null: false
+    t.index ["user_id_1", "user_id_2"], name: "index_user_conversations_on_user_id_1_and_user_id_2", unique: true
+    t.index ["user_id_1"], name: "index_user_conversations_on_user_id_1"
+    t.index ["user_id_2"], name: "index_user_conversations_on_user_id_2"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
@@ -195,10 +229,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_144152) do
   end
 
   add_foreign_key "saved_items", "users"
+  add_foreign_key "chats", "users"
+  add_foreign_key "messages", "chats"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "user_conversations", "users", column: "user_id_1"
+  add_foreign_key "user_conversations", "users", column: "user_id_2"
 end
