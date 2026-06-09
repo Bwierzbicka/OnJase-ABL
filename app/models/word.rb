@@ -3,7 +3,7 @@ class Word < ApplicationRecord
 
   has_many :saved_items, as: :saveable
 
-  validates :type, inclusion: { in: WORD_TYPE }
+  validates :word_type, inclusion: { in: WORD_TYPE }
   validates :french, presence: true
   validates :english, presence: true
   validates :definition, presence: true
