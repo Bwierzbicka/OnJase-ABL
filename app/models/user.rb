@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :saved_items, dependent: :destroy
+  has_many :saved_words, through: :saved_items, source: :saveable, source_type: 'Word'
+  has_many :saved_phrases, through: :saved_items, source: :saveable, source_type: 'Phrase'
 end

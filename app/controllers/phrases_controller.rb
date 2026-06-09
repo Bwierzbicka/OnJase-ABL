@@ -1,6 +1,6 @@
 class PhrasesController < ApplicationController
   def index
-    @phrases = current_user.phrases
+    @phrases = current_user.saved_phrases
   end
 
   def new
