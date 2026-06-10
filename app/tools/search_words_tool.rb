@@ -4,8 +4,15 @@ class SearchWordsTool < RubyLLM::Tool
 
   def execute(query:)
     french_words = Word.all
-    query.split.each d |word|
-    french_words = french_words.where("french = :q", q: "#{word}")
+    query.split.each do |word|
+      french_words = french_words.where("french = :q", q: "#{word}")
+    end
+    return "No french words found for '#{query}'" if french_words.empty?
+
+    french_words.map do |french_word|
+      { id: french_word.id, definition: french_word.definition,
+        english: french_word.english, french: french_word.french,
+        word_type: french_word.word_type }
+    end
   end
-  return "No words found for '#{query}'" if words.empty?
 end
