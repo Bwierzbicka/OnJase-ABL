@@ -1,0 +1,8 @@
+<h1><%= @chat.title %></h1>
+
+<%= simple_form_for [@chat, @message] do |f| %>
+  <%= f.input :content, placeholder: "Ask anything", required: true, label: false %>
+  <%= f.button :submit, "Submit", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to "All Chats", chats_path, class: "btn btn-primary mt-4" %>
