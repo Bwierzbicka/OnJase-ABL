@@ -1,4 +1,4 @@
-class SaveFileTool < Rubyllm::Tool
+class SaveFileTool < RubyLLM::Tool
   descritpion "save content to file"
 
   params :path, desc: "fichier sauvegarder"
