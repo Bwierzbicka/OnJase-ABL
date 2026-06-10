@@ -3,6 +3,10 @@ class UserConversationsController < ApplicationController
     @user_conversation = UserConversation.new
   end
 
+  def index
+    # @user_conversations = current_user.user_conversations_as_user1
+  end
+
   def create
     @user_conversation = UserConversation.new(user_conversation_params)
     @user_conversation.user = current_user

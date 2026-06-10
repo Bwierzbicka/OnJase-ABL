@@ -3,10 +3,16 @@
     <%= link_to dashboard_path do %>
       <i class="fa-solid fa-house"></i>
     <% end %>
+    <%= link_to user_conversations_path do %>
+      <i class="fa-solid fa-inbox"></i>
+    <% end %>
+    <%= link_to chats_path do %>
+      <i class="fa-solid fa-hexagon-nodes"></i>
+    <% end %>
+    <%= link_to saved_items_path do %>
+      <i class="fa-solid fa-book-bookmark"></i>
+    <% end %>
 
-    <i class="fa-solid fa-inbox"></i>
-    <i class="fa-solid fa-hexagon-nodes"></i>
-    <i class="fa-solid fa-book-bookmark"></i>
     <%= link_to profile_path do %>
       <% if current_user.avatar.attached? %>
         <%= cl_image_tag current_user.avatar.key,
