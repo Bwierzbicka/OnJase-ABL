@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
-  # get "user_conversations/new"
-  # get "user_conversations/create"
-  # get "user_conversations/show"
-  # get "user_conversations/destroy"
-  # get "user_conversation_messages/create"
+
+
+
+  root to: "pages#home"
+  devise_for :users
+  get "/dashboard", to: "pages#dashboard"
+  get "/profile", to: "pages#profile"
+
   resources :user_conversations, only: [:new, :create, :show, :destroy]
   resources :user_conversation_messages, only: [:create]
-  devise_for :users
-  root to: "pages#home"
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
