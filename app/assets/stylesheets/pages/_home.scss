@@ -1,1 +1,44 @@
-// Specific CSS for your home-page
+.background-img {
+  background-image: url('background-img.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.container-main {
+  padding: 50px 30px;
+}
+
+.hero-text {
+  width: 70vw;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.4em;
+    margin-bottom: 30px;
+  }
+}
+
+.cards-container {
+  padding-top: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.home-card {
+  background-color: $OJ-background-color;
+  opacity: 0.9;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 5px $OJ-primary-light;
+  border-radius: 10px;
+  i {
+    font-size: 4rem;
+    padding-right: 20px;
+  }
+}
