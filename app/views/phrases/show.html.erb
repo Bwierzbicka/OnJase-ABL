@@ -1,0 +1,10 @@
+<div class="main-container">
+  <%= link_to "← Back to saved items", saved_items_path, class: "text-decoration-none mb-4 d-inline-block" %>
+
+  <div class="saved-item-card mt-3">
+    <p class="word-french fs-5 mb-2"><%= @phrase.french %></p>
+    <hr>
+    <p class="word-english fs-5 mb-0"><%= @phrase.english %></p>
+  </div>
+</div>
+<%= render "shared/bottom_navbar" %>

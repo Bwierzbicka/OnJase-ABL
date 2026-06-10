@@ -1,5 +1,10 @@
 <%= turbo_stream_from @chat %>
-<%= link_to "All Chats", chats_path, class: "btn btn-primary mt-4 ms-3" %>
+
+<div class='main-container'>
+<%= link_to chats_path do %>
+  <i class="fa-solid fa-chevron-left"></i>
+<% end %>
+<h1><%= @chat.title %></h1>
 <div class="text-center p-4">
   <h1><%= @chat.title %></h1>
   </div>
