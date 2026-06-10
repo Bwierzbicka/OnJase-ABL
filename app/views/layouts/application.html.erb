@@ -9,6 +9,14 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta property="og:title" content="<%= content_for(:title) || 'On Jase' %>">
+    <meta property="og:description" content="On Jase is a community platform where people learn quebecois.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="<%= image_url('og-image.png') %>">
+    <meta property="og:url" content="https://www.onjase.xyz">
+
+    <%= favicon_link_tag "icon.png" %>
+
     <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
@@ -16,7 +24,7 @@
 
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="apple-touch-icon" href="/OnJase_logo.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
