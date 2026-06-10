@@ -2,7 +2,6 @@
   <div class="d-flex justify-content-end mt-2 me-3">
      <div class="bg-light-blue user-message">
       <%= raw(render_markdown(message.content)) %>
-      <%#= message.content %>
     </div>
   </div>
 <% elsif message.role == "assistant" %>
