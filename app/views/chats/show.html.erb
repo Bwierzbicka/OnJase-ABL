@@ -1,6 +1,4 @@
-<% if @chat %>
 <%= turbo_stream_from @chat %>
-<% end %>
 <%= link_to "All Chats", chats_path, class: "btn btn-primary mt-4 ms-3" %>
 <div class="text-center p-4">
   <h1><%= @chat.title %></h1>
