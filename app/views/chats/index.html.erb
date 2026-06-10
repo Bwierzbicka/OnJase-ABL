@@ -9,8 +9,11 @@
     <% end %>
   <% end %>
 
-  <%= link_to new_chat_path do %>
+  <%= link_to chats_path do %>
     <i class="fa-solid fa-circle-plus"></i>
   <% end %>
+
+  <%= button_to "New Chat", chats_path %>
+
 </div>
 <%= render "shared/bottom_navbar" %>

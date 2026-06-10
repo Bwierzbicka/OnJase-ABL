@@ -1,5 +1,5 @@
 class SaveFileTool < RubyLLM::Tool
-  descritpion "save content to file"
+  description "save content to file"
 
   params :path, desc: "fichier sauvegarder"
   params :content, desc: "contenu du fichier"
