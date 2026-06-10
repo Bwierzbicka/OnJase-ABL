@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one_attached :avatar
+
+  validates :username, presence: true, uniqueness: true
   has_many :chats
   has_many :saved_items, dependent: :destroy
   has_many :saved_words, through: :saved_items, source: :saveable, source_type: 'Word'
