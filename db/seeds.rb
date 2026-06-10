@@ -11,7 +11,8 @@ User.destroy_all
 user = User.create!(
   email: "test@example.com",
   password: "password123",
-  password_confirmation: "password123"
+  password_confirmation: "password123",
+  username: "user 1"
 )
 
 word1 = Word.create!(
@@ -46,7 +47,8 @@ SavedItem.create!(user: user, saveable: phrase2)
 user2 = User.create!(
   email: "autre@example.com",
   password: "password123",
-  password_confirmation: "password123"
+  password_confirmation: "password123",
+  username: "user 2"
 )
 
 conversation = UserConversation.create!(user1: user, user2: user2)

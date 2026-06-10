@@ -1,11 +1,18 @@
+<%= turbo_stream_from @chat %>
+
 <div class='main-container'>
 <%= link_to chats_path do %>
   <i class="fa-solid fa-chevron-left"></i>
 <% end %>
 <h1><%= @chat.title %></h1>
-
-<%= simple_form_for [@chat, @message] do |f| %>
-  <%= f.input :content, placeholder: "Ask anything", required: true, label: false %>
-  <%= f.button :submit, "Submit", class: "btn btn-primary" %>
-<% end %>
+<div class="text-center p-4">
+  <h1><%= @chat.title %></h1>
+  </div>
+<div class="chat">
+  <div id="messages">
+    <%= render "messages/messages", messages: @chat.messages %>
+  </div>
+  <div id="new_message_container">
+    <%= render "messages/form", chat: @chat, message: @message %>
+  </div>
 </div>
