@@ -1,4 +1,7 @@
 
+puts "Dictionary entries are being destroyed. Please wait."
+DictionaryEntry.destroy_all
+puts "Dictionary entries have been destroyed!"
 Message.destroy_all
 Chat.destroy_all
 UserConversationMessage.destroy_all
@@ -81,3 +84,84 @@ chat = Chat.create!(user: user, title: "French vocabulary help")
 Message.create!(chat: chat, role: "user", content: "Can you help me understand when to use 'tu' vs 'vous' in French?")
 Message.create!(chat: chat, role: "assistant", content: "Of course! 'Tu' is the informal singular 'you', used with friends, family, and children. 'Vous' is the formal or plural 'you', used with strangers, authority figures, or when addressing multiple people.")
 Message.create!(chat: chat, role: "user", content: "That makes sense! So I should use 'vous' when talking to my French teacher?")
+
+
+require "csv"
+
+filepath = "data/oqlf_2026-01-19.csv"
+
+MASCULINE = /\(\s*n\.\s*m\.(?:\s*pl\.)?\s*\)/
+
+FEMININE = /\(\s*n\.\s*f\.(?:\s*pl\.)?\s*\)/
+
+BOTH = /\(\s*n\.\s*m\.\s*ou\s*f\.(?:\s*pl\.)?\s*\)/
+
+def gender(text)
+
+  return nil if text.nil?
+
+  markers = text.scan(/\([^)]*\)/) # ALL (...) groups → array
+
+  marker = markers.find { |m| m !~ /\(loc\./ } # first that isn't (loc.)
+
+  return nil unless marker
+
+    case marker
+
+    when BOTH then :both
+
+    when MASCULINE then :masculine
+
+    when FEMININE then :feminine
+
+    end
+
+end
+
+POS_PATTERNS = {
+
+noun: /\(n\./, # (n.m. (n.f. (n.m. et f. — all just "noun"
+
+verb: /\(v\./,
+
+article: /\(art\./, # didn't find any in CSV
+
+adjective: /\(adj\./,
+
+pronoun: /\(pron\./, # didn't find any in CSV
+
+adverb: /\(adv\./,
+
+preposition: /\(prép\./,
+
+conjunction: /\(conj\./, # didn't find any in CSV
+
+interjection: /\(interj\./
+
+}
+
+def categorize(text)
+
+  return nil if text.nil?
+
+	markers = text.scan(/\([^)]*\)/) # ALL (...) groups → array
+
+	marker = markers.find { |m| m !~ /\(loc\./ } # first that isn't (loc.)
+
+	return nil unless marker
+
+	POS_PATTERNS.each { |label, pattern| return label if marker =~ pattern }
+
+	nil
+
+end
+
+
+puts "Dictionary entries are being generated. Please wait."
+CSV.foreach(filepath) do |row|
+  g = gender(row[0])
+  w = categorize(row[0])
+  next if g.nil? || w.nil?
+  DictionaryEntry.create!(terme_francais: row[0], terme_anglais: row[1], definition: row[2], gender: g, word_type: w)
+end
+puts "Dictionary entries were created successfully!"
