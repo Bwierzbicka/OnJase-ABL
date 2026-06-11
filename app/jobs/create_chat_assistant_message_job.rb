@@ -1,4 +1,6 @@
 class CreateChatAssistantMessageJob < ApplicationJob
+  include ActionView::RecordIdentifier
+
   queue_as :default
 
   def instructions
@@ -9,13 +11,43 @@ class CreateChatAssistantMessageJob < ApplicationJob
     - Correct learners gently using québécois phrasing"
   end
 
-  def perform(user_message)
-    # Do something later
-    puts "sending message"
-    @message = user_message
-    @chat = user_message.chat
+  # def perform(user_message)
+  #   # Do something later
+  #   puts "sending message"
+  #   @message = user_message
+  #   @chat = user_message.chat
 
-    @assistant_message = @chat.messages.create(role: "assistant", content: "")
-    @chat.with_instructions(instructions).ask(@message.content)
+  #   @assistant_message = @chat.messages.create(role: "assistant", content: "")
+  #   @chat.with_instructions(instructions).ask(@message.content)
+  #   @chat.generate_title_from_first_message
+
+  #   return unless @chat.title_previously_changed?
+
+  #   Turbo::StreamsChannel.broadcast_update_to(@chat, target: "chat_title", content: @chat.title)
+  # end
+  #
+  def perform(chat_id)
+    chat = Chat.find(chat_id)
+
+    user_message = chat.messages.where(role: :user).last
+    return unless user_message
+
+    chat.ask(user_message.content) do |chunk|
+      next unless chunk.content.present?
+
+      assistant_message = chat.messages.where(role: :assistant).last
+
+      assistant_message.broadcast_chunk(chunk.content)
+    end
   end
+
+  # private
+
+  # def broadcast_replace(message)
+  #   Turbo::StreamsChannel.broadcast_replace_to(
+  #     @chat,
+  #     target: helpers.dom_id(message),
+  #     partial: "messages/message", locals: { message: message }
+  #   )
+  # end
 end

@@ -1,4 +1,4 @@
-<%= simple_form_for [@chat, @message],
+<%= simple_form_for [chat, message],
     html: { data: { controller: "message-form", action: "turbo:submit-end->message-form#clear" } } do |f| %>
   <%= f.input :content, placeholder: "Ask anything", required: true, label: false,
       input_html: { data: { "message-form-target": "input" } } %>

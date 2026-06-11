@@ -6,8 +6,10 @@ class MessagesController < ApplicationController
     @message.role = "user"
 
     if @message.save!
-      CreateChatAssistantMessageJob.perform_later(@message)
-      # @chat.generate_title_from_first_message
+      debugger
+      @chat.messages.create!(role: :user, content: params[:content])
+      CreateChatAssistantMessageJob.perform_later(@chat.id)
+
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to chat_path(@chat) }
