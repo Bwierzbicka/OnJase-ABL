@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "/dashboard", to: "pages#dashboard"
   get "/profile", to: "pages#profile"
 
+  resources :flashcards
   resources :user_conversations, only: [:index, :new, :create, :show, :destroy]
   resources :user_conversation_messages, only: [:create]
   resources :chats, only: [:index, :new, :create, :show] do
