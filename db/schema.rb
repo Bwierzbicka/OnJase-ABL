@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_10_202023) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_11_193147) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "vector"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
@@ -54,6 +55,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_202023) do
   create_table "dictionary_entries", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "definition"
+    t.vector "embedding", limit: 1536
     t.string "gender"
     t.text "terme_anglais"
     t.text "terme_francais"
@@ -79,18 +81,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_202023) do
     t.datetime "created_at", null: false
     t.string "english"
     t.string "french"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "quebecois_entries", force: :cascade do |t|
-    t.string "category"
-    t.datetime "created_at", null: false
-    t.jsonb "embedding"
-    t.text "example_usage"
-    t.text "meaning"
-    t.text "notes"
-    t.string "phrase"
-    t.string "register"
     t.datetime "updated_at", null: false
   end
 

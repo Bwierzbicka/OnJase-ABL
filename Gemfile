@@ -30,6 +30,9 @@ gem "solid_cable"
 # gem csv
 gem "csv"
 
+# neighbor setup for embedding
+gem "neighbor"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
