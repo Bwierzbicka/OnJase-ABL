@@ -1,13 +1,13 @@
-<div id="profile-container" class='main-container'>
+<div class='text-center p-4'>
   <h1>My Proflie</h1>
   <div>
     <% if current_user.avatar.attached? %>
       <%= cl_image_tag current_user.avatar.key,
             gravity: :face,
-            class: "avatar-large",
+            class: "avatar-large rounded-circle object-fit-cover d-block",
             alt: "User avatar" %>
     <% else %>
-      <%= image_tag "OnJase_logo.png", class: "avatar-large", alt: "Default avatar" %>
+      <%= image_tag "OnJase_logo.png", class: "avatar-large rounded-circle object-fit-cover d-block", alt: "Default avatar" %>
     <% end %>
   </div>
   <strong>
