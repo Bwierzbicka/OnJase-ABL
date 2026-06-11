@@ -1,5 +1,5 @@
 
-puts "Dictionary entries are being destroyed. Please wait."
+puts "#{DictionaryEntry.count} dictionary entries are being destroyed. Please wait."
 DictionaryEntry.destroy_all
 puts "Dictionary entries have been destroyed!"
 Message.destroy_all
@@ -85,7 +85,7 @@ Message.create!(chat: chat, role: "user", content: "Can you help me understand w
 Message.create!(chat: chat, role: "assistant", content: "Of course! 'Tu' is the informal singular 'you', used with friends, family, and children. 'Vous' is the formal or plural 'you', used with strangers, authority figures, or when addressing multiple people.")
 Message.create!(chat: chat, role: "user", content: "That makes sense! So I should use 'vous' when talking to my French teacher?")
 
-
+#Logic for the Dictionary Entries from CSV starts here
 require "csv"
 
 filepath = "data/oqlf_2026-01-19.csv"
@@ -164,4 +164,17 @@ CSV.foreach(filepath) do |row|
   next if g.nil? || w.nil?
   DictionaryEntry.create!(terme_francais: row[0], terme_anglais: row[1], definition: row[2], gender: g, word_type: w)
 end
-puts "Dictionary entries were created successfully!"
+puts "#{DictionaryEntry.count} dictionary entries were created successfully!"
+
+
+# Embedding code - Do not uncomment - Costs .01 USD per 50, 10 USD for the whole thing
+# When it's time to run everything, replace .first(50) by .all
+# puts "Embedding first 50 is being generated. Please wait."
+# DictionaryEntry.first(50).each do |entry|
+#   str = ""
+#   str.concat(entry.terme_francais, entry.terme_anglais, entry.definition, entry.gender, entry.word_type)
+#   embedding = RubyLLM.embed(entry)   # pass a text column, not the whole record
+#   entry.update(embedding: embedding.vectors)
+#   puts "#{entry.terme_francais} embedding set"
+# end
+# puts "Embedding first 50 is successfully completed!"
