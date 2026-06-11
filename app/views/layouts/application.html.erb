@@ -10,12 +10,12 @@
     <%= csp_meta_tag %>
 
     <meta property="og:title" content="<%= content_for(:title) || 'On Jase - Your Quebecois Community Platform' %>">
-    <meta property="og:description" content="On Jase is a community platform where people learn quebecois.">
+    <meta property="og:description" content="On Jase - Your Quebecois Community Platform">
     <meta property="og:type" content="website">
     <meta property="og:image" content="<%= image_url('OnJase_logo.png') %>">
     <meta property="og:url" content="https://www.onjase.xyz">
 
-    <%= favicon_link_tag "icon.png" %>
+    <%= favicon_link_tag "OnJase_logo.png" %>
 
     <%= yield :head %>
 
