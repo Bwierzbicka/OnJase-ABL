@@ -1,5 +1,5 @@
 <nav class="fixed-bottom">
-  <div class="main-menu">
+  <div class="main-menu d-flex justify-content-evenly align-items-center">
     <%= link_to dashboard_path do %>
       <i class="fa-solid fa-house"></i>
     <% end %>
@@ -18,10 +18,10 @@
         <%= cl_image_tag current_user.avatar.key,
               crop: :thumb,
               gravity: :face,
-              class: "avatar",
+              class: "avatar rounded-circle object-fit-cover",
               alt: "User avatar" %>
       <% else %>
-        <%= image_tag "OnJase_logo.png", class: "avatar", alt: "Default avatar" %>
+        <%= image_tag "OnJase_logo.png", class: "avatar rounded-circle object-fit-cover", alt: "Default avatar" %>
       <% end %>
     <% end %>
   </div>

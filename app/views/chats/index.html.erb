@@ -1,4 +1,4 @@
-<div class='main-container'>
+<div class='m-5'>
 <h1>All Chats</h1>
 
   <% if @chats.any? %>
@@ -9,8 +9,9 @@
     <% end %>
   <% end %>
 
-  <%= link_to new_chat_path do %>
-    <i class="fa-solid fa-circle-plus"></i>
+  <%= button_to chats_path, class: 'plus-button new-chat-btn border-0 p-0' do %>
+    <i class="fa-regular fa-square-plus"></i>
   <% end %>
+
 </div>
 <%= render "shared/bottom_navbar" %>
