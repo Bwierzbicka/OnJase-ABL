@@ -4,4 +4,9 @@
   <% end %>
 <h1>New User Conversation </h1>
 
+<%= simple_form_for @user_conversation do |f| %>
+  <%= f.input :user_id_2 %>
+  <%= f.button :submit %>
+<% end %>
+
 </div>

@@ -1,0 +1,23 @@
+
+
+
+
+
+
+<% if  user_conversation_message.user_id.to_i == @current_user_id %>
+
+  <div class="d-flex justify-content-end mb-3">
+    <div class="px-3 pb-0 pt-3">
+      <%= raw(user_conversation_message.content) %>
+    </div>
+  </div>
+
+<% else %>
+
+  <div class="d-flex 'justify-content-start' mb-3">
+    <div class="px-3 pb-0 pt-3 text-bg-secondary ">
+      <%= raw(user_conversation_message.content)%>
+    </div>
+  </div>
+
+<% end %>

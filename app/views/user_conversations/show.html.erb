@@ -1,7 +1,20 @@
 <div class='m-5'>
-<h1>User Conversation </h1>
-  <%= link_to user_conversations_path do %>
-    <i class="fa-solid fa-chevron-left"></i>
-  <% end %>
+  <%= turbo_stream_from @user_conversation %>
+   <%= link_to user_conversations_path do %>
+      <i class="fa-solid fa-chevron-left"></i>
+    <% end %>
+
+  <strong><%= @user_conversation.user1.username == current_user.username ? @user_conversation.user2.username : @user_conversation.user1.username %></strong>
+
+
+    <div class="conversation">
+      <div id="user_conversation_messages" class='p-3'>
+        <%= render "user_conversation_messages/user_conversation_messages", user_conversation_messages: @user_conversation.user_conversation_messages %>
+      </div>
+
+      <div id="new_message_container">
+        <%= render "user_conversation_messages/form", user_conversation: @user_conversation, user_conversation_message: @user_conversation_message %>
+      </div>
+  </div>
 
 </div>

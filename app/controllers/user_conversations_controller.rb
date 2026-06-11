@@ -4,27 +4,34 @@ class UserConversationsController < ApplicationController
   end
 
   def index
-    # @user_conversations = current_user.user_conversations_as_user1
+    @user_conversations = current_user.user_conversations
   end
 
   def create
-    @user_conversation = UserConversation.new(user_conversation_params)
-    @user_conversation.user = current_user
-    @user_conversation.save
+    @user_conversation = UserConversation.new
+    @user_conversation.user1 = current_user
+    @user_conversation.user2 = User.find(user_conversation_params[:user_id_2])
+    if @user_conversation.save!
+      redirect_to user_conversations_path(@user_conversation)
+    else
+      render "new_user_conversation", status: :unprocessable_entity
+    end
   end
 
   def show
-    @user_conversation = Userconversation.find(params[:id])
+    @user_conversation = UserConversation.find(params[:id])
+    @user_conversation_message = UserConversationMessage.new
+    @current_user_id = current_user.id
   end
 
   def destroy
-    @user_conversation = Userconversation.find(params[:id])
+    @user_conversation = UserConversation.find(params[:id])
     @user_conversation.destroy
   end
 
   private
 
   def user_conversation_params
-    params.require(:user_conversation).permit(:user_id_1, :user_id_2)
+    params.require(:user_conversation).permit(:user_id_2)
   end
 end

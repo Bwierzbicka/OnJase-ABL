@@ -1,5 +1,10 @@
 <div class='m-5'>
   <h1>User conversations list</h1>
+  <ul>
+  <% @user_conversations.each do |conversation| %>
+    <li><%= link_to conversation.user2.username, user_conversation_path(conversation) %></li>
+  <% end %>
+  </ul>
   <div>
     <%= link_to new_user_conversation_path, class: 'plus-button' do %>
     <i class="fa-regular fa-square-plus"></i>
