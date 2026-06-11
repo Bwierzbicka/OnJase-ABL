@@ -1,0 +1,50 @@
+<div class='m-5'>
+  <h1 class="mb-4">Saved Items</h1>
+
+  <ul class="nav nav-tabs" id="savedTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="words-tab" data-bs-toggle="tab" data-bs-target="#words-pane"
+              type="button" role="tab" aria-controls="words-pane" aria-selected="true">
+        Words
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="phrases-tab" data-bs-toggle="tab" data-bs-target="#phrases-pane"
+              type="button" role="tab" aria-controls="phrases-pane" aria-selected="false">
+        Phrases
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content pt-3" id="savedTabsContent">
+    <div class="tab-pane fade show active" id="words-pane" role="tabpanel" aria-labelledby="words-tab">
+      <% if @saved_words.any? %>
+        <% @saved_words.each do |word| %>
+          <%= link_to word_path(word), class: "saved-item-link text-decoration-none" do %>
+            <div class="saved-item-card d-flex align-items-baseline gap-2">
+              <span class="word-french"><%= word.french %></span>
+              <span class="word-english text-muted"><%= word.english %></span>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p class="text-muted">No saved words yet.</p>
+      <% end %>
+    </div>
+
+    <div class="tab-pane fade" id="phrases-pane" role="tabpanel" aria-labelledby="phrases-tab">
+      <% if @saved_phrases.any? %>
+        <% @saved_phrases.each do |phrase| %>
+          <%= link_to phrase_path(phrase), class: "saved-item-link text-decoration-none" do %>
+            <div class="saved-item-card">
+              <span class="word-french"><%= phrase.french %></span>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p class="text-muted">No saved phrases yet.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= render "shared/bottom_navbar" %>

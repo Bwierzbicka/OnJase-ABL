@@ -1,0 +1,35 @@
+.word-french {
+  color: $OJ-primary;
+  font-weight: 700;
+}
+
+.word-english {
+  font-weight: 400;
+}
+
+.saved-item-card {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background-color: $OJ-background-color;
+  border: 1px solid $OJ-primary-light;
+  transition: background-color 0.15s ease;
+}
+
+.saved-item-link:hover .saved-item-card {
+  background-color: $OJ-primary-light;
+}
+
+.nav-tabs .nav-link {
+  color: $OJ-text-main;
+
+  &.active {
+    color: $OJ-primary;
+    border-bottom-color: $OJ-primary;
+    font-weight: 600;
+  }
+
+  &:hover:not(.active) {
+    color: $OJ-primary;
+  }
+}

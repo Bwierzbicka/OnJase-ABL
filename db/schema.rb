@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_10_151553) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_10_202023) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -44,25 +44,53 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_151553) do
 
   create_table "chats", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.string "model_id"
     t.string "title"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
+  create_table "dictionary_entries", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "definition"
+    t.string "gender"
+    t.text "terme_anglais"
+    t.text "terme_francais"
+    t.datetime "updated_at", null: false
+    t.string "word_type"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.bigint "chat_id", null: false
     t.text "content"
     t.datetime "created_at", null: false
+    t.integer "input_tokens"
+    t.string "model_id"
+    t.integer "output_tokens"
     t.string "role"
+    t.bigint "tool_call_id"
     t.datetime "updated_at", null: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["tool_call_id"], name: "index_messages_on_tool_call_id"
   end
 
   create_table "phrases", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "english"
     t.string "french"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quebecois_entries", force: :cascade do |t|
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.jsonb "embedding"
+    t.text "example_usage"
+    t.text "meaning"
+    t.text "notes"
+    t.string "phrase"
+    t.string "register"
     t.datetime "updated_at", null: false
   end
 
@@ -218,6 +246,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_151553) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "tool_calls", force: :cascade do |t|
+    t.jsonb "arguments"
+    t.datetime "created_at", null: false
+    t.bigint "message_id", null: false
+    t.string "name"
+    t.string "tool_call_id"
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_tool_calls_on_message_id"
+    t.index ["tool_call_id"], name: "index_tool_calls_on_tool_call_id"
+  end
+
   create_table "user_conversation_messages", force: :cascade do |t|
     t.string "content"
     t.datetime "created_at", null: false
@@ -265,6 +304,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_151553) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chats", "users"
   add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "tool_calls"
   add_foreign_key "saved_items", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
@@ -272,6 +312,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_151553) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "tool_calls", "messages"
   add_foreign_key "user_conversation_messages", "user_conversations"
   add_foreign_key "user_conversations", "users", column: "user_id_1"
   add_foreign_key "user_conversations", "users", column: "user_id_2"

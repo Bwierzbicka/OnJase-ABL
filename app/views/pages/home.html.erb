@@ -1,32 +1,37 @@
 <div class="background-img">
   <%= render "shared/navbar" %>
-
-  <div class="container-main">
-    <div class='hero-text'>
-      <h2>Learn Québécois French through real conversations</h2>
-      <p>OnJase helps you speak real Québec French with confidence through authentic conversations, repetition, and culture.</p>
+  <div class="m-5">
+    <div class="hero-text">
+      <h2 class="hero-title">Master French the way it’s actually spoken.</h2>
+      <p>OnJase helps you speak real Québec French with confidence through authentic conversations,
+        repetition, and culture.</p>
+      <%= link_to "Start Learning  →", new_user_registration_path, class: 'btn btn-OJ-primary my-btn' %>
     </div>
-
-    <div class='cards-container'>
-      <div class='home-card'>
+    <div class="cards-container">
+      <div class="home-card">
         <div>
-          <i class="fa-solid fa-user-graduate" style="color: rgb(108, 99, 255);"></i>
+          <i class="fa-solid fa-brain"></i>
         </div>
         <div>
           <strong>Learn Smarter</strong>
-          <p>Backed by learnig psychology, real conversations and spaced repetytion.</p>
+          <p>
+            Built on learning psychology, spaced repetition, and real conversational patterns.
+          </p>
         </div>
       </div>
 
-      <div class='home-card'>
+      <div class="home-card">
         <div>
-          <i class="fa-solid fa-user-graduate" style="color: rgb(108, 99, 255);"></i>
+          <i class="fa-solid fa-earth-americas"></i>
         </div>
         <div>
-          <strong>Language & Culture </strong>
-          <p>Discover Québécois humor, habits, traditions, and everyday life while building confidence.</p>
+          <strong>Language & Culture</strong>
+          <p>
+            Explore Québécois humor, expressions, and everyday life while building natural fluency.
+          </p>
         </div>
       </div>
+
     </div>
   </div>
 </div>

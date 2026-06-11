@@ -1,21 +1,17 @@
 .avatar {
-  text-decoration: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   border: 1px solid $OJ-background-color;
 }
 .avatar-large {
   width: 150px;
   height: 150px;
-  border-radius: 50%;
   background-color: $OJ-primary;
   margin: 30px auto;
 }
 
 .avatar-square {
   width: 40px;
-  border-radius: 0px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   border: white 1px solid;
 }

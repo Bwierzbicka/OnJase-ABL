@@ -27,6 +27,9 @@ gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
 
+# gem csv
+gem "csv"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
@@ -75,3 +78,11 @@ group :test do
 end
 
 gem "ruby_llm", "~> 1.16"
+
+gem "redcarpet"
+
+gem "kramdown"
+
+gem "rouge"
+
+gem "kramdown-parser-gfm"
