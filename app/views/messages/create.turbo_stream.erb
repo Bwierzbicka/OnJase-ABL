@@ -2,8 +2,7 @@
   <%= turbo_stream.update "chat_title", @chat.title %>
 <% end %>
 
-<%= turbo_stream.append "messages" do %>
-  <%= render "messages/message", message: @message %>
-  <%= render "messages/message", message: @assistant_message %>
-<% end %>
-
+<%#= turbo_stream.append "messages" do %>
+  <%#= render "messages/message", message: @message %>
+  <%#= render "messages/message", message: @assistant_message %>
+<%# end %>
