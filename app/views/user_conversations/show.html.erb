@@ -27,7 +27,9 @@
     <%= render "user_conversation_messages/user_conversation_messages", user_conversation_messages: @user_conversation.user_conversation_messages %>
   </div>
 
-  <div id="new_message_container" class="p-3 bg-white border-top" data-controller="ai-panel">
+  <div id="new_message_container" class="p-3 bg-white border-top"
+       data-controller="ai-panel"
+       data-ai-panel-url-value="<%= call_assistant_user_conversation_path(@user_conversation) %>">
     <div class="border rounded-3 bg-white d-none mb-2" data-ai-panel-target="panel">
       <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
         <div class="d-flex align-items-center gap-2">
@@ -39,9 +41,14 @@
           <i class="fa-solid fa-chevron-down"></i>
         </button>
       </div>
-      <div class="p-3">
-        <p> TODO: AI CONVERSATION ASSISTANT </p>
+
+
+      <div id="conversation-assistant" class="p-3">
+        <%# <%= link_to "link", call_assistant_user_conversation_path(@user_conversation) %>
+        <p>Generating ideas</p>
       </div>
+
+
     </div>
 
     <div class="d-flex align-items-center gap-2">

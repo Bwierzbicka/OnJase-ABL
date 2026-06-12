@@ -13,7 +13,6 @@ class CreateChatAssistantMessageJob < ApplicationJob
 
   def perform(chat_id)
     chat = Chat.find(chat_id)
-
     user_message = chat.messages.where(role: :user).last
     return unless user_message
 

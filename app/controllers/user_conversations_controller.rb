@@ -22,12 +22,18 @@ class UserConversationsController < ApplicationController
   def show
     @user_conversation = UserConversation.find(params[:id])
     @user_conversation_message = UserConversationMessage.new
-    @current_user_id = current_user.id
+    @current_user_id = current_user.id ## probably dont need it anymore
   end
 
   def destroy
     @user_conversation = UserConversation.find(params[:id])
     @user_conversation.destroy
+  end
+
+  def call_assistant
+    @user_conversation = UserConversation.find(params[:id])
+    ConversationAssistantJob.perform_later(@user_conversation, current_user)
+    head :ok
   end
 
   private
