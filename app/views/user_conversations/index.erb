@@ -1,7 +1,7 @@
 <div class='m-4'>
   <h1 class="page-title">messages</h1>
 
-<div class="user-conversations">
+<div>
   <ul class="list-unstyled p-0">
     <% @user_conversations.each do |conversation| %>
       <% other = conversation.other_participant(current_user) %>
