@@ -1,0 +1,17 @@
+<% if user_conversation_message.user_id.to_i == current_user_id %>
+
+  <div class="d-flex justify-content-end mb-2">
+    <div class="chat-bubble bg-OJ-primary-light rounded-4 px-3 py-2">
+      <%= user_conversation_message.content %>
+    </div>
+  </div>
+
+<% else %>
+
+  <div class="d-flex justify-content-start mb-2">
+    <div class="chat-bubble bg-white rounded-4 px-3 py-2 border">
+      <%= user_conversation_message.content %>
+    </div>
+  </div>
+
+<% end %>
