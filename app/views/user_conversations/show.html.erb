@@ -1,4 +1,4 @@
-<% other_user = @user_conversation.user1.username == current_user.username ? @user_conversation.user2 : @user_conversation.user1 %>
+<% other_user = @user_conversation.other_participant(current_user) %>
 
 <div class="d-flex flex-column vh-100 overflow-hidden bg-light">
   <%= turbo_stream_from "user_conversation_#{@user_conversation.id}_user_#{current_user.id}" %>
