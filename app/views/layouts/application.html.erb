@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="On Jase">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -15,7 +16,8 @@
     <meta property="og:image" content="<%= image_url('OnJase_logo.png') %>">
     <meta property="og:url" content="https://www.onjase.xyz">
 
-    <%= favicon_link_tag "OnJase_logo.png" %>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
     <%= yield :head %>
 

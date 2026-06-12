@@ -1,0 +1,14 @@
+<div class="main-container">
+  <%= link_to "← Back to saved items", saved_items_path, class: "text-decoration-none mb-4 d-inline-block" %>
+
+  <div class="saved-item-card mt-3">
+    <p class="mb-1">
+      <span class="word-french fs-4"><%= @word.french %></span>
+      <span class="badge bg-secondary ms-2"><%= @word.word_type %></span>
+    </p>
+    <p class="word-english fs-5 mb-2"><%= @word.english %></p>
+    <hr>
+    <p class="text-muted mb-0"><%= @word.definition %></p>
+  </div>
+</div>
+<%= render "shared/bottom_navbar" %>

@@ -1,11 +1,17 @@
+<div class='m-5'>
 <h1>All Chats</h1>
 
-<% if @chats.any? %>
-  <% @chats.each do |chat| %>
-    <ul>
-      <li><%= link_to chat.title, chat_path(chat) %></li>
-    </ul>
+  <% if @chats.any? %>
+    <% @chats.each do |chat| %>
+      <ul>
+        <li><%= link_to chat.title, chat_path(chat) %></li>
+      </ul>
+    <% end %>
   <% end %>
-<% end %>
 
-<%= button_to "New Chat", chats_path %>
+  <%= button_to chats_path, class: 'plus-button new-chat-btn border-0 p-0' do %>
+    <i class="fa-regular fa-square-plus"></i>
+  <% end %>
+
+</div>
+<%= render "shared/bottom_navbar" %>
