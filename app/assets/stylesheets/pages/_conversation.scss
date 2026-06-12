@@ -1,0 +1,34 @@
+.go-back {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: $OJ-text-main;
+}
+
+.ai-panel__trigger-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: white;
+}
+
+.ai-panel__logo {
+  width: 28px;
+  height: 28px;
+}
+
+.ai-panel__sparkle {
+  font-size: 0.65rem;
+}
+
+.chat-bubble {
+  max-width: 75%;
+  word-break: break-word;
+}
+
+.chat-send-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  flex-shrink: 0;
+  color: white;
+}

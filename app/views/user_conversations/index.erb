@@ -1,14 +1,31 @@
-<div class='m-5'>
-  <h1>User conversations list</h1>
-  <ul>
-  <% @user_conversations.each do |conversation| %>
-    <li><%= link_to conversation.user2.username, user_conversation_path(conversation) %></li>
-  <% end %>
+<div class='m-4'>
+  <h1 class="page-title">messages</h1>
+
+<div class="user-conversations">
+  <ul class="list-unstyled p-0">
+    <% @user_conversations.each do |conversation| %>
+      <% other = conversation.other_participant(current_user) %>
+      <li class="py-2">
+        <% if other.avatar.attached? %>
+          <%= cl_image_tag other.avatar.key,
+                crop: :thumb,
+                gravity: :face,
+                class: "avatar-medium rounded-circle object-fit-cover me-2",
+                alt: "User avatar" %>
+        <% else %>
+          <%= image_tag "OnJase_logo.png", class: "avatar-medium rounded-circle object-fit-cover me-2", alt: "Default avatar" %>
+        <% end %>
+        <%= link_to other.username, user_conversation_path(conversation), class: "text-decoration-none text-OJ-text-main fw-bold" %>
+      </li>
+    <% end %>
   </ul>
+  </div>
+
   <div>
     <%= link_to new_user_conversation_path, class: 'plus-button' do %>
     <i class="fa-regular fa-square-plus"></i>
     <% end %>
   </div>
+
 </div>
 <%= render "shared/bottom_navbar" %>

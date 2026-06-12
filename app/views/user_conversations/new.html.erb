@@ -1,12 +1,18 @@
-<div class='m-5'>
+<div class='m-4'>
+
   <%= link_to user_conversations_path do %>
-    <i class="fa-solid fa-chevron-left"></i>
+    <i class="fa-solid fa-chevron-left fs-4 text-OJ-text-main"></i>
   <% end %>
-<h1>New User Conversation </h1>
 
-<%= simple_form_for @user_conversation do |f| %>
-  <%= f.input :user_id_2 %>
-  <%= f.button :submit %>
-<% end %>
+  <h1 class="page-title">new message </h1>
 
+  <div class="mt-5 pt-5">
+    <%= simple_form_for @user_conversation do |f| %>
+      <%= f.input :user_id_2, label: "Send message to:" %>
+      <div class="d-flex justify-content-end">
+        <%= f.button :submit, "Search", class: "btn btn-OJ-primary fw-bold text-white" %>
+      </div>
+    <% end %>
+  </div>
 </div>
+<%= render "shared/bottom_navbar" %>

@@ -11,8 +11,9 @@ class UserConversationsController < ApplicationController
     @user_conversation = UserConversation.new
     @user_conversation.user1 = current_user
     @user_conversation.user2 = User.find(user_conversation_params[:user_id_2])
+
     if @user_conversation.save!
-      redirect_to user_conversations_path(@user_conversation)
+      redirect_to user_conversation_path(@user_conversation)
     else
       render "new_user_conversation", status: :unprocessable_entity
     end

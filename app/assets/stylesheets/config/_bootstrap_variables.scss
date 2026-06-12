@@ -30,3 +30,5 @@ $border-radius-xxl:           1rem;
 @import "bootstrap/variables";
 
 $theme-colors: map-merge($theme-colors, ( "OJ-primary": $OJ-primary));
+$theme-colors: map-merge($theme-colors, ( "OJ-text-main": $OJ-text-main));
+$theme-colors: map-merge($theme-colors, ( "OJ-primary-light": $OJ-primary-light));

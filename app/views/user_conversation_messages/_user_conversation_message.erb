@@ -1,22 +1,16 @@
+<% if user_conversation_message.user_id.to_i == current_user_id %>
 
-
-
-
-
-
-<% if  user_conversation_message.user_id.to_i == @current_user_id %>
-
-  <div class="d-flex justify-content-end mb-3">
-    <div class="px-3 pb-0 pt-3">
+  <div class="d-flex justify-content-end mb-2">
+    <div class="chat-bubble bg-OJ-primary-light rounded-4 px-3 py-2">
       <%= raw(user_conversation_message.content) %>
     </div>
   </div>
 
 <% else %>
 
-  <div class="d-flex 'justify-content-start' mb-3">
-    <div class="px-3 pb-0 pt-3 text-bg-secondary ">
-      <%= raw(user_conversation_message.content)%>
+  <div class="d-flex justify-content-start mb-2">
+    <div class="chat-bubble bg-white rounded-4 px-3 py-2 border">
+      <%= raw(user_conversation_message.content) %>
     </div>
   </div>
 
