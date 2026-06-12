@@ -32,13 +32,28 @@ class CreateChatAssistantMessageJob < ApplicationJob
     user_message = chat.messages.where(role: :user).last
     return unless user_message
 
-    chat.ask(user_message.content) do |chunk|
+    assistant_message = chat.messages.create!(role: :assistant, content: "")
+
+    RubyLLM.chat.with_instructions(instructions).ask(user_message.content) do |chunk|
       next unless chunk.content.present?
 
-      assistant_message = chat.messages.where(role: :assistant).last
+      assistant_message.update!(
+        content: assistant_message.content.to_s + chunk.content
+      )
 
-      assistant_message.broadcast_chunk(chunk.content)
+      assistant_message.broadcast_replace_to(
+        chat,
+        target: ActionView::RecordIdentifier.dom_id(assistant_message),
+        partial: "messages/message",
+        locals: { message: assistant_message }
+      )
     end
+    old_title = chat.title
+    chat.generate_title_from_first_message
+
+    return unless chat.reload.title != old_title
+
+    Turbo::StreamsChannel.broadcast_update_to(chat, target: "chat_title", content: chat.title)
   end
 
   # private
