@@ -1,7 +1,63 @@
-<div class='m-5'>
-<h1>User Conversation </h1>
-  <%= link_to user_conversations_path do %>
-    <i class="fa-solid fa-chevron-left"></i>
-  <% end %>
+<% other_user = @user_conversation.other_participant(current_user) %>
 
+<div class="d-flex flex-column vh-100 overflow-hidden bg-light">
+  <%= turbo_stream_from "user_conversation_#{@user_conversation.id}_user_#{current_user.id}" %>
+
+  <div class="d-flex align-items-center p-3 bg-white border-bottom sticky-top shadow-sm">
+    <%= link_to user_conversations_path, class: 'text-decoration-none me-3' do %>
+      <i class="fa-solid fa-chevron-left fs-4 text-OJ-text-main"></i>
+    <% end %>
+
+    <% if other_user.avatar.attached? %>
+      <%= cl_image_tag other_user.avatar.key,
+                crop: :thumb,
+                gravity: :face,
+                class: "avatar rounded-circle object-fit-cover me-2",
+                alt: "User avatar" %>
+    <% else %>
+      <%= image_tag "OnJase_logo.png", class: "avatar rounded-circle object-fit-cover me-2", alt: "Default avatar" %>
+    <% end %>
+
+    <h2 class="d-inline m-0 fs-5 fw-semibold"><%= other_user.username %></h2>
+  </div>
+
+  <div id="user_conversation_messages"
+       class="flex-grow-1 overflow-auto p-3"
+       data-controller="chat-scroll">
+    <%= render "user_conversation_messages/user_conversation_messages", user_conversation_messages: @user_conversation.user_conversation_messages %>
+  </div>
+
+  <div id="new_message_container" class="p-3 bg-white border-top"
+       data-controller="ai-panel"
+       data-ai-panel-url-value="<%= call_assistant_user_conversation_path(@user_conversation) %>">
+    <div class="border rounded-3 bg-white d-none mb-2" data-ai-panel-target="panel">
+      <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
+        <div class="d-flex align-items-center gap-2">
+          <%= image_tag "OnJase_logo.png", class: "rounded-circle object-fit-cover ai-panel__logo", alt: "OnJase" %>
+          <span class="fw-semibold text-OJ-primary">OnJase</span>
+          <i class="fa-solid fa-wand-magic-sparkles text-OJ-primary ai-panel__sparkle"></i>
+        </div>
+        <button class="btn btn-link p-0 text-muted" data-action="click->ai-panel#toggle">
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+      </div>
+
+
+      <div id="conversation-assistant" class="p-3">
+        <%# <%= link_to "link", call_assistant_user_conversation_path(@user_conversation) %>
+        <p>Generating ideas</p>
+      </div>
+
+
+    </div>
+
+    <div class="d-flex align-items-center gap-2">
+      <button class="btn btn-OJ-primary rounded-circle p-0 text-white ai-panel__trigger-btn flex-shrink-0" data-action="click->ai-panel#toggle">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+      </button>
+      <div class="flex-grow-1">
+        <%= render "user_conversation_messages/form", user_conversation: @user_conversation, user_conversation_message: @user_conversation_message %>
+      </div>
+    </div>
+  </div>
 </div>

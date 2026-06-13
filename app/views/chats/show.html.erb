@@ -1,19 +1,47 @@
 <%= turbo_stream_from @chat %>
 
-<div class='m-5'>
-  <%= link_to chats_path do %>
-    <i class="fa-solid fa-chevron-left"></i>
-  <% end %>
+<div class="d-flex flex-column vh-100 overflow-hidden bg-light">
 
-  <div class="text-center p-4">
-    <h1><%= @chat.title %></h1>
+  <div class="d-flex align-items-center p-3 bg-white border-bottom sticky-top shadow-sm">
+    <%= link_to chats_path, class: 'text-decoration-none me-3' do %>
+      <i class="fa-solid fa-chevron-left fs-4 text-OJ-text-main"></i>
+    <% end %>
+
+    <%# we need to decide an avatar for the AI %>
+
+    <h2 id="chat_title" class="d-inline m-0 fs-5 fw-semibold"><%= @chat.title %></h2>
   </div>
 
-  <div class="chat">
-    <div id="messages">
-      <%= render "messages/messages", messages: @chat.messages %>
+  <div id="messages"
+       class="flex-grow-1 overflow-auto p-3"
+       data-controller="chat-scroll">
+    <%= render "messages/messages", messages: @chat.messages %>
+  </div>
+
+  <div id="new_message_container" class="p-3 bg-white border-top" data-controller="ai-panel">
+    <div class="border rounded-3 bg-white d-none mb-2" data-ai-panel-target="panel">
+      <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
+        <div class="d-flex align-items-center gap-2">
+          <%= image_tag "OnJase_logo.png", class: "rounded-circle object-fit-cover ai-panel__logo", alt: "OnJase" %>
+          <span class="fw-semibold text-OJ-primary">OnJase</span>
+          <i class="fa-solid fa-wand-magic-sparkles text-OJ-primary ai-panel__sparkle"></i>
+        </div>
+        <button class="btn btn-link p-0 text-muted" data-action="click->ai-panel#toggle">
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+      </div>
+      <div class="p-3">
+        <p> TODO: AI CONVERSATION ASSISTANT </p>
+      </div>
     </div>
-    <div id="new_message_container">
-      <%= render "messages/form", chat: @chat, message: @message %>
+
+    <div class="d-flex align-items-center gap-2">
+      <button class="btn btn-OJ-primary rounded-circle p-0 text-white ai-panel__trigger-btn flex-shrink-0" data-action="click->ai-panel#toggle">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+      </button>
+      <div class="flex-grow-1">
+        <%= render "messages/form", chat: @chat, message: @message %>
+      </div>
     </div>
+  </div>
 </div>
