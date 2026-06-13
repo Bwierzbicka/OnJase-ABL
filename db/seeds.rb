@@ -156,7 +156,7 @@ def categorize(text)
 
 end
 
-
+# Dictionary entries generated for first(n) records of CSV. n=50
 puts "Dictionary entries are being generated, from the first n CSV entries. Please wait." # CSV.foreach(filepath).first(n) do |row|
 CSV.foreach(filepath).first(50) do |row| #replace 50 by the number we want to generate. if we want all just remove .first(50)
   g = gender(row[0])
