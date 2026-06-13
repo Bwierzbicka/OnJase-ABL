@@ -85,96 +85,95 @@ Message.create!(chat: chat, role: "user", content: "Can you help me understand w
 Message.create!(chat: chat, role: "assistant", content: "Of course! 'Tu' is the informal singular 'you', used with friends, family, and children. 'Vous' is the formal or plural 'you', used with strangers, authority figures, or when addressing multiple people.")
 Message.create!(chat: chat, role: "user", content: "That makes sense! So I should use 'vous' when talking to my French teacher?")
 
-#Logic for the Dictionary Entries from CSV starts here
-# require "csv"
+Logic for the Dictionary Entries from CSV starts here
+require "csv"
 
-# filepath = "data/oqlf_2026-01-19.csv"
+filepath = "data/oqlf_2026-01-19.csv"
 
-# MASCULINE = /\(\s*n\.\s*m\.(?:\s*pl\.)?\s*\)/
+MASCULINE = /\(\s*n\.\s*m\.(?:\s*pl\.)?\s*\)/
 
-# FEMININE = /\(\s*n\.\s*f\.(?:\s*pl\.)?\s*\)/
+FEMININE = /\(\s*n\.\s*f\.(?:\s*pl\.)?\s*\)/
 
-# BOTH = /\(\s*n\.\s*m\.\s*ou\s*f\.(?:\s*pl\.)?\s*\)/
+BOTH = /\(\s*n\.\s*m\.\s*ou\s*f\.(?:\s*pl\.)?\s*\)/
 
-# def gender(text)
+def gender(text)
 
-#   return nil if text.nil?
+  return nil if text.nil?
 
-#   markers = text.scan(/\([^)]*\)/) # ALL (...) groups → array
+  markers = text.scan(/\([^)]*\)/) # ALL (...) groups → array
 
-#   marker = markers.find { |m| m !~ /\(loc\./ } # first that isn't (loc.)
+  marker = markers.find { |m| m !~ /\(loc\./ } # first that isn't (loc.)
 
-#   return nil unless marker
+  return nil unless marker
 
-#     case marker
+    case marker
 
-#     when BOTH then :both
+    when BOTH then :both
 
-#     when MASCULINE then :masculine
+    when MASCULINE then :masculine
 
-#     when FEMININE then :feminine
+    when FEMININE then :feminine
 
-#     end
+    end
 
-# end
+end
 
-# POS_PATTERNS = {
+POS_PATTERNS = {
 
-# noun: /\(n\./, # (n.m. (n.f. (n.m. et f. — all just "noun"
+noun: /\(n\./, # (n.m. (n.f. (n.m. et f. — all just "noun"
 
-# verb: /\(v\./,
+verb: /\(v\./,
 
-# article: /\(art\./, # didn't find any in CSV
+article: /\(art\./, # didn't find any in CSV
 
-# adjective: /\(adj\./,
+adjective: /\(adj\./,
 
-# pronoun: /\(pron\./, # didn't find any in CSV
+pronoun: /\(pron\./, # didn't find any in CSV
 
-# adverb: /\(adv\./,
+adverb: /\(adv\./,
 
-# preposition: /\(prép\./,
+preposition: /\(prép\./,
 
-# conjunction: /\(conj\./, # didn't find any in CSV
+conjunction: /\(conj\./, # didn't find any in CSV
 
-# interjection: /\(interj\./
+interjection: /\(interj\./
 
-# }
+}
 
-# def categorize(text)
+def categorize(text)
 
-#   return nil if text.nil?
+  return nil if text.nil?
 
-# 	markers = text.scan(/\([^)]*\)/) # ALL (...) groups → array
+	markers = text.scan(/\([^)]*\)/) # ALL (...) groups → array
 
-# 	marker = markers.find { |m| m !~ /\(loc\./ } # first that isn't (loc.)
+	marker = markers.find { |m| m !~ /\(loc\./ } # first that isn't (loc.)
 
-# 	return nil unless marker
+	return nil unless marker
 
-# 	POS_PATTERNS.each { |label, pattern| return label if marker =~ pattern }
+	POS_PATTERNS.each { |label, pattern| return label if marker =~ pattern }
 
-# 	nil
+	nil
 
-# end
-
-
-# puts "Dictionary entries are being generated. Please wait."
-# CSV.foreach(filepath) do |row|
-#   g = gender(row[0])
-#   w = categorize(row[0])
-#   next if g.nil? || w.nil?
-#   DictionaryEntry.create!(terme_francais: row[0], terme_anglais: row[1], definition: row[2], gender: g, word_type: w)
-# end
-# puts "#{DictionaryEntry.count} dictionary entries were created successfully!"
+end
 
 
-# Embedding code - Do not uncomment - Costs .01 USD per 50, 10 USD for the whole thing
-# When it's time to run everything, replace .first(50) by .all
-# puts "Embedding first 50 is being generated. Please wait."
-# DictionaryEntry.first(50).each do |entry|
-#   str = ""
-#   str.concat(entry.terme_francais, entry.terme_anglais, entry.definition, entry.gender, entry.word_type)
-#   embedding = RubyLLM.embed(entry)   # pass a text column, not the whole record
-#   entry.update(embedding: embedding.vectors)
-#   puts "#{entry.terme_francais} embedding set"
-# end
-# puts "Embedding first 50 is successfully completed!"
+puts "Dictionary entries are being generated, from the first 50 CSV entries. Please wait."
+CSV.foreach(filepath).first(50) do |row| #replace 50 by the number we want to generate. if we want all just remove .first(50)
+  g = gender(row[0])
+  w = categorize(row[0])
+  next if g.nil? || w.nil?
+  DictionaryEntry.create!(terme_francais: row[0], terme_anglais: row[1], definition: row[2], gender: g, word_type: w)
+end
+puts "#{DictionaryEntry.count} dictionary entries were created successfully!"
+
+
+# Costs .01 USD per 50, 10 USD for the whole thing
+puts "Embedding of first #{DictionaryEntry.count} dictionary entries are being generated. Please wait."
+DictionaryEntry.each do |entry|
+  str = ""
+  str.concat(entry.terme_francais, entry.terme_anglais, entry.definition, entry.gender, entry.word_type)
+  embedding = RubyLLM.embed(entry)    # pass a text column, not the whole record
+  entry.update(embedding: embedding.vectors)
+  puts "#{entry.terme_francais} embedding set"
+end
+puts "Embedding first #{DictionaryEntry.count} is successfully completed!"
