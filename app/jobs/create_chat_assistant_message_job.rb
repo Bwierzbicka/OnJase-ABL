@@ -11,8 +11,12 @@ class CreateChatAssistantMessageJob < ApplicationJob
     - Correct learners gently using québécois phrasing
 
       You have access to tools:
-      -Creates a word in our saved words list with the required fields, When I give you a word to save, look up the definition, the english word, the word type, the gender of the word (masculine or feminine) and add them all to the saved word record.
-      Do not create multiple words. Do not make any suggestions. Just create the word and save it."
+      -Creates a word in our saved words list with the required fields. When I give you a word to save, look up the definition, the english word, the word type, the gender of the word (masculine or feminine) and add them all to the saved word record.
+      Do not create multiple words. Do not make any suggestions. Just create the word and save it.
+      -Creates a phrase in our saved phrases list with the required fields. When I give you a phrase to save, look up the english translation, and add it to the saved word record, along with the french phrase.
+      Do not create multiple phrases. Do not make any suggestions. Just create the phrase and save it.
+      -Search for a french dictionary entry, in the seeds. Do not make any suggestions. Just search for the french dictionary entry.
+      -Search for a saved french word. Do not make any suggestions. Just search for the french word."
   end
 
   def perform(chat_id)
@@ -23,6 +27,9 @@ class CreateChatAssistantMessageJob < ApplicationJob
     assistant_message = chat.messages.create!(role: :assistant, content: "")
 
     RubyLLM.chat.with_tool(CreateWordTool)
+    RubyLLM.chat.with_tool(CreatePhraseTool)
+    RubyLLM.chat.with_tool(SearchDictionaryEntriesTool)
+    RubyLLM.chat.with_tool(SearchWordsTool)
 
     RubyLLM.chat.with_instructions(instructions).ask(user_message.content) do |chunk|
       next unless chunk.content.present?
