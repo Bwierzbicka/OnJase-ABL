@@ -4,18 +4,20 @@
 <div>
   <ul class="list-unstyled p-0">
     <% @user_conversations.each do |conversation| %>
-      <% other = conversation.other_participant(current_user) %>
+      <% other_user = conversation.other_participant(current_user) %>
       <li class="py-2">
-        <% if other.avatar.attached? %>
-          <%= cl_image_tag other.avatar.key,
+        <% if other_user.avatar.attached? %>
+          <%= cl_image_tag other_user.avatar.key,
                 crop: :thumb,
                 gravity: :face,
                 class: "avatar-medium rounded-circle object-fit-cover me-2",
                 alt: "User avatar" %>
         <% else %>
-          <%= image_tag "OnJase_logo.png", class: "avatar-medium rounded-circle object-fit-cover me-2", alt: "Default avatar" %>
+          <%= image_tag "avatar_default.png", class: "avatar-medium rounded-circle object-fit-cover me-2", alt: "Default avatar" %>
         <% end %>
-        <%= link_to other.username, user_conversation_path(conversation), class: "text-decoration-none text-OJ-text-main fw-bold" %>
+        <%= link_to user_conversation_path(conversation), class: "text-decoration-none text-OJ-text-main fw-bold" do %>
+          <%= other_user.display_name.present? ? other_user.display_name : other_user.username %>
+        <% end %>
       </li>
     <% end %>
   </ul>
