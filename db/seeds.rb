@@ -85,7 +85,7 @@ Message.create!(chat: chat, role: "user", content: "Can you help me understand w
 Message.create!(chat: chat, role: "assistant", content: "Of course! 'Tu' is the informal singular 'you', used with friends, family, and children. 'Vous' is the formal or plural 'you', used with strangers, authority figures, or when addressing multiple people.")
 Message.create!(chat: chat, role: "user", content: "That makes sense! So I should use 'vous' when talking to my French teacher?")
 
-Logic for the Dictionary Entries from CSV starts here
+# Logic for the Dictionary Entries from CSV starts here
 require "csv"
 
 filepath = "data/oqlf_2026-01-19.csv"
@@ -167,7 +167,7 @@ end
 puts "#{DictionaryEntry.count} dictionary entries were created successfully!"
 
 
-# Costs .01 USD per 50, 10 USD for the whole thing
+# Costs .01 USD per 50, 10 USD for the whole thing, according to my maths :)
 puts "Embedding #{DictionaryEntry.count} dictionary entries are being generated. Please wait."
 DictionaryEntry.each do |entry|
   str = ""
