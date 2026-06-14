@@ -1,3 +1,9 @@
+.conversation-list,
+.chat-list {
+  height: 80vh;
+  overflow-y: auto;
+}
+
 .ai-panel__trigger-btn {
   width: 36px;
   height: 36px;
