@@ -8,7 +8,7 @@
 
   <div class="mt-5 pt-5">
     <%= simple_form_for @user_conversation do |f| %>
-      <%= f.input :user_id_2, label: "Send message to:" %>
+      <%= f.input :username, label: "Send message to:", placeholder: "Enter username" %>
       <div class="d-flex justify-content-end">
         <%= f.button :submit, "Search", class: "btn btn-OJ-primary fw-bold text-white" %>
       </div>

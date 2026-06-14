@@ -10,19 +10,36 @@ class UserConversationsController < ApplicationController
   def create
     @user_conversation = UserConversation.new
     @user_conversation.user1 = current_user
-    @user_conversation.user2 = User.find(user_conversation_params[:user_id_2])
 
-    if @user_conversation.save!
+    user2 = User.find_by(username: user_conversation_params[:username])
+
+    if user2.nil?
+      @user_conversation.errors.add(:username, "not found")
+      render :new, status: :unprocessable_entity
+      return
+    end
+
+    existing = UserConversation.where(user_id_1: current_user.id, user_id_2: user2.id)
+                               .or(UserConversation.where(user_id_1: user2.id, user_id_2: current_user.id))
+    if existing.exists?
+      @user_conversation.errors.add(:username, "already has an existing conversation with you")
+      render :new, status: :unprocessable_entity
+      return
+    end
+
+    @user_conversation.user2 = user2
+
+    if @user_conversation.save
       redirect_to user_conversation_path(@user_conversation)
     else
-      render "new_user_conversation", status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
   def show
     @user_conversation = UserConversation.find(params[:id])
     @user_conversation_message = UserConversationMessage.new
-    @current_user_id = current_user.id ## probably dont need it anymore
+    @other_user = @user_conversation.other_participant(current_user)
   end
 
   def destroy
@@ -39,6 +56,6 @@ class UserConversationsController < ApplicationController
   private
 
   def user_conversation_params
-    params.require(:user_conversation).permit(:user_id_2)
+    params.require(:user_conversation).permit(:username)
   end
 end
