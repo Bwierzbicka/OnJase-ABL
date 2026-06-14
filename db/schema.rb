@@ -63,6 +63,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_12_153850) do
     t.string "word_type"
   end
 
+  create_table "flashcards", force: :cascade do |t|
+    t.text "answer"
+    t.datetime "created_at", null: false
+    t.text "question"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_flashcards_on_user_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.bigint "chat_id", null: false
     t.text "content"
@@ -268,6 +277,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_12_153850) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.string "display_name"
     t.string "email", default: "", null: false
@@ -294,6 +304,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_12_153850) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chats", "users"
+  add_foreign_key "flashcards", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "tool_calls"
   add_foreign_key "saved_items", "users"
