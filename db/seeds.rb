@@ -157,19 +157,23 @@ def categorize(text)
 end
 
 # Dictionary entries generated for first(n) records of CSV. n=50
-puts "Dictionary entries are being generated, from the first n CSV entries. Please wait." # CSV.foreach(filepath).first(n) do |row|
-CSV.foreach(filepath).first(50) do |row| #replace 50 by the number we want to generate. if we want all just remove .first(50)
+puts "Dictionary entries are being generated, from the first 50 CSV entries. Please wait." # CSV.foreach(filepath).first(n) do |row|
+CSV.foreach(filepath).first(50).each do |row| #replace 50 by the number we want to generate. if we want all just remove .first(50)
   g = gender(row[0])
   w = categorize(row[0])
   next if g.nil? || w.nil?
-  DictionaryEntry.create!(terme_francais: row[0], terme_anglais: row[1], definition: row[2], gender: g, word_type: w)
+  word_entry = DictionaryEntry.create!(terme_francais: row[0], terme_anglais: row[1], definition: row[2], gender: g, word_type: w)
+  puts "#{word_entry.terme_francais} was created!" # comment this out if you don't want to see the words created
 end
 puts "#{DictionaryEntry.count} dictionary entries were created successfully!"
 
+print "Should I continue with the embedding of #{DictionaryEntry.count} dictionary records? (y/n): "
+answer = gets.chomp.downcase
+exit unless answer == "y"
 
 # Costs .01 USD per 50, 10 USD for the whole thing, according to my maths :)
 puts "Embedding #{DictionaryEntry.count} dictionary entries are being generated. Please wait."
-DictionaryEntry.each do |entry|
+DictionaryEntry.all.each do |entry|
   str = ""
   str.concat(entry.terme_francais, entry.terme_anglais, entry.definition, entry.gender, entry.word_type)
   embedding = RubyLLM.embed(entry)    # pass a text column, not the whole record
