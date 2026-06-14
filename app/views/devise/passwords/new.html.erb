@@ -1,4 +1,4 @@
-<div class="devise-container">
+<div class="vh-100 d-flex justify-content-center align-items-center devise-container">
   <div class="devise-card">
     <h2>Forgot your password?</h2>
 
@@ -12,8 +12,8 @@
                     input_html: { autocomplete: "email" } %>
       </div>
 
-      <div class="form-actions">
-        <%= f.button :submit, "Send me password reset instructions" %>
+      <div class="form-actions mb-5">
+        <%= f.button :submit, "Send reset instructions", class: 'btn btn-OJ-primary text-white' %>
       </div>
     <% end %>
 
