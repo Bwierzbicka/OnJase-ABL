@@ -1,3 +1,17 @@
+.ai-panel__trigger-btn {
+  width: 36px;
+  height: 36px;
+}
+
+.ai-panel__logo {
+  width: 28px;
+  height: 28px;
+}
+
+.ai-panel__sparkle {
+  font-size: 0.65rem;
+}
+
 .ai-panel {
   &__qc-badge {
     background-color: $OJ-background-color;
@@ -11,7 +25,7 @@
     font-size: 0.8rem;
   }
 
-  &__suggestion-box {
+  &__section-box {
     background-color: $OJ-background-color;
     color: $OJ-text-main;
     font-size: 0.95rem;
@@ -29,8 +43,5 @@
   &__trigger-btn {
     width: 40px;
     height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 }
