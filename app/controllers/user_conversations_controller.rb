@@ -36,6 +36,12 @@ class UserConversationsController < ApplicationController
     head :ok
   end
 
+  def call_typing_assistant
+    @user_conversation = UserConversation.find(params[:id])
+    ConversationTypingAssistantJob.perform_later(@user_conversation, current_user, params[:message_text].to_s)
+    head :ok
+  end
+
   private
 
   def user_conversation_params

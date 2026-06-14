@@ -28,8 +28,10 @@
   </div>
 
   <div id="new_message_container" class="p-3 bg-white border-top"
-       data-controller="ai-panel"
-       data-ai-panel-url-value="<%= call_assistant_user_conversation_path(@user_conversation) %>">
+       data-controller="ai-panel typing-assistant"
+       data-ai-panel-url-value="<%= call_assistant_user_conversation_path(@user_conversation) %>"
+       data-typing-assistant-url-value="<%= call_typing_assistant_user_conversation_path(@user_conversation) %>">
+
     <div class="border rounded-3 bg-white d-none mb-2" data-ai-panel-target="panel">
       <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
         <div class="d-flex align-items-center gap-2">
@@ -48,12 +50,34 @@
         <p>Generating ideas</p>
       </div>
 
+    </div>
 
+    <div class="border rounded-3 bg-white d-none mb-2" data-typing-assistant-target="panel">
+      <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
+        <div class="d-flex align-items-center gap-2">
+          <i class="fa-solid fa-spell-check text-OJ-primary"></i>
+          <span class="fw-semibold text-OJ-primary">Aide à la rédaction</span>
+        </div>
+        <button class="btn btn-link p-0 text-muted" data-action="click->typing-assistant#close">
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+      </div>
+      <div id="conversation-typing-assistant" class="p-3">
+        <div class="d-flex align-items-center gap-2 text-muted">
+          <div class="spinner-border spinner-border-sm" role="status"></div>
+          <small>Analyse en cours…</small>
+        </div>
+      </div>
     </div>
 
     <div class="d-flex align-items-center gap-2">
       <button class="btn btn-OJ-primary rounded-circle p-0 text-white ai-panel__trigger-btn flex-shrink-0" data-action="click->ai-panel#toggle">
         <i class="fa-solid fa-wand-magic-sparkles"></i>
+      </button>
+      <button class="btn btn-OJ-primary text-white rounded-circle p-0 d-none ai-panel__trigger-btn flex-shrink-0"
+              data-typing-assistant-target="trigger"
+              data-action="click->typing-assistant#open">
+        <i class="fa-solid fa-spell-check"></i>
       </button>
       <div class="flex-grow-1">
         <%= render "user_conversation_messages/form", user_conversation: @user_conversation, user_conversation_message: @user_conversation_message %>

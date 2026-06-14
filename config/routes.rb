@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   resources :user_conversations, only: [:index, :new, :create, :show, :destroy] do
     resources :user_conversation_messages, only: [:new, :create]
     member do
-      get :call_assistant
+      get  :call_assistant
+      get  :call_typing_assistant
     end
   end
 
