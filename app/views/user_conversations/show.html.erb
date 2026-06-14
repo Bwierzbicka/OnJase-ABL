@@ -1,5 +1,3 @@
-<% other_user = @user_conversation.other_participant(current_user) %>
-
 <div class="d-flex flex-column vh-100 overflow-hidden bg-light">
   <%= turbo_stream_from "user_conversation_#{@user_conversation.id}_user_#{current_user.id}" %>
 
@@ -8,8 +6,8 @@
       <i class="fa-solid fa-chevron-left fs-4 text-OJ-text-main"></i>
     <% end %>
 
-    <% if other_user.avatar.attached? %>
-      <%= cl_image_tag other_user.avatar.key,
+    <% if @other_user.avatar.attached? %>
+      <%= cl_image_tag @other_user.avatar.key,
                 crop: :thumb,
                 gravity: :face,
                 class: "avatar rounded-circle object-fit-cover me-2",
@@ -19,9 +17,9 @@
     <% end %>
     <div class='ms-2'>
       <h2 class="d-inline m-0 fs-5 fw-semibold">
-        <%= other_user.display_name.present? ? other_user.display_name : other_user.username %>
+        <%= @other_user.display_name.present? ? @other_user.display_name : @other_user.username %>
       </h2>
-      <p class='m-0'><%= other_user.username if other_user.display_name.present?  %></p>
+      <p class='m-0'><%= @other_user.username if @other_user.display_name.present?  %></p>
     </div>
   </div>
 
