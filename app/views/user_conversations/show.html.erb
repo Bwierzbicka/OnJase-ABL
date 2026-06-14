@@ -44,8 +44,10 @@
 
 
       <div id="conversation-assistant" class="p-3">
-        <%# <%= link_to "link", call_assistant_user_conversation_path(@user_conversation) %>
-        <p>Generating ideas</p>
+        <div class="d-flex align-items-center gap-2 text-muted">
+          <div class="spinner-border spinner-border-sm" role="status"></div>
+          <small>Analyse en cours…</small>
+        </div>
       </div>
 
 

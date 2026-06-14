@@ -2,18 +2,16 @@ class ConversationAssistantJob < ApplicationJob
   queue_as :default
 
   def perform(conversation, current_user)
-  puts "running job"
     @current_user = current_user
     @conversation = conversation
-    @messages = conversation.user_conversation_messages.last(5)
+    @messages = conversation.user_conversation_messages.last(4)
 
     response = RubyLLM.chat.with_schema(ConversationAssistantSchema.new).ask(instructions).content
-    puts response
 
     Turbo::StreamsChannel.broadcast_update_to(
       "user_conversation_#{@conversation.id}_user_#{@current_user.id}",
       target: "conversation-assistant",
-      content: response
+      content: panel_content(response)
     )
   end
 
@@ -24,29 +22,104 @@ class ConversationAssistantJob < ApplicationJob
   end
 
   def extract_messages
-    response = ""
+    message_history = ""
     @messages.each do |message|
-      if message.user_id == @current_user
-        response += "Current user message: #{message.content}\n\n"
+      if message.user_id == @current_user.id
+        message_history += "Current user message: #{message.content}\n\n"
       else
-        response += "Incoming message: #{message.content}\n\n"
+        message_history += "Incoming message: #{message.content}\n\n"
       end
     end
-    response
+    message_history
   end
 
   def build_instructions
     "Persona:
     - You are a warm, enthusiastic Québécois French tutor from Montréal.
 
-    Main instructions:
-    - generate suggestions for the next message in conversation
-    - If the message is in english, you offer french translation
-    - Always suggest authentic québécois expressions
-    - Contrast québécois usage with standard French where helpful
-    - Read the tone of conversation: correct use of 'on/tu' and 'vous'
-    - If there is no message history, make sure to suggest usage of correct tone
+    Instructions:
+    - Analyse only the LAST incoming message for québécois expressions.
+    - Suggest a short, natural next reply only for incoming messeges.
+    - Check last current user message and correct any mistakes.
+    - Translate last incoming message.
+    - Keep everything concise — one expression, 2-3 examples, one suggestion.
 
-    If there are any, here are latest available messages: "
+    Here are the latest messages: "
+  end
+
+  def panel_content(response)
+    expression   = response['expression'].to_s.strip
+    explanation  = response['expression_explanation'].to_s.strip
+    examples     = response['examples'].to_s.strip
+    suggestion   = response['suggestion'].to_s.strip
+    translation  = response['translation'].to_s.strip
+    correction   = response['correction'].to_s.strip
+
+    parts = []
+
+    if expression.present?
+      parts << <<~HTML
+        <div class="mb-3">
+          <div class="d-flex align-items-center flex-wrap gap-2 mb-2">
+            <strong>#{expression}</strong>
+            <span class="badge rounded-pill ai-panel__qc-badge">
+            <i class="fa-regular fa-hand-point-up"></i> Expression québécoise</span>
+          </div>
+          #{"<p class=\"text-muted small mb-0\">#{explanation}</p>" if explanation.present?}
+        </div>
+      HTML
+    end
+
+    if examples.present?
+      parts << <<~HTML
+        <div class="mb-3">
+          <div class="d-flex align-items-center gap-2 mb-2 ai-panel__section-label">
+            <i class="fa-regular fa-lightbulb"></i>
+            <small>Exemples similaires</small>
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="rounded-3 p-2 ai-panel__suggestion-box">#{examples}</span>
+          </div>
+        </div>
+      HTML
+    end
+
+    if suggestion.present?
+      parts << <<~HTML
+        <div class="mb-3">
+          <div class="d-flex align-items-center gap-2 mb-2 ai-panel__section-label">
+            <i class="fa-regular fa-comment"></i>
+            <small>Réponse suggérée</small>
+          </div>
+          <div class="rounded-3 p-2 ai-panel__suggestion-box">#{suggestion}</div>
+        </div>
+      HTML
+    end
+
+    if translation.present?
+      parts << <<~HTML
+        <div class="mb-3">
+          <div class="d-flex align-items-center gap-2 mb-2 ai-panel__section-label">
+            <i class="fa-solid fa-language"></i>
+            <small>Traduction</small>
+          </div>
+          <div class="rounded-3 p-2 ai-panel__suggestion-box">#{translation}</div>
+        </div>
+      HTML
+    end
+
+    if correction.present?
+      parts << <<~HTML
+        <div class="mb-1">
+          <div class="d-flex align-items-center gap-2 mb-2 ai-panel__section-label">
+            <i class="fa-solid fa-spell-check"></i>
+            <small>Correction</small>
+          </div>
+          <div class="rounded-3 p-2 ai-panel__suggestion-box">#{correction}</div>
+        </div>
+      HTML
+    end
+
+    parts.join
   end
 end

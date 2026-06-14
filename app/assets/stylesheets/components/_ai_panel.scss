@@ -1,0 +1,36 @@
+.ai-panel {
+  &__qc-badge {
+    background-color: $OJ-background-color;
+    color: $OJ-primary;
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+
+  &__section-label {
+    color: #999;
+    font-size: 0.8rem;
+  }
+
+  &__suggestion-box {
+    background-color: $OJ-background-color;
+    color: $OJ-text-main;
+    font-size: 0.95rem;
+  }
+
+  &__logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__sparkle {
+    font-size: 0.75rem;
+  }
+
+  &__trigger-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
