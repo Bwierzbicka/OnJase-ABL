@@ -1,10 +1,10 @@
 <div class='m-4'>
   <h1 class="page-title">BEATA 9000</h1>
 
-  <div>
+  <div class="chat-list">
     <ul class="list-unstyled p-0">
       <% if @chats.any? %>
-        <% @chats.each do |chat| %>
+        <% @chats.reverse.each do |chat| %>
           <li class="py-2">
             <%= link_to chat.title, chat_path(chat), class: "text-decoration-none text-OJ-text-main fw-bold" %>
           </li>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_11_193147) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_14_025845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "vector"
@@ -61,6 +61,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_193147) do
     t.text "terme_francais"
     t.datetime "updated_at", null: false
     t.string "word_type"
+  end
+
+  create_table "flashcards", force: :cascade do |t|
+    t.text "answer"
+    t.datetime "created_at", null: false
+    t.text "question"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_flashcards_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -253,7 +262,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_193147) do
     t.string "translation"
     t.datetime "updated_at", null: false
     t.bigint "user_conversation_id", null: false
-    t.string "user_id"
+    t.integer "user_id"
     t.index ["user_conversation_id"], name: "index_user_conversation_messages_on_user_conversation_id"
   end
 
@@ -268,6 +277,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_193147) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.string "display_name"
     t.string "email", default: "", null: false
@@ -293,6 +303,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_193147) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chats", "users"
+  add_foreign_key "flashcards", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "tool_calls"
   add_foreign_key "saved_items", "users"
