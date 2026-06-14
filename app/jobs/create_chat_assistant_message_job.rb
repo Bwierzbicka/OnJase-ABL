@@ -26,12 +26,12 @@ class CreateChatAssistantMessageJob < ApplicationJob
 
     assistant_message = chat.messages.create!(role: :assistant, content: "")
 
-    RubyLLM.chat.with_tool(CreateWordTool.new(current_user))
-    RubyLLM.chat.with_tool(CreatePhraseTool.new(current_user))
-    RubyLLM.chat.with_tool(SearchDictionaryEntriesTool)
-    RubyLLM.chat.with_tool(SearchWordsTool)
+    chat.with_tool(CreateWordTool.new(current_user))
+    chat.with_tool(CreatePhraseTool.new(current_user))
+    chat.with_tool(SearchDictionaryEntriesTool)
+    chat.with_tool(SearchWordsTool)
 
-    RubyLLM.chat.with_instructions(instructions).ask(user_message.content) do |chunk|
+    chat.with_instructions(instructions).ask(user_message.content) do |chunk|
       next unless chunk.content.present?
 
       assistant_message.update!(
