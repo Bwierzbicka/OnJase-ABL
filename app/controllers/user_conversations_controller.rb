@@ -39,7 +39,7 @@ class UserConversationsController < ApplicationController
   def show
     @user_conversation = UserConversation.find(params[:id])
     @user_conversation_message = UserConversationMessage.new
-    @current_user_id = current_user.id ## probably dont need it anymore
+    @other_user = @user_conversation.other_participant(current_user)
   end
 
   def destroy
