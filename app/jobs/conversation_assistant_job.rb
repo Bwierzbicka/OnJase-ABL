@@ -13,6 +13,8 @@ class ConversationAssistantJob < ApplicationJob
       target: "conversation-assistant",
       content: panel_content(response)
     )
+
+    puts extract_messages
   end
 
   private
@@ -38,13 +40,19 @@ class ConversationAssistantJob < ApplicationJob
     - You are a warm, enthusiastic Québécois French tutor from Montréal.
 
     Instructions:
-    - Analyse only the LAST incoming message for québécois expressions.
-    - Suggest a short, natural next reply only for incoming messeges.
+    - React accordingly only to the LAST message.
+    If last messege is CURRENT user message:
     - Check last current user message and correct any mistakes.
-    - Translate last incoming message.
+
+    If last message is INCOMING message:
+    - Analyse only the LAST incoming message for québécois expressions.
+    - Suggest a short, natural next reply.
+
+    For all responses:
     - Keep everything concise — one expression, 2-3 examples, one suggestion.
 
     Here are the latest messages: "
+    #  - Translate last incoming message.
   end
 
   def panel_content(response)
@@ -52,7 +60,7 @@ class ConversationAssistantJob < ApplicationJob
     explanation  = response['expression_explanation'].to_s.strip
     examples     = response['examples'].to_s.strip
     suggestion   = response['suggestion'].to_s.strip
-    translation  = response['translation'].to_s.strip
+    # translation  = response['translation'].to_s.strip
     correction   = response['correction'].to_s.strip
 
     parts = []
@@ -96,17 +104,17 @@ class ConversationAssistantJob < ApplicationJob
       HTML
     end
 
-    if translation.present?
-      parts << <<~HTML
-        <div class="mb-3">
-          <div class="d-flex align-items-center gap-2 mb-2 ai-panel__section-label">
-            <i class="fa-solid fa-language"></i>
-            <small>Traduction</small>
-          </div>
-          <div class="rounded-3 p-2 ai-panel__suggestion-box">#{translation}</div>
-        </div>
-      HTML
-    end
+    # if translation.present?
+    #   parts << <<~HTML
+    #     <div class="mb-3">
+    #       <div class="d-flex align-items-center gap-2 mb-2 ai-panel__section-label">
+    #         <i class="fa-solid fa-language"></i>
+    #         <small>Traduction</small>
+    #       </div>
+    #       <div class="rounded-3 p-2 ai-panel__suggestion-box">#{translation}</div>
+    #     </div>
+    #   HTML
+    # end
 
     if correction.present?
       parts << <<~HTML
