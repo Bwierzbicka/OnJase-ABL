@@ -7,7 +7,7 @@ class ConversationAssistantSchema < RubyLLM::Schema
                       Leave empty if no expression. Do not give Examples"
 
   string :examples,
-         description: "2-3 similar québécois expressions. No preamble.(just the phrases, e.g. 'Je suis dans le jus | Je suis épuisé').
+         description: "1-2 similar québécois expressions. No preamble.(just the phrases, e.g. 'Je suis dans le jus | Je suis épuisé').
                       No explanations. Do not use word Exemples : before giving examples. Leave empty if no expression."
 
   string :suggestion,
@@ -16,8 +16,4 @@ class ConversationAssistantSchema < RubyLLM::Schema
   string :translation,
          description: "If the INCOMING message is in French, provide English translation.
                       Do not translate current user messages and leave empty."
-
-  string :correction,
-         description: "If the LAST CURRENT user message is in French and if there are mistakes,
-                      shortly say what is wrong and suggest correct form. Leave empty otherwise."
 end
