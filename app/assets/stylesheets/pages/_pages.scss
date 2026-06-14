@@ -24,9 +24,10 @@
   color: $OJ-text-main;
 
   &.active {
-    color: $OJ-primary;
+    color: white;
     border-bottom-color: $OJ-primary;
     font-weight: 600;
+    background-color: $OJ-primary;
   }
 
   &:hover:not(.active) {
