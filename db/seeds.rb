@@ -11,7 +11,7 @@ Phrase.destroy_all
 Word.destroy_all
 User.destroy_all
 
-user = User.create!(
+user = User.create!( # user = current_user
   email: "test@example.com",
   password: "password123",
   password_confirmation: "password123",

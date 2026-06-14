@@ -19,15 +19,15 @@ class CreateChatAssistantMessageJob < ApplicationJob
       -Search for a saved french word. Do not make any suggestions. Just search for the french word."
   end
 
-  def perform(chat_id)
+  def perform(chat_id, current_user)
     chat = Chat.find(chat_id)
     user_message = chat.messages.where(role: :user).last
     return unless user_message
 
     assistant_message = chat.messages.create!(role: :assistant, content: "")
 
-    RubyLLM.chat.with_tool(CreateWordTool)
-    RubyLLM.chat.with_tool(CreatePhraseTool)
+    RubyLLM.chat.with_tool(CreateWordTool.new(current_user))
+    RubyLLM.chat.with_tool(CreatePhraseTool.new(current_user))
     RubyLLM.chat.with_tool(SearchDictionaryEntriesTool)
     RubyLLM.chat.with_tool(SearchWordsTool)
 

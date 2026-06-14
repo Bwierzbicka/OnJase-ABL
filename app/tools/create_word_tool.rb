@@ -7,10 +7,16 @@ class CreateWordTool < RubyLLM::Tool
   param :word_type_add, desc: "The word type of the word I want to add"
   param :gender_add, desc: "The gender of the word I want to add"
 
+  # When calling this tool you need to initialise it with an isntance of User
+  def initialize(current_user)
+    @user = current_user
+  end
+
   def execute(french_add:, english_add:, definition_add:, word_type_add:, gender_add:) # no need for word id
     word = Word.create!(french: french_add,
                         english: english_add, definition: definition_add,
                         gender: gender_add, word_type: word_type_add)
+    SavedItem.create!(saveable: word, user: @user)
   rescue ActiveRecord::RecordInvalid => e
     { error: e.message }
   end
