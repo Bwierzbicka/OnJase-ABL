@@ -188,7 +188,7 @@ puts "#{DictionaryEntry.count} dictionary entries were created successfully!"
 # puts "Embedding #{DictionaryEntry.count} dictionary entries is successfully completed!"
 
 # Logic for the Dictionary Entries from CSV starts here
-require "csv2"
+require "csv"
 
 filepath2 = "data/expressions-quebecoises_20260615.csv"
 
@@ -221,7 +221,7 @@ DictionaryPhrase.all.each do |entry2|
   str2 = ""
   str2.concat(entry2.french, entry2.english)
   embedding = RubyLLM.embed(entry2)    # pass a text column, not the whole record
-  entry.update(embedding: embedding.vectors)
+  entry2.update(embedding: embedding.vectors)
   puts "#{entry2.french} embedding set"
 end
 puts "Embedding #{DictionaryPhrase.count} dictionary phrases is successfully completed!"
