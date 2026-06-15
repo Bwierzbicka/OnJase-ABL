@@ -18,7 +18,7 @@ class CreateChatAssistantMessageJob < ApplicationJob
 
     assistant_message = chat.messages.create!(role: :assistant, content: "")
 
-    RubyLLM.chat.with_instructions(instructions).ask(user_message.content) do |chunk|
+    chat.with_instructions(instructions).ask(user_message.content) do |chunk|
       next unless chunk.content.present?
 
       assistant_message.update!(
