@@ -11,7 +11,7 @@ Phrase.destroy_all
 Word.destroy_all
 User.destroy_all
 
-user = User.create!(
+user = User.create!( # user = current_user
   email: "test@example.com",
   password: "password123",
   password_confirmation: "password123",
@@ -85,7 +85,7 @@ Message.create!(chat: chat, role: "user", content: "Can you help me understand w
 Message.create!(chat: chat, role: "assistant", content: "Of course! 'Tu' is the informal singular 'you', used with friends, family, and children. 'Vous' is the formal or plural 'you', used with strangers, authority figures, or when addressing multiple people.")
 Message.create!(chat: chat, role: "user", content: "That makes sense! So I should use 'vous' when talking to my French teacher?")
 
-#Logic for the Dictionary Entries from CSV starts here
+# Logic for the Dictionary Entries from CSV starts here
 require "csv"
 
 filepath = "data/oqlf_2026-01-19.csv"
@@ -156,25 +156,28 @@ def categorize(text)
 
 end
 
-
-puts "Dictionary entries are being generated. Please wait."
-CSV.foreach(filepath) do |row|
+# Dictionary entries generated for first(n) records of CSV. n=50
+puts "Dictionary entries are being generated, from the first 50 CSV entries. Please wait." # CSV.foreach(filepath).first(n) do |row|
+CSV.foreach(filepath).first(50).each do |row| #replace 50 by the number we want to generate. if we want all just remove .first(50)
   g = gender(row[0])
   w = categorize(row[0])
   next if g.nil? || w.nil?
-  DictionaryEntry.create!(terme_francais: row[0], terme_anglais: row[1], definition: row[2], gender: g, word_type: w)
+  word_entry = DictionaryEntry.create!(terme_francais: row[0], terme_anglais: row[1], definition: row[2], gender: g, word_type: w)
+  puts "#{word_entry.terme_francais} was created!" # comment this out if you don't want to see the words created
 end
 puts "#{DictionaryEntry.count} dictionary entries were created successfully!"
 
+print "Should I continue with the embedding of #{DictionaryEntry.count} dictionary records? (y/n): "
+answer = gets.chomp.downcase
+exit unless answer == "y"
 
-# Embedding code - Do not uncomment - Costs .01 USD per 50, 10 USD for the whole thing
-# When it's time to run everything, replace .first(50) by .all
-# puts "Embedding first 50 is being generated. Please wait."
-# DictionaryEntry.first(50).each do |entry|
-#   str = ""
-#   str.concat(entry.terme_francais, entry.terme_anglais, entry.definition, entry.gender, entry.word_type)
-#   embedding = RubyLLM.embed(entry)   # pass a text column, not the whole record
-#   entry.update(embedding: embedding.vectors)
-#   puts "#{entry.terme_francais} embedding set"
-# end
-# puts "Embedding first 50 is successfully completed!"
+# Costs .01 USD per 50, 10 USD for the whole thing, according to my maths :)
+puts "Embedding #{DictionaryEntry.count} dictionary entries are being generated. Please wait."
+DictionaryEntry.all.each do |entry|
+  str = ""
+  str.concat(entry.terme_francais, entry.terme_anglais, entry.definition, entry.gender, entry.word_type)
+  embedding = RubyLLM.embed(entry)    # pass a text column, not the whole record
+  entry.update(embedding: embedding.vectors)
+  puts "#{entry.terme_francais} embedding set"
+end
+puts "Embedding #{DictionaryEntry.count} dictionary entries is successfully completed!"

@@ -52,6 +52,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_14_025845) do
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
+  create_table "flashcards", force: :cascade do |t|
+    t.text "answer"
+    t.datetime "created_at", null: false
+    t.text "question"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_flashcards_on_user_id"
+  end
+  
   create_table "dictionary_entries", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "definition"
@@ -61,15 +70,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_14_025845) do
     t.text "terme_francais"
     t.datetime "updated_at", null: false
     t.string "word_type"
-  end
-
-  create_table "flashcards", force: :cascade do |t|
-    t.text "answer"
-    t.datetime "created_at", null: false
-    t.text "question"
-    t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_flashcards_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -296,6 +296,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_14_025845) do
     t.text "definition"
     t.string "english"
     t.string "french"
+    t.string "gender"
     t.datetime "updated_at", null: false
     t.string "word_type"
   end
@@ -303,7 +304,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_14_025845) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chats", "users"
-  add_foreign_key "flashcards", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "tool_calls"
   add_foreign_key "saved_items", "users"

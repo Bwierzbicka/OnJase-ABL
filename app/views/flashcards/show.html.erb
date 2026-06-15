@@ -1,0 +1,16 @@
+<h1><%= @flashcard.question %></h1>
+
+<p><strong>Answer:</strong> <%= @flashcard.answer %></p>
+
+<hr>
+
+<%= link_to "Edit", edit_flashcard_path(@flashcard), class: "btn btn-warning" %>
+
+<%= link_to "Delete",
+            flashcard_path(@flashcard),
+            data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+            class: "btn btn-danger" %>
+
+<br><br>
+
+<%= link_to "Back to all flashcards", flashcards_path %>

@@ -24,11 +24,7 @@
         <div class="d-flex align-items-center gap-2">
           <%= image_tag "OnJase_logo.png", class: "rounded-circle object-fit-cover ai-panel__logo", alt: "OnJase" %>
           <span class="fw-semibold text-OJ-primary">OnJase</span>
-          <i class="fa-solid fa-wand-magic-sparkles text-OJ-primary ai-panel__sparkle"></i>
         </div>
-        <button class="btn btn-link p-0 text-muted" data-action="click->ai-panel#toggle">
-          <i class="fa-solid fa-chevron-down"></i>
-        </button>
       </div>
       <div class="p-3">
         <p> TODO: AI CONVERSATION ASSISTANT </p>
@@ -36,9 +32,6 @@
     </div>
 
     <div class="d-flex align-items-center gap-2">
-      <button class="btn btn-OJ-primary rounded-circle p-0 text-white ai-panel__trigger-btn flex-shrink-0" data-action="click->ai-panel#toggle">
-        <i class="fa-solid fa-wand-magic-sparkles"></i>
-      </button>
       <div class="flex-grow-1">
         <%= render "messages/form", chat: @chat, message: @message %>
       </div>
