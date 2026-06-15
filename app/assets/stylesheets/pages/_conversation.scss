@@ -9,6 +9,22 @@
   word-break: break-word;
 }
 
+.save-message-btn {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+
+  &--visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &--saved {
+    color: $OJ-primary !important;
+  }
+}
+
 .chat-send-btn {
   width: 36px;
   height: 36px;

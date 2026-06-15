@@ -59,8 +59,9 @@ class UserConversationsController < ApplicationController
     head :ok
   end
 
-  def save_item_to_saved_phrases
+  def save_item_to_saveable_items
     SaveItemFromMessagesJob.perform_later(current_user, params[:item].to_s)
+    head :ok
   end
 
   private
