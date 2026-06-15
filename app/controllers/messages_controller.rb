@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
     @message.role = "user"
 
     if @message.save!
-      CreateChatAssistantMessageJob.perform_later(@chat.id)
+      CreateChatAssistantMessageJob.perform_later(@chat.id, current_user)
 
       respond_to do |format|
         format.turbo_stream

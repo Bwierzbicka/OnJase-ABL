@@ -296,6 +296,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_14_025845) do
     t.text "definition"
     t.string "english"
     t.string "french"
+    t.string "gender"
     t.datetime "updated_at", null: false
     t.string "word_type"
   end
