@@ -35,5 +35,8 @@
   <body>
     <%= render "shared/flashes" %>
     <%= yield %>
+    <% if show_bottom_navbar? %>
+      <%= render "shared/bottom_navbar" %>
+    <% end %>
   </body>
 </html>
