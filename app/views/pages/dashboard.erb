@@ -1,19 +1,49 @@
+<div class='m-4'>
+  <p class="fs-5 mb-4"><span class="page-title fs-1">Salut,</span>
+    <% if current_user.display_name.present? %>
+      <%= current_user.display_name %>
+    <% else %>
+      <%= current_user.username %>
+    <% end %>
+  </p>
 
-<div class='m-5'>
-  <div id="fun-fact">
-    <h4>Fun Fact</h4>
-    <p id="gen-fun-fact"><%= @fun_fact.fact %></p>
-  </div>
+  <div class="d-flex flex-column gap-3 dashboard-container">
 
-  <div class="card-container">
-  <%= link_to flashcards_path do %>
-    <div class="card-dashboard">
-      <h4>Flashcards</h4>
+    <div class="dashborad-card p-3 bg-white">
+      <p class="text-OJ-primary"><strong>L'anecdote du jour</strong></p>
+      <% if @fun_fact.fact %>
+        <p id="gen-fun-fact" class="m-0"><%= @fun_fact.fact %></p>
+      <% else %>
+        <p class="m-0">Le Vieux-Montréal cache encore des rues pavées du 17e siècle, ce qui lui donne un charme européen unique qu’on ne retrouve nulle part ailleurs au Québec de la même façon.</p>
+      <% end %>
     </div>
-  <% end %>
-</div>
-<%= render "shared/bottom_navbar" %>
 
-<%= link_to flashcards_path do %>
-  <!-- purple box HTML -->
-<% end %>
+
+    <%= link_to flashcards_path, class: 'text-OJ-primary text-decoration-none' do %>
+      <div class="dashborad-card text-center p-3 bg-white">
+        <strong class="fs-6">
+           <p class="mb-2">FLASHCARDS</p>
+           <div class="d-flex gap-3 justify-content-center">
+            <i class="fs-3 fa-regular fa-face-smile-beam text-success"></i>
+            <i class="fs-3 fa-regular fa-face-meh text-warning"></i>
+            <i class="fs-3 fa-regular fa-face-frown text-danger"></i>
+           </div>
+        </strong>
+      </div>
+    <% end %>
+
+    <div class="dashborad-card p-3 bg-white">
+      <p class="text-OJ-primary"><strong>Enregistré récemment</strong></p>
+      <% @recently_saved_phrases.each do |phrase| %>
+        <%= link_to phrase_path(phrase), class: "text-decoration-none" do %>
+            <div class="saved-item-card">
+              <span class="text-OJ-text-main"><%= phrase.french %></span>
+            </div>
+          <% end %>
+      <% end %>
+    </div>
+
+  </div>
+</div
+>
+<%= render "shared/bottom_navbar" %>
