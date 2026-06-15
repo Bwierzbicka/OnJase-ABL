@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_13_153419) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_14_025845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "vector"
@@ -52,6 +52,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_13_153419) do
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
+  create_table "flashcards", force: :cascade do |t|
+    t.text "answer"
+    t.datetime "created_at", null: false
+    t.text "question"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_flashcards_on_user_id"
+  end
+  
   create_table "dictionary_entries", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "definition"
@@ -253,7 +262,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_13_153419) do
     t.string "translation"
     t.datetime "updated_at", null: false
     t.bigint "user_conversation_id", null: false
-    t.string "user_id"
+    t.integer "user_id"
     t.index ["user_conversation_id"], name: "index_user_conversation_messages_on_user_conversation_id"
   end
 
