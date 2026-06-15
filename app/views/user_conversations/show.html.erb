@@ -46,15 +46,18 @@
 
 
       <div id="conversation-assistant" class="p-3">
-        <%# <%= link_to "link", call_assistant_user_conversation_path(@user_conversation) %>
-        <p>Generating ideas</p>
+        <div class="d-flex align-items-center gap-2 text-muted">
+          <div class="spinner-border spinner-border-sm" role="status"></div>
+          <small>Analyse en cours…</small>
+        </div>
       </div>
 
 
     </div>
 
     <div class="d-flex align-items-center gap-2">
-      <button class="btn btn-OJ-primary rounded-circle p-0 text-white ai-panel__trigger-btn flex-shrink-0" data-action="click->ai-panel#toggle">
+      <button class="btn btn-OJ-primary rounded-circle p-0 text-white ai-panel__trigger-btn flex-shrink-0 d-flex align-items-center justify-content-center"
+              data-action="click->ai-panel#toggle">
         <i class="fa-solid fa-wand-magic-sparkles"></i>
       </button>
       <div class="flex-grow-1">
