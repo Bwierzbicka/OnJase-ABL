@@ -1,4 +1,5 @@
 <%= simple_form_for @flashcard do |f| %>
+  <%= f.association :deck, collection: current_user.decks, prompt: "Choose a deck" %>
   <%= f.input :question %>
   <%= f.input :answer %>
 

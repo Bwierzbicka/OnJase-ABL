@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "decks/index"
+  get "decks/show"
+  get "decks/new"
+  get "decks/edit"
   get "up" => "rails/health#show", as: :rails_health_check
 
   root to: "pages#home"
@@ -21,4 +25,8 @@ Rails.application.routes.draw do
   resources :saved_items, only: [:index]
   resources :words, only: [:show]
   resources :phrases, only: [:show]
+
+  resources :decks do
+   resources :flashcards, only: [:index]
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_11_193147) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_15_192039) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "vector"
@@ -52,6 +52,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_193147) do
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
+  create_table "decks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_decks_on_user_id"
+  end
+
   create_table "dictionary_entries", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "definition"
@@ -66,9 +74,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_193147) do
   create_table "flashcards", force: :cascade do |t|
     t.text "answer"
     t.datetime "created_at", null: false
+    t.bigint "deck_id"
     t.text "question"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.index ["deck_id"], name: "index_flashcards_on_deck_id"
     t.index ["user_id"], name: "index_flashcards_on_user_id"
   end
 
@@ -314,6 +324,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_193147) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chats", "users"
+  add_foreign_key "decks", "users"
+  add_foreign_key "flashcards", "decks"
   add_foreign_key "flashcards", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "tool_calls"
