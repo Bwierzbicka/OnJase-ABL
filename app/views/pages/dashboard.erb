@@ -11,7 +11,7 @@
 
     <div class="dashborad-card p-3 bg-white">
       <p class="text-OJ-primary"><strong>L'anecdote du jour</strong></p>
-      <% if @fun_fact.fact %>
+      <% if @fun_fact.present? %>
         <p id="gen-fun-fact" class="m-0"><%= @fun_fact.fact %></p>
       <% else %>
         <p class="m-0">Le Vieux-Montréal cache encore des rues pavées du 17e siècle, ce qui lui donne un charme européen unique qu’on ne retrouve nulle part ailleurs au Québec de la même façon.</p>
