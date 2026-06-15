@@ -9,8 +9,8 @@
   }
 }
 
-[data-ai-panel-target="panel"]:not(.d-none),
-[data-typing-assistant-target="panel"]:not(.d-none),
+// [data-ai-panel-target="panel"]:not(.d-none),
+// [data-typing-assistant-target="panel"]:not(.d-none),
 [data-typing-assistant-target="trigger"]:not(.d-none) {
   animation: oj-fade-up 0.3s ease-out;
 }
