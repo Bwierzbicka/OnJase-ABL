@@ -88,6 +88,8 @@ Message.create!(chat: chat, role: "user", content: "Can you help me understand w
 Message.create!(chat: chat, role: "assistant", content: "Of course! 'Tu' is the informal singular 'you', used with friends, family, and children. 'Vous' is the formal or plural 'you', used with strangers, authority figures, or when addressing multiple people.")
 Message.create!(chat: chat, role: "user", content: "That makes sense! So I should use 'vous' when talking to my French teacher?")
 
+
+# ADD LINES TO SEEDS BEFORE THIS LOGIC, IF POSSIBLE
 # Logic for the Dictionary Entries from CSV starts here
 require "csv"
 
