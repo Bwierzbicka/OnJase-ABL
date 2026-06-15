@@ -1,11 +1,12 @@
 #fun-fact {
-  background-color: rgb(151, 229, 151);
+  background-color: white;
   height: 200px;
   border-radius: 10px;
   padding: 10px;
+  box-shadow: 2px 2px 5px $OJ-primary-light;
 }
 
-.card-container{
+.card-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
@@ -18,4 +19,8 @@
   border-radius: 10px;
   padding: 10px;
   justify-content: center;
+}
+
+#gen-fun-fact {
+  font-size: 100%;
 }
