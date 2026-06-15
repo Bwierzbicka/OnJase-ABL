@@ -7,7 +7,11 @@
           class: "form-control border-0 shadow-none bg-transparent ps-3",
           placeholder: "Type a message...",
           autocomplete: "off",
-          data: { "message-form-target": "input" }
+          data: {
+            "message-form-target": "input",
+            "typing-assistant-target": "input",
+            action: "input->typing-assistant#inputChanged"
+          }
         } %>
     <button type="submit" class="btn btn-OJ-primary rounded-circle m-1 d-flex align-items-center justify-content-center
                                  p-0 text-white flex-shrink-0 chat-send-btn">
