@@ -5,6 +5,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    @fun_fact = FunFact.all.sample
   end
 
   def profile
