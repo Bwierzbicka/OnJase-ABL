@@ -1,3 +1,5 @@
+<%= turbo_stream_from UserConversation %>
+
 <div class='m-4'>
 
   <%= link_to user_conversations_path, class: 'text-decoration-none' do %>
@@ -20,7 +22,6 @@
     <% end %>
   </div>
   <div id="user_search_results">
-    <%# accessing result and do for each result (do it in a partial) %>
-    <%= render "user_conversations/search_result" %>
+    <span>disappear</span>
   </div>
 </div>
