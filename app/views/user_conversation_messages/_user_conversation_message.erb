@@ -1,6 +1,16 @@
 <% if user_conversation_message.user_id.to_i == current_user_id %>
 
-  <div class="d-flex justify-content-end mb-2">
+  <div class="d-flex justify-content-end align-items-center mb-2 message-wrapper"
+       data-controller="save-message"
+       data-save-message-url-value="<%= save_item_to_saveable_items_user_conversation_path(user_conversation_message.user_conversation_id) %>"
+       data-save-message-item-value="<%= user_conversation_message.content %>"
+       data-action="click->save-message#toggle">
+    <button class="save-message-btn btn btn-sm p-1 text-muted border-0 me-1"
+            data-save-message-target="button"
+            data-action="click->save-message#save"
+            title="Save to phrases">
+      <i class="fa-regular fa-bookmark"></i>
+    </button>
     <div class="chat-bubble bg-OJ-primary-light rounded-4 px-3 py-2">
       <%= user_conversation_message.content %>
     </div>
@@ -8,10 +18,20 @@
 
 <% else %>
 
-  <div class="d-flex justify-content-start mb-2">
+  <div class="d-flex justify-content-start align-items-center mb-2 message-wrapper"
+       data-controller="save-message"
+       data-save-message-url-value="<%= save_item_to_saveable_items_user_conversation_path(user_conversation_message.user_conversation_id) %>"
+       data-save-message-item-value="<%= user_conversation_message.content %>"
+       data-action="click->save-message#toggle">
     <div class="chat-bubble bg-white rounded-4 px-3 py-2 border">
       <%= user_conversation_message.content %>
     </div>
+    <button class="save-message-btn btn btn-sm p-1 text-muted border-0 ms-1"
+            data-save-message-target="button"
+            data-action="click->save-message#save"
+            title="Save to phrases">
+      <i class="fa-regular fa-bookmark"></i>
+    </button>
   </div>
 
 <% end %>

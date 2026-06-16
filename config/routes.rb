@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     member do
       get  :call_assistant
       get  :call_typing_assistant
+      post :save_item_to_saveable_items
     end
   end
 
