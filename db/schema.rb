@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_16_143923) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_16_185834) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "vector"
@@ -52,6 +52,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_16_143923) do
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
+  create_table "deck_flashcards", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "deck_id", null: false
+    t.bigint "flashcard_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deck_id"], name: "index_deck_flashcards_on_deck_id"
+    t.index ["flashcard_id"], name: "index_deck_flashcards_on_flashcard_id"
+  end
+
   create_table "decks", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -69,6 +78,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_16_143923) do
     t.text "terme_francais"
     t.datetime "updated_at", null: false
     t.string "word_type"
+  end
+
+  create_table "dictionary_phrases", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.vector "embedding", limit: 1536
+    t.text "english"
+    t.text "french"
+    t.datetime "updated_at", null: false
   end
 
   create_table "flashcards", force: :cascade do |t|
@@ -104,18 +121,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_16_143923) do
     t.datetime "created_at", null: false
     t.string "english"
     t.string "french"
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "quebecois_entries", force: :cascade do |t|
-    t.string "category"
-    t.datetime "created_at", null: false
-    t.jsonb "embedding"
-    t.text "example_usage"
-    t.text "meaning"
-    t.text "notes"
-    t.string "phrase"
-    t.string "register"
     t.datetime "updated_at", null: false
   end
 
@@ -330,6 +335,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_16_143923) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chats", "users"
+  add_foreign_key "deck_flashcards", "decks"
+  add_foreign_key "deck_flashcards", "flashcards"
   add_foreign_key "decks", "users"
   add_foreign_key "flashcards", "users"
   add_foreign_key "messages", "chats"
