@@ -70,6 +70,10 @@ class UserConversationsController < ApplicationController
     head :ok
   end
 
+  def retrieve_users
+    puts "hello there"
+  end
+
   private
 
   def user_conversation_params

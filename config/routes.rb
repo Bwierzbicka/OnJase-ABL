@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       get  :call_typing_assistant
       post :save_item_to_saveable_items
     end
+    collection do
+      post :retrieve_users
+    end
   end
 
   resources :chats, only: [:index, :new, :create, :show] do
