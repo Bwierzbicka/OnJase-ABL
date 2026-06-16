@@ -8,8 +8,5 @@ class SearchDictionaryPhrasesTool < RubyLLM::Tool
                                                                    distance: "euclidean").first(5)
     return "No dictionary phrases found for '#{query}'" if dictionary_phrase_results.empty?
 
-    dictionary_phrase_results.each do |entry3|
-      puts "#{entry3.french} (distance: #{entry3.neighbor_distance.round(4)})"
-    end
   end
 end
