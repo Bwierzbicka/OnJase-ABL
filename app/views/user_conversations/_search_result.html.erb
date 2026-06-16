@@ -1,0 +1,7 @@
+<% if results.present? %>
+  <ul>
+    <% results.each do |result| %>
+      <li><%= result.username %></li>
+    <% end %>
+  </ul>
+<% end %>
