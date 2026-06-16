@@ -1,4 +1,6 @@
 class UserConversationsController < ApplicationController
+  after_action :verify_authorized, only: [:show, :destroy]
+
   def new
     @user_conversation = UserConversation.new
     #  authorize @user_conversation
