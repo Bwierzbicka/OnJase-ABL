@@ -17,7 +17,7 @@
   </ul>
 
   <div class="tab-content pt-3" id="savedTabsContent">
-    <div class="tab-pane fade show active" id="words-pane" role="tabpanel" aria-labelledby="words-tab">
+    <div class="saved-list tab-pane fade show active" id="words-pane" role="tabpanel" aria-labelledby="words-tab">
       <% if @saved_words.any? %>
         <% @saved_words.reverse.each do |word| %>
           <%= link_to word_path(word), class: "saved-item-link text-decoration-none" do %>
@@ -44,7 +44,7 @@
       <% end %>
     </div>
 
-    <div class="tab-pane fade" id="phrases-pane" role="tabpanel" aria-labelledby="phrases-tab">
+    <div class="saved-list tab-pane fade" id="phrases-pane" role="tabpanel" aria-labelledby="phrases-tab">
       <% if @saved_phrases.any? %>
         <% @saved_phrases.reverse.each do |phrase| %>
           <%= link_to phrase_path(phrase), class: "saved-item-link text-decoration-none" do %>
