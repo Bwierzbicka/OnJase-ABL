@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount MissionControl::Jobs::Engine, at: "/jobs"
   end
-  
+
   root to: "pages#home"
   devise_for :users, controllers: { registrations: "users/registrations" }
 
@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     member do
       get  :call_assistant
       get  :call_typing_assistant
+      post :save_item_to_saveable_items
     end
   end
 
@@ -24,6 +25,6 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
   resources :saved_items, only: [:index]
-  resources :words, only: [:show]
+  resources :words, only: [:show, :destroy]
   resources :phrases, only: [:show]
 end

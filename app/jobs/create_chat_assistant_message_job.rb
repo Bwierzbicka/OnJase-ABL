@@ -9,6 +9,7 @@ class CreateChatAssistantMessageJob < ApplicationJob
     - Contrast québécois usage with standard French where helpful
     - Reference local culture (hockey, poutine, dépanneur, etc.)
     - Correct learners gently using québécois phrasing
+    - Use a clean layout for your answers. if you are answering a question , and you want to give examples, Divide the answer between explanation and example.
 
       You have access to tools:
       -Creates a word in our saved words list with the required fields. When I give you a word to save, look up the definition, the english word, the word type, the gender of the word (masculine or feminine) and add them all to the saved word record.
@@ -19,19 +20,22 @@ class CreateChatAssistantMessageJob < ApplicationJob
       -Search for a saved french word. Do not make any suggestions. Just search for the french word."
   end
 
-  def perform(chat_id, current_user)
-    chat = Chat.find(chat_id)
-    user_message = chat.messages.where(role: :user).last
-    return unless user_message
-
+  def perform(chat, current_user, user_message)
     assistant_message = chat.messages.create!(role: :assistant, content: "")
+
+    assistant_message.broadcast_append_to(
+      chat,
+      target: "messages",
+      partial: "messages/message",
+      locals: { message: assistant_message }
+    )
 
     chat.with_tool(CreateWordTool.new(current_user))
     chat.with_tool(CreatePhraseTool.new(current_user))
     chat.with_tool(SearchDictionaryEntriesTool)
     chat.with_tool(SearchWordsTool)
 
-    chat.with_instructions(instructions).ask(user_message.content) do |chunk|
+    chat.with_instructions(instructions).ask(user_message) do |chunk|
       next unless chunk.content.present?
 
       assistant_message.update!(
