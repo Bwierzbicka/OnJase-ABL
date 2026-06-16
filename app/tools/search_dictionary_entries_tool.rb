@@ -8,6 +8,5 @@ class SearchDictionaryEntriesTool < RubyLLM::Tool
 
     return "No dictionary entries found for '#{query}'" if dictionary_entry_results.empty?
 
-    end
   end
 end
