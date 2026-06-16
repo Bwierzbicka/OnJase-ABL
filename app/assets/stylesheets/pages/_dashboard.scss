@@ -1,21 +1,4 @@
-#fun-fact {
-  background-color: rgb(151, 229, 151);
-  height: 200px;
+.dashborad-card{
   border-radius: 10px;
-  padding: 10px;
-}
-
-.card-container{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.card-dashboard {
-  background-color: rgb(164, 164, 239);
-  height: 150px;
-  border-radius: 10px;
-  padding: 10px;
-  justify-content: center;
+  box-shadow: 2px 2px 5px $OJ-primary-light;
 }
