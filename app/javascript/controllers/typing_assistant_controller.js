@@ -15,6 +15,8 @@ export default class extends Controller {
   inputChanged() {
     clearTimeout(this._timer)
     if (!this.inputTarget.value.trim()) {
+      // apply new fade out css class
+      // make sure on animation end is used before the class with d-none is added
       this.triggerTarget.classList.add("d-none")
       return
     }
