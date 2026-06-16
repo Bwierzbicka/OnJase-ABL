@@ -6,9 +6,12 @@
 
   <h1 class="page-title">new message </h1>
 
-  <div class="mt-5 pt-5">
+  <div class="mt-5 pt-5" data-controller="partial-user-search"> <%# add controller here data-controller %>
     <%= simple_form_for @user_conversation do |f| %>
-      <%= f.input :username, label: "Send message to:", placeholder: "Enter username" %>
+      <%= f.input :username, label: "Send message to:", placeholder: "Enter username",
+              input_html: {
+                data: { action: "input->partial-user-search#searchUsername" }
+              } %>
       <div class="d-flex justify-content-end">
         <%= f.button :submit, "Search", class: "btn btn-OJ-primary fw-bold text-white" %>
       </div>
