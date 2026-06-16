@@ -10,7 +10,7 @@
     <%= simple_form_for @user_conversation do |f| %>
       <%= f.input :username, label: "Send message to:", placeholder: "Enter username",
               input_html: {
-                data: { action: "input->partial-user-search#searchUsername" }
+                data: { "partial-user-search-target": "input", action: "input->partial-user-search#searchUsername" }
               } %>
       <div class="d-flex justify-content-end">
         <%= f.button :submit, "Search", class: "btn btn-OJ-primary fw-bold text-white" %>
