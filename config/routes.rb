@@ -26,5 +26,5 @@ Rails.application.routes.draw do
   end
   resources :saved_items, only: [:index]
   resources :words, only: [:show, :destroy]
-  resources :phrases, only: [:show]
+  resources :phrases, only: [:show, :destroy]
 end
