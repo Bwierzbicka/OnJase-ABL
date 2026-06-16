@@ -1,7 +1,7 @@
 class UserConversationsController < ApplicationController
   def new
     @user_conversation = UserConversation.new
-    authorize @user_conversation
+    #  authorize @user_conversation
   end
 
   def index
@@ -10,7 +10,7 @@ class UserConversationsController < ApplicationController
 
   def create
     @user_conversation = UserConversation.new
-    authorize @user_conversation
+    #  authorize @user_conversation
     @user_conversation.user1 = current_user
 
     user2 = User.find_by(username: user_conversation_params[:username])
