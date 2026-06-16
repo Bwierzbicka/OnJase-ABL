@@ -1,5 +1,8 @@
 <%= simple_form_for @flashcard do |f| %>
-  <%= f.association :deck, collection: current_user.decks, prompt: "Choose a deck" %>
+  <%= f.association :decks,
+      collection: current_user.decks,
+      as: :check_boxes,
+      label: "Assign to decks" %>
   <%= f.input :question %>
   <%= f.input :answer %>
 

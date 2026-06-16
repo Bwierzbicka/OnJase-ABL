@@ -46,6 +46,6 @@ class FlashcardsController < ApplicationController
   end
 
   def flashcard_params
-    params.require(:flashcard).permit(:question, :answer, :deck_id)
+    params.require(:flashcard).permit(:question, :answer, deck_ids: [])
   end
 end
