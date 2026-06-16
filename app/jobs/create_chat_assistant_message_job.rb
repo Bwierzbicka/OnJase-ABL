@@ -17,6 +17,7 @@ class CreateChatAssistantMessageJob < ApplicationJob
       -Creates a phrase in our saved phrases list with the required fields. When I give you a phrase to save, look up the english translation, and add it to the saved word record, along with the french phrase.
       Do not create multiple phrases. Do not make any suggestions. Just create the phrase and save it.
       -Search for a french dictionary entry, in the seeds. Do not make any suggestions. Just search for the french dictionary entry.
+      -Search for a french dictionary phrase, in the seeds. Do not make any suggestions. Just search for the french dictionary entry.
       -Search for a saved french word. Do not make any suggestions. Just search for the french word."
   end
 
@@ -33,6 +34,7 @@ class CreateChatAssistantMessageJob < ApplicationJob
     chat.with_tool(CreateWordTool.new(current_user))
     chat.with_tool(CreatePhraseTool.new(current_user))
     chat.with_tool(SearchDictionaryEntriesTool)
+    chat.with_tool(SearchDictionaryPhrasesTool)
     chat.with_tool(SearchWordsTool)
 
     chat.with_instructions(instructions).ask(user_message) do |chunk|

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount MissionControl::Jobs::Engine, at: "/jobs"
   end
-  
+
   root to: "pages#home"
   devise_for :users, controllers: { registrations: "users/registrations" }
 
@@ -25,12 +25,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :chats, only: [:index, :new, :create, :show] do
+  resources :chats, only: [:index, :new, :create, :show, :destroy] do
     resources :messages, only: [:create]
   end
   resources :saved_items, only: [:index]
-  resources :words, only: [:show]
-  resources :phrases, only: [:show]
+  resources :words, only: [:show, :destroy]
+  resources :phrases, only: [:show, :destroy]
 
   resources :decks do
    resources :flashcards, only: [:index]

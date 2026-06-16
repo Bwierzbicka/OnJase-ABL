@@ -6,4 +6,12 @@
     font-size: 2.2rem;
     color: $OJ-text-main;
   }
+
+  .active {
+    color: $OJ-primary;
+  }
+
+  .profile_active {
+    border: 2px solid $OJ-primary;
+  }
 }

@@ -8,8 +8,5 @@ class SearchDictionaryEntriesTool < RubyLLM::Tool
 
     return "No dictionary entries found for '#{query}'" if dictionary_entry_results.empty?
 
-    dictionary_entry_results.each do |entry|
-      puts "#{entry.terme_francais} (distance: #{entry.neighbor_distance.round(4)})"
-    end
   end
 end

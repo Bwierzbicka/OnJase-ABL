@@ -2,6 +2,9 @@
 puts "#{DictionaryEntry.count} dictionary entries are being destroyed. Please wait."
 DictionaryEntry.destroy_all
 puts "Dictionary entries have been destroyed!"
+puts "#{DictionaryPhrase.count} dictionary phrases are being destroyed. Please wait."
+DictionaryPhrase.destroy_all
+puts "Dictionary phrases have been destroyed!"
 Message.destroy_all
 Chat.destroy_all
 UserConversationMessage.destroy_all
@@ -85,6 +88,8 @@ Message.create!(chat: chat, role: "user", content: "Can you help me understand w
 Message.create!(chat: chat, role: "assistant", content: "Of course! 'Tu' is the informal singular 'you', used with friends, family, and children. 'Vous' is the formal or plural 'you', used with strangers, authority figures, or when addressing multiple people.")
 Message.create!(chat: chat, role: "user", content: "That makes sense! So I should use 'vous' when talking to my French teacher?")
 
+
+# ADD LINES TO SEEDS BEFORE THIS LOGIC, IF POSSIBLE
 # Logic for the Dictionary Entries from CSV starts here
 require "csv"
 
@@ -167,7 +172,35 @@ CSV.foreach(filepath).first(50).each do |row| #replace 50 by the number we want 
 end
 puts "#{DictionaryEntry.count} dictionary entries were created successfully!"
 
-print "Should I continue with the embedding of #{DictionaryEntry.count} dictionary records? (y/n): "
+# print "Should I continue with the embedding of #{DictionaryEntry.count} dictionary records? (y/n): "
+# answer = gets.chomp.downcase
+# exit unless answer == "y"
+
+# # Costs .01 USD per 50, 10 USD for the whole thing, according to my maths :)
+# puts "Embedding #{DictionaryEntry.count} dictionary entries are being generated. Please wait."
+# DictionaryEntry.all.each do |entry|
+#   str = ""
+#   str.concat(entry.terme_francais, entry.terme_anglais, entry.definition, entry.gender, entry.word_type)
+#   embedding = RubyLLM.embed(entry)    # pass a text column, not the whole record
+#   entry.update(embedding: embedding.vectors)
+#   puts "#{entry.terme_francais} embedding set"
+# end
+# puts "Embedding #{DictionaryEntry.count} dictionary entries is successfully completed!"
+
+# Logic for the Dictionary Entries from CSV starts here
+require "csv"
+
+filepath2 = "data/expressions-quebecoises_20260615.csv"
+
+puts "Dictionary phrases (there should be 93) are being generated. Please wait."
+CSV.foreach(filepath2, headers: true) do |row|
+
+  phrase_entry = DictionaryPhrase.create!(french: row[0], english: row[1])
+  puts "#{phrase_entry.french} was created!" # comment this out if you don't want to see the words created
+end
+puts "#{DictionaryPhrase.count} dictionary phrases were created successfully!"
+
+print "Should I continue with the embedding of #{DictionaryEntry.count} dictionary words and #{DictionaryPhrase.count} dictionary phrases? (y/n): "
 answer = gets.chomp.downcase
 exit unless answer == "y"
 
