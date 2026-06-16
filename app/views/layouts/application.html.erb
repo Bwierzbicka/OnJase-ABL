@@ -36,7 +36,7 @@
     <%= render "shared/flashes" %>
     <%= yield %>
     <% if show_bottom_navbar? %>
-      <%= render "shared/bottom_navbar" %>
+      <%= render "shared/bottom_navbar", locals: { page: current_page } %>
     <% end %>
   </body>
 </html>

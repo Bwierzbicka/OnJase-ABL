@@ -78,15 +78,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_15_150712) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "flashcards", force: :cascade do |t|
-    t.text "answer"
-    t.datetime "created_at", null: false
-    t.text "question"
-    t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_flashcards_on_user_id"
-  end
-
   create_table "messages", force: :cascade do |t|
     t.bigint "chat_id", null: false
     t.text "content"
