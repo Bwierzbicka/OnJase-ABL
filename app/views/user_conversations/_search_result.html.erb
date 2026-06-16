@@ -1,7 +1,7 @@
-<% if @results %>
-  <% @results.each do |result| %>
+<% if results.present? %>
   <ul>
-    <li><%= result.username %></li>
+    <% results.each do |result| %>
+      <li><%= result.username %></li>
+    <% end %>
   </ul>
-  <% end %>
 <% end %>

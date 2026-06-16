@@ -73,24 +73,7 @@ class UserConversationsController < ApplicationController
   end
 
   def retrieve_users
-    # USE ILIKE in the .where for the username
-    # after we retrieve, return the results to the turbo frame
-    # have a div on the new page to show the results
-    # turbo frame is going to send the results to that frame
-    # use turbo update method (used append before - now update)
-    return unless params[:query].present?
-
-    @results = User.where("username ILIKE ?", "%#{params[:query]}%")
-
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.update("user_search_results",
-                              partial: "user_conversations/search_result",
-                              locals: { results: @results })
-        ]
-      end
-    end
+    @results = params[:query].present? ? User.where("username ILIKE ?", "#{params[:query]}%") : User.none
   end
 
   private
