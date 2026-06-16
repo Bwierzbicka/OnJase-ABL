@@ -1,13 +1,16 @@
 <div class='m-4'>
-  <h1 class="page-title">BEATA 9000</h1>
+  <h1 class="page-title mb-3">OnJase chat</h1>
 
   <div class="chat-list">
     <ul class="list-unstyled p-0">
       <% if @chats.any? %>
         <% @chats.reverse.each do |chat| %>
-          <li class="py-2">
-            <%= link_to chat.title, chat_path(chat), class: "text-decoration-none text-OJ-text-main fw-bold" %>
-          </li>
+        <li class="py-2 mb-3">
+          <div class="d-flex align-items-center">
+            <i class="fa-solid fa-hexagon-nodes text-OJ-primary fs-3 me-3"></i>
+            <%= link_to chat.title, chat_path(chat), class: "fw-bold text-decoration-none text-OJ-text-main" %>
+          </div>
+        </li>
         <% end %>
       <% end %>
     </ul>

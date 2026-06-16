@@ -19,4 +19,11 @@ class ChatsController < ApplicationController
     @chat = Chat.find(params[:id])
     @message = Message.new
   end
+
+  def destroy
+    @chat = Chat.find(params[:id])
+    @chat.destroy
+
+    redirect_to chats_path
+  end
 end

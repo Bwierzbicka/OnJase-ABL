@@ -34,7 +34,7 @@
 
     <div class="dashborad-card p-3 bg-white">
       <p class="text-OJ-primary"><strong>Enregistré récemment</strong></p>
-      <% @recently_saved_phrases.each do |phrase| %>
+      <% @recently_saved_phrases.reverse.each do |phrase| %>
         <%= link_to phrase_path(phrase), class: "text-decoration-none" do %>
             <div class="saved-item-card">
               <span class="text-OJ-text-main"><%= phrase.french %></span>
