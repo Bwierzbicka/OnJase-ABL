@@ -20,6 +20,26 @@
   background-color: $OJ-primary-light;
 }
 
+$word-type-colors: (
+  "noun": $orange,
+  "verb": $teal,
+  "article": $OJ-primary,
+  "adjective": $dark-blue,
+  "pronoun": $OJ-primary,
+  "adverb": $yellow,
+  "preposition": $purple,
+  "conjunction": $OJ-primary,
+  "interjection": $brown,
+);
+
+.word-type-badge {
+  @each $type, $color in $word-type-colors {
+    &--#{$type} {
+      background-color: $color;
+    }
+  }
+}
+
 .nav-tabs .nav-link {
   color: $OJ-text-main;
 
