@@ -1,16 +1,16 @@
 <nav class="fixed-bottom">
   <div class="main-menu d-flex justify-content-evenly align-items-center">
     <%= link_to dashboard_path do %>
-      <i class="fa-solid fa-house"></i>
+      <i class="fa-solid fa-house <%= 'active' if current_page == 'dashboard' %>"></i>
     <% end %>
     <%= link_to user_conversations_path do %>
-      <i class="fa-solid fa-inbox"></i>
+      <i class="fa-solid fa-inbox <%= 'active' if current_page == 'user_conversations' %>"></i>
     <% end %>
     <%= link_to chats_path do %>
-      <i class="fa-solid fa-hexagon-nodes"></i>
+      <i class="fa-solid fa-hexagon-nodes <%= 'active' if current_page == 'chats' %>"></i>
     <% end %>
     <%= link_to saved_items_path do %>
-      <i class="fa-solid fa-book-bookmark"></i>
+      <i class="fa-solid fa-book-bookmark <%= 'active' if current_page == 'saved_items' %>"></i>
     <% end %>
 
     <%= link_to profile_path do %>
@@ -18,10 +18,10 @@
         <%= cl_image_tag current_user.avatar.key,
               crop: :thumb,
               gravity: :face,
-              class: "avatar rounded-circle object-fit-cover",
+              class: "avatar rounded-circle object-fit-cover #{'profile_active' if current_page == 'profile'}",
               alt: "User avatar" %>
       <% else %>
-        <%= image_tag "avatar_default.png", class: "avatar rounded-circle object-fit-cover", alt: "Default avatar" %>
+        <%= image_tag "avatar_default.png", class: "avatar rounded-circle object-fit-cover #{'profile_active' if current_page == 'profile'}", alt: "Default avatar" %>
       <% end %>
     <% end %>
   </div>
