@@ -13,7 +13,7 @@
           une
         <% end %>
         <%= @word.french %></span>
-      <span class="badge bg-secondary ms-2"><%= @word.word_type %></span>
+      <span class="badge word-type-badge word-type-badge--<%= @word.word_type %> ms-2"><%= @word.word_type %></span>
     </p>
     <p class="word-english fs-5 mb-2"><%= @word.english %></p>
     <hr>
