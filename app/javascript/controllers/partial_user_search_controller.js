@@ -8,10 +8,9 @@ export default class extends Controller {
   connect() {
     console.log(this.urlValue)
   }
-
+  //
   searchUsername() {
     const csrfToken = document.querySelector("meta[name='csrf-token']").content
-    console.log(this.inputTarget.value)
     console.log(this.urlValue)
     fetch(this.urlValue, {
       method: "POST",
@@ -19,8 +18,7 @@ export default class extends Controller {
         "X-CSRF-Token": csrfToken,
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      body: { query: this.inputTarget.value }
+      body: new URLSearchParams({ query: this.inputTarget.value })
     })
   }
-  // add event listener for key up and then when you type the username it updates with the suggestions
 }

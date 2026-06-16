@@ -71,7 +71,8 @@ class UserConversationsController < ApplicationController
   end
 
   def retrieve_users
-    puts "hello there"
+    # get the query thats being sent (params)
+    puts params
   end
 
   private
