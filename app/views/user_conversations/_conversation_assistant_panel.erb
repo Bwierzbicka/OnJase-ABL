@@ -1,0 +1,51 @@
+<% expression  = response['expression'].to_s.strip %>
+<% explanation = response['expression_explanation'].to_s.strip %>
+<% examples    = response['examples'].to_s.strip %>
+<% suggestion  = response['suggestion'].to_s.strip %>
+<% translation = response['translation'].to_s.strip %>
+
+<% if expression.present? %>
+  <div class="mb-3">
+    <div class="d-flex align-items-center flex-wrap gap-2 mb-2">
+      <strong><%= expression %></strong>
+      <span class="badge rounded-pill ai-panel__qc-badge">
+        <i class="fa-regular fa-hand-point-up"></i> Expression québécoise
+      </span>
+    </div>
+    <% if explanation.present? %>
+      <p class="text-muted small mb-0"><%= explanation %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<% if examples.present? %>
+  <div class="mb-3">
+    <div class="d-flex align-items-center gap-2 mb-2 ai-panel__section-label">
+      <i class="fa-regular fa-lightbulb"></i>
+      <small>Exemples similaires</small>
+    </div>
+    <div class="d-flex flex-wrap gap-2">
+      <span class="rounded-3 p-2 ai-panel__suggestion-box"><%= examples %></span>
+    </div>
+  </div>
+<% end %>
+
+<% if suggestion.present? %>
+  <div class="mb-3">
+    <div class="d-flex align-items-center gap-2 mb-2 ai-panel__section-label">
+      <i class="fa-regular fa-comment"></i>
+      <small>Réponse suggérée</small>
+    </div>
+    <div class="rounded-3 p-2 ai-panel__section-box"><%= suggestion %></div>
+  </div>
+<% end %>
+
+<% if translation.present? %>
+  <div class="mb-3">
+    <div class="d-flex align-items-center gap-2 mb-2 ai-panel__section-label">
+      <i class="fa-solid fa-language"></i>
+      <small>Traduction</small>
+    </div>
+    <div class="rounded-3 p-2 ai-panel__section-box"><%= translation %></div>
+  </div>
+<% end %>

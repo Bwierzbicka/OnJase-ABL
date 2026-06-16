@@ -1,15 +1,11 @@
 .devise-container {
   background-color: $OJ-primary;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .devise-card {
   width: 80vw;
   background-color: $OJ-background-color;
-  padding: 50px 20px;
+  padding: 50px 20px 30px;
   box-shadow: 2px 2px 5px $OJ-primary-light;
   border-radius: 10px;
 }

@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.1].define(version: 2026_06_15_192039) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_15_150712) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "vector"
@@ -74,11 +75,32 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_15_192039) do
   create_table "flashcards", force: :cascade do |t|
     t.text "answer"
     t.datetime "created_at", null: false
+<<<<<<< HEAD
     t.bigint "deck_id"
     t.text "question"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["deck_id"], name: "index_flashcards_on_deck_id"
+=======
+    t.text "question"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_flashcards_on_user_id"
+  end
+
+  create_table "fun_facts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "fact"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "flashcards", force: :cascade do |t|
+    t.text "answer"
+    t.datetime "created_at", null: false
+    t.text "question"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+>>>>>>> c7af795b95d2a0cf1ad26e3a6d5de0418bc46b8c
     t.index ["user_id"], name: "index_flashcards_on_user_id"
   end
 
@@ -284,7 +306,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_15_192039) do
     t.string "translation"
     t.datetime "updated_at", null: false
     t.bigint "user_conversation_id", null: false
-    t.string "user_id"
+    t.integer "user_id"
     t.index ["user_conversation_id"], name: "index_user_conversation_messages_on_user_conversation_id"
   end
 
@@ -299,6 +321,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_15_192039) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.string "display_name"
     t.string "email", default: "", null: false
@@ -317,6 +340,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_15_192039) do
     t.text "definition"
     t.string "english"
     t.string "french"
+    t.string "gender"
     t.datetime "updated_at", null: false
     t.string "word_type"
   end

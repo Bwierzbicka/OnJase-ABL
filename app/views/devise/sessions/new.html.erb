@@ -1,4 +1,4 @@
-<div class="devise-container">
+<div class="vh-100 d-flex justify-content-center align-items-center devise-container">
   <div class="devise-card">
      <h2>Log in</h2>
 
@@ -14,8 +14,8 @@
         <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
       </div>
 
-      <div class="form-actions">
-        <%= f.button :submit, "Log in" %>
+      <div class="form-actions mb-5">
+        <%= f.button :submit, "Log in", class: 'btn btn-OJ-primary text-white' %>
       </div>
     <% end %>
 
