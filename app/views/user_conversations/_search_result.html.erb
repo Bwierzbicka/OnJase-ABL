@@ -1,13 +1,13 @@
 <% if results.present? %>
 
-  <div class="fw-bold text-decoration-none text-OJ-text-main">
-    <ul class="list-unstyled p-0">
-      <% results.each do |result| %>
+  <ul class="list-unstyled p-0">
+    <% results.each do |result| %>
+      <li>
         <%= form_with url: user_conversations_path, method: :post, scope: :user_conversation, data: { turbo: false } do |f| %>
-          <%= f.search_field :username, value: result.username %>
-          <%= f.submit "Add" %>
+          <%= f.hidden_field :username, value: result.username %>
+          <%= f.submit result.username, class: "btn btn-link p-0 fw-bold text-decoration-none text-OJ-text-main field" %>
         <% end %>
-      <% end %>
-    </ul>
-  </div>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
