@@ -1,7 +1,13 @@
 <% if results.present? %>
-  <ul>
-    <% results.each do |result| %>
-      <li><%= result.username %></li>
-    <% end %>
-  </ul>
+
+  <div class="fw-bold text-decoration-none text-OJ-text-main">
+    <ul class="list-unstyled p-0">
+      <% results.each do |result| %>
+        <%= form_with url: user_conversations_path, method: :post, scope: :user_conversation, data: { turbo: false } do |f| %>
+          <%= f.search_field :username, value: result.username %>
+          <%= f.submit "Add" %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
