@@ -15,12 +15,24 @@
     <% else %>
       <%= image_tag "avatar_default.png", class: "avatar rounded-circle object-fit-cover me-2", alt: "Default avatar" %>
     <% end %>
-    <div class='ms-2'>
-      <h2 class="d-inline m-0 fs-5 fw-semibold">
-        <%= @other_user.display_name.present? ? @other_user.display_name : @other_user.username %>
-      </h2>
-      <p class='m-0'><%= @other_user.username if @other_user.display_name.present?  %></p>
+
+    <div class=" w-100 d-flex justify-content-between align-items-center">
+
+      <div class='ms-2'>
+        <h2 class="d-inline m-0 fs-5 fw-semibold">
+          <%= @other_user.display_name.present? ? @other_user.display_name : @other_user.username %>
+        </h2>
+        <p class='m-0'><%= @other_user.username if @other_user.display_name.present?  %></p>
+      </div>
+
+      <div>
+        <%= link_to user_conversation_path(@user_conversation), class: 'pe-2 text-decoration-none text-danger fw-bold',  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+          <i class="fa-regular fa-trash-can text-OJ-text-main fs-6"></i>
+        <% end %>
+      </div>
+
     </div>
+
   </div>
 
   <div id="user_conversation_messages"

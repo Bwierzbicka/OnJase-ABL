@@ -49,6 +49,8 @@ class UserConversationsController < ApplicationController
     @user_conversation = UserConversation.find(params[:id])
     authorize @user_conversation
     @user_conversation.destroy
+
+    redirect_to user_conversations_path
   end
 
   def call_assistant
