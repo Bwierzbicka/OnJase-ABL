@@ -4,13 +4,29 @@
 
 <hr>
 
-<%= link_to "Edit", edit_flashcard_path(@flashcard), class: "btn btn-warning" %>
+<h4>Decks containing this flashcard:</h4>
 
-<%= link_to "Delete",
-            flashcard_path(@flashcard),
-            data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-            class: "btn btn-danger" %>
+<% if @flashcard.decks.any? %>
+  <ul class="list-group mb-3">
+    <% @flashcard.decks.each do |deck| %>
+      <li class="list-group-item">
+        <%= link_to deck.name, deck_path(deck) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p><em>This flashcard is not in any deck.</em></p>
+<% end %>
 
-<br><br>
+<hr>
 
-<%= link_to "Back to all flashcards", flashcards_path %>
+<div class="d-flex gap-2">
+  <%= link_to "Edit", edit_flashcard_path(@flashcard), class: "btn btn-warning" %>
+
+  <%= link_to "Delete",
+              flashcard_path(@flashcard),
+              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+              class: "btn btn-danger" %>
+
+  <%= link_to "Back to all flashcards", flashcards_path, class: "btn btn-secondary" %>
+</div>
