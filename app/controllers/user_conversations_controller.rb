@@ -1,9 +1,6 @@
 class UserConversationsController < ApplicationController
-  after_action :verify_authorized, only: [:show, :destroy]
-
   def new
     @user_conversation = UserConversation.new
-    #  authorize @user_conversation
   end
 
   def index
@@ -12,7 +9,6 @@ class UserConversationsController < ApplicationController
 
   def create
     @user_conversation = UserConversation.new
-    #  authorize @user_conversation
     @user_conversation.user1 = current_user
 
     user2 = User.find_by(username: user_conversation_params[:username])
@@ -41,30 +37,26 @@ class UserConversationsController < ApplicationController
   end
 
   def show
-    @user_conversation = UserConversation.find(params[:id])
-    authorize @user_conversation
+    @user_conversation = current_user.user_conversations.find(params[:id])
     @user_conversation_message = UserConversationMessage.new
     @other_user = @user_conversation.other_participant(current_user)
   end
 
   def destroy
-    @user_conversation = UserConversation.find(params[:id])
-    authorize @user_conversation
+    @user_conversation = current_user.user_conversations.find(params[:id])
     @user_conversation.destroy
 
     redirect_to user_conversations_path
   end
 
   def call_assistant
-    @user_conversation = UserConversation.find(params[:id])
-    authorize @user_conversation
+    @user_conversation = current_user.user_conversations.find(params[:id])
     ConversationAssistantJob.perform_later(@user_conversation, current_user)
     head :ok
   end
 
   def call_typing_assistant
-    @user_conversation = UserConversation.find(params[:id])
-    authorize @user_conversation
+    @user_conversation = current_user.user_conversations.find(params[:id])
     ConversationTypingAssistantJob.perform_later(@user_conversation, current_user, params[:message_text].to_s)
     head :ok
   end

@@ -16,12 +16,12 @@ class ChatsController < ApplicationController
   end
 
   def show
-    @chat = Chat.find(params[:id])
+    @chat = current_user.chats.find(params[:id])
     @message = Message.new
   end
 
   def destroy
-    @chat = Chat.find(params[:id])
+    @chat = current_user.chats.find(params[:id])
     @chat.destroy
 
     redirect_to chats_path
