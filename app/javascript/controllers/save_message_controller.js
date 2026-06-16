@@ -21,7 +21,7 @@ export default class extends Controller {
     }).then(() => {
       const btn = this.buttonTarget
       btn.classList.add("save-message-btn--saved")
-      btn.querySelector("i").className = "fa-solid fa-bookmark"
+      btn.textContent = "TIGIDOU"
     })
   }
 }
