@@ -214,14 +214,3 @@ DictionaryEntry.all.each do |entry|
   puts "#{entry.terme_francais} embedding set"
 end
 puts "Embedding #{DictionaryEntry.count} dictionary entries is successfully completed!"
-
-# Costs .01 USD per 50, .02 USD for 93, according to my maths :)
-puts "Embedding #{DictionaryPhrase.count} dictionary phrases are being generated. Please wait."
-DictionaryPhrase.all.each do |entry2|
-  str2 = ""
-  str2.concat(entry2.french, entry2.english)
-  embedding = RubyLLM.embed(entry2)    # pass a text column, not the whole record
-  entry2.update(embedding: embedding.vectors)
-  puts "#{entry2.french} embedding set"
-end
-puts "Embedding #{DictionaryPhrase.count} dictionary phrases is successfully completed!"

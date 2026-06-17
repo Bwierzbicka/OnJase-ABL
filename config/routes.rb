@@ -30,4 +30,8 @@ Rails.application.routes.draw do
   resources :saved_items, only: [:index]
   resources :words, only: [:show, :destroy]
   resources :phrases, only: [:show, :destroy]
+
+  resources :decks do
+   resources :flashcards, only: [:index]
+  end
 end
