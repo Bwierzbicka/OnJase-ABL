@@ -1,6 +1,6 @@
 class UserConversationMessagesController < ApplicationController
   def create
-    @user_conversation = UserConversation.find(params[:user_conversation_id])
+    @user_conversation = current_user.user_conversations.find(params[:user_conversation_id])
     @message = UserConversationMessage.new(user_conversation_message_params)
     @message.user_conversation = @user_conversation
     @message.user_id = current_user.id
