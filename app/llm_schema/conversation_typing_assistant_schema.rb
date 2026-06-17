@@ -10,8 +10,10 @@ class ConversationTypingAssistantSchema < RubyLLM::Schema
                       Leave empty if no expression. Do not give Examples"
 
   string :examples,
-         description: "1-2 similar québécois expressions. No preamble.(just the phrases, e.g. 'Je suis dans le jus | Je suis épuisé').
-                      No explanations. Do not use word Exemples : before giving examples. Leave empty if no expression."
+         description: "1 similar québécois expression. No preamble.
+                      Do not write 'Example: ', 'Exemples: ', 'Ex. 1', 'Ex. 2',
+                      just the phrase,e.g. 'Je suis dans le jus'.
+                      Leave empty if no expression."
 
   string :translation,
          description: "If the typed message is in English, provide French translation.
