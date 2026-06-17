@@ -1,5 +1,5 @@
 class DecksController < ApplicationController
-  before_action :set_deck, only: %i[show edit update destroy play_deck]
+  before_action :set_deck, only: %i[show edit update destroy play_deck record_score]
 
   def index
     @decks = current_user.decks
@@ -40,6 +40,13 @@ class DecksController < ApplicationController
 
   def play_deck
     @flashcards = @deck.flashcards
+  end
+
+  def record_score
+    deck_flashcard = @deck.deck_flashcards.find_by!(flashcard_id: params[:flashcard_id])
+    deck_flashcard.increment!(:attempt_count)
+    deck_flashcard.increment!(:correct_count) if params[:correct] == "true"
+    head :ok
   end
 
   private

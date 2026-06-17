@@ -33,8 +33,9 @@ Rails.application.routes.draw do
 
   resources :decks do
     member do
-     get :play_deck
-   end
-   resources :flashcards, only: [:index]
+      get  :play_deck
+      post :record_score
+    end
+    resources :flashcards, only: [:index]
   end
 end
