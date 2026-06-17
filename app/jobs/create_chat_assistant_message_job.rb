@@ -64,6 +64,16 @@ class CreateChatAssistantMessageJob < ApplicationJob
       )
     end
 
+    broadcast_appended.each do |msg_id|
+      msg = Message.find(msg_id)
+      msg.broadcast_replace_to(
+        chat,
+        target: ActionView::RecordIdentifier.dom_id(msg),
+        partial: "messages/message",
+        locals: { message: msg }
+      )
+    end
+
     old_title = chat.title
     chat.generate_title_from_first_message
 
