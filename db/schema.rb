@@ -124,17 +124,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_16_203311) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "quebecois_entries", force: :cascade do |t|
-    t.string "category"
-    t.datetime "created_at", null: false
-    t.jsonb "embedding"
-    t.text "example_usage"
-    t.text "meaning"
-    t.text "notes"
-    t.string "phrase"
-    t.string "register"
-    t.datetime "updated_at", null: false
-  end
 
   create_table "saved_items", force: :cascade do |t|
     t.datetime "created_at", null: false
