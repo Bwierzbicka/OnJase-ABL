@@ -46,7 +46,7 @@ class DecksController < ApplicationController
     deck_flashcard = @deck.deck_flashcards.find_by!(flashcard_id: params[:flashcard_id])
     deck_flashcard.increment!(:attempt_count)
     deck_flashcard.increment!(:correct_count) if params[:correct] == "true"
-    head :ok
+    render json: { score: @deck.score }
   end
 
   private

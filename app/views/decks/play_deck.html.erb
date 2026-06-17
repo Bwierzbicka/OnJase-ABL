@@ -30,9 +30,16 @@
       <button class="btn btn-danger"  data-action="click->flashcard#score" data-correct="false">No ✗</button>
     </div>
 
-    <div class="d-flex justify-content-center gap-3 mt-3">
+    <div class="d-flex justify-content-center gap-3 mt-3" data-flashcard-target="nav">
       <button class="btn btn-outline-secondary" data-action="click->flashcard#prev">&#8592; Previous</button>
       <button class="btn btn-primary" data-action="click->flashcard#next">Next &#8594;</button>
+    </div>
+
+    <div class="d-none text-center py-4" data-flashcard-target="results">
+      <h2 class="mb-3">Deck complete!</h2>
+      <p class="fs-4 mb-4">Current score: <strong data-flashcard-target="scoreDisplay"></strong></p>
+      <%= link_to "Play again", play_deck_deck_path(@deck), class: "btn btn-primary me-2" %>
+      <%= link_to "Back to decks", decks_path, class: "btn btn-outline-secondary" %>
     </div>
   <% end %>
 </div>
