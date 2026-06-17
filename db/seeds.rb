@@ -95,9 +95,9 @@ require "csv"
 
 filepath = "data/oqlf_2026-01-19.csv"
 
-MASCULINE = /\(\s*n\.\s*m\.(?:\s*pl\.)?\s*\)/
+MASCULIN = /\(\s*n\.\s*m\.(?:\s*pl\.)?\s*\)/
 
-FEMININE = /\(\s*n\.\s*f\.(?:\s*pl\.)?\s*\)/
+FÉMININ = /\(\s*n\.\s*f\.(?:\s*pl\.)?\s*\)/
 
 BOTH = /\(\s*n\.\s*m\.\s*ou\s*f\.(?:\s*pl\.)?\s*\)/
 
@@ -115,9 +115,9 @@ def gender(text)
 
     when BOTH then :both
 
-    when MASCULINE then :masculine
+    when MASCULIN then :masculin
 
-    when FEMININE then :feminine
+    when FÉMININ then :féminin
 
     end
 
