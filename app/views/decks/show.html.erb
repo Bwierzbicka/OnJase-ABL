@@ -1,2 +1,3 @@
-<h1>Decks#show</h1>
-<p>Find me in app/views/decks/show.html.erb</p>
+<h1><%= @deck.name %></h1>
+
+<%= link_to "Back to decks", decks_path, class: "btn btn-primary" %>
