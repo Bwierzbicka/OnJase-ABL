@@ -38,6 +38,7 @@ class UserConversationsController < ApplicationController
 
   def show
     @user_conversation = current_user.user_conversations.find(params[:id])
+    @user_conversation.mark_read_for!(current_user)
     @user_conversation_message = UserConversationMessage.new
     @other_user = @user_conversation.other_participant(current_user)
   end
