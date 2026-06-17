@@ -6,9 +6,14 @@ class SaveItemFromMessagesJob < ApplicationJob
     - You are given word or phrase to save into our saved items lists.
 
     You have access to tools:
-    -Creates a word in our saved words list with the required fields. When I give you a word to save, look up the definition, the english word, the word type, the gender of the word (masculine or feminine) and add them all to the saved word record.
+    - Creates a word in our saved words list with the required fields.
+      When I give you a word to save, look up the definition, the english word,
+      the word type, the gender of the word (masculine or feminine)
+      and add them all to the saved word record.
       Do not create multiple words. Do not make any suggestions. Just create the word and save it.
-    -Creates a phrase in our saved phrases list with the required fields. When I give you a phrase to save, look up the english translation, and add it to the saved word record, along with the french phrase.
+    - Creates a phrase in our saved phrases list with the required fields.
+      When I give you a phrase to save, look up the english translation,
+      and add it to the saved phrase record, along with the french phrase.
       Do not create multiple phrases. Do not make any suggestions. Just create the phrase and save it.
 
     Here is an item I want to save: "
