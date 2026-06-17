@@ -10,6 +10,9 @@ Chat.destroy_all
 UserConversationMessage.destroy_all
 UserConversation.destroy_all
 SavedItem.destroy_all
+DeckFlashcard.destroy_all
+Flashcard.destroy_all
+Deck.destroy_all
 Phrase.destroy_all
 Word.destroy_all
 User.destroy_all
@@ -56,6 +59,32 @@ user2 = User.create!(
   password_confirmation: "password123",
   username: "user 2"
 )
+
+deck1 = Deck.create!(name: "Basic French Vocabulary", user: user)
+deck2 = Deck.create!(name: "Common French Phrases", user: user)
+
+flashcard1 = Flashcard.create!(question: "What is the French word for 'house'?", answer: "maison", user: user)
+flashcard2 = Flashcard.create!(question: "What is the French word for 'to run'?", answer: "courir", user: user)
+flashcard3 = Flashcard.create!(question: "How do you say 'Hello, how are you?' in French?", answer: "Bonjour, comment ça va ?", user: user)
+flashcard4 = Flashcard.create!(question: "How do you say 'I don't understand' in French?", answer: "Je ne comprends pas", user: user)
+
+DeckFlashcard.create!(deck: deck1, flashcard: flashcard1)
+DeckFlashcard.create!(deck: deck1, flashcard: flashcard2)
+DeckFlashcard.create!(deck: deck2, flashcard: flashcard3)
+DeckFlashcard.create!(deck: deck2, flashcard: flashcard4)
+
+deck3 = Deck.create!(name: "Québécois Expressions", user: user2)
+deck4 = Deck.create!(name: "French Verbs", user: user2)
+
+flashcard5 = Flashcard.create!(question: "What does 'tiguidou' mean?", answer: "It's all good / Perfect", user: user2)
+flashcard6 = Flashcard.create!(question: "What does 'c'est le boutte' mean?", answer: "It's the best / It's awesome", user: user2)
+flashcard7 = Flashcard.create!(question: "How do you conjugate 'être' in the present tense for 'je'?", answer: "je suis", user: user2)
+flashcard8 = Flashcard.create!(question: "How do you conjugate 'avoir' in the present tense for 'il/elle'?", answer: "il/elle a", user: user2)
+
+DeckFlashcard.create!(deck: deck3, flashcard: flashcard5)
+DeckFlashcard.create!(deck: deck3, flashcard: flashcard6)
+DeckFlashcard.create!(deck: deck4, flashcard: flashcard7)
+DeckFlashcard.create!(deck: deck4, flashcard: flashcard8)
 
 conversation = UserConversation.create!(user1: user, user2: user2)
 
