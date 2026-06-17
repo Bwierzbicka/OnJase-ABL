@@ -21,7 +21,7 @@ export default class extends Controller {
     }).then(() => {
       const btn = this.buttonTarget
       btn.classList.add("save-message-btn--saved")
-      btn.textContent = "TIGIDOU"
+      btn.textContent = "TIGUIDOU"
     })
   }
 }

@@ -21,7 +21,9 @@
   }
 
   &--saved {
-    color: $OJ-primary !important;
+    color: green !important;
+    background-color: white !important;
+    border: none !important;
   }
 }
 
