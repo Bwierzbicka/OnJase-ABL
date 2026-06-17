@@ -72,6 +72,10 @@ class UserConversationsController < ApplicationController
     head :ok
   end
 
+  def retrieve_users
+    @results = params[:query].present? ? User.where("username ILIKE ?", "#{params[:query]}%") : User.none
+  end
+
   private
 
   def user_conversation_params

@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       get  :call_typing_assistant
       post :save_item_to_saveable_items
     end
+    collection do
+      post :retrieve_users
+    end
   end
 
   resources :chats, only: [:index, :new, :create, :show, :destroy] do
@@ -27,4 +30,8 @@ Rails.application.routes.draw do
   resources :saved_items, only: [:index]
   resources :words, only: [:show, :destroy]
   resources :phrases, only: [:show, :destroy]
+
+  resources :decks do
+   resources :flashcards, only: [:index]
+  end
 end

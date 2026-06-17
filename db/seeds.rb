@@ -25,14 +25,14 @@ word1 = Word.create!(
   french: "maison",
   english: "house",
   definition: "A building used as a home",
-  word_type: "noun"
+  word_type: "nom"
 )
 
 word2 = Word.create!(
   french: "courir",
   english: "to run",
   definition: "To move swiftly on foot",
-  word_type: "verb"
+  word_type: "verbe"
 )
 
 phrase1 = Phrase.create!(
@@ -125,21 +125,21 @@ end
 
 POS_PATTERNS = {
 
-noun: /\(n\./, # (n.m. (n.f. (n.m. et f. — all just "noun"
+nom: /\(n\./, # (n.m. (n.f. (n.m. et f. — all just "nom"
 
-verb: /\(v\./,
+verbe: /\(v\./,
 
 article: /\(art\./, # didn't find any in CSV
 
-adjective: /\(adj\./,
+adjectif: /\(adj\./,
 
-pronoun: /\(pron\./, # didn't find any in CSV
+pronom: /\(pron\./, # didn't find any in CSV
 
-adverb: /\(adv\./,
+adverbe: /\(adv\./,
 
-preposition: /\(prép\./,
+préposition: /\(prép\./,
 
-conjunction: /\(conj\./, # didn't find any in CSV
+conjonction: /\(conj\./, # didn't find any in CSV
 
 interjection: /\(interj\./
 
@@ -214,14 +214,3 @@ DictionaryEntry.all.each do |entry|
   puts "#{entry.terme_francais} embedding set"
 end
 puts "Embedding #{DictionaryEntry.count} dictionary entries is successfully completed!"
-
-# Costs .01 USD per 50, .02 USD for 93, according to my maths :)
-puts "Embedding #{DictionaryPhrase.count} dictionary phrases are being generated. Please wait."
-DictionaryPhrase.all.each do |entry2|
-  str2 = ""
-  str2.concat(entry2.french, entry2.english)
-  embedding = RubyLLM.embed(entry2)    # pass a text column, not the whole record
-  entry2.update(embedding: embedding.vectors)
-  puts "#{entry2.french} embedding set"
-end
-puts "Embedding #{DictionaryPhrase.count} dictionary phrases is successfully completed!"
