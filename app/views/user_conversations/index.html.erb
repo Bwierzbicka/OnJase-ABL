@@ -5,17 +5,33 @@
     <ul class="list-unstyled p-0">
       <% @user_conversations.reverse.each do |conversation| %>
         <% other = conversation.other_participant(current_user) %>
-        <li class="py-2">
-          <% if other.avatar.attached? %>
-            <%= cl_image_tag other.avatar.key,
-                  crop: :thumb,
-                  gravity: :face,
-                  class: "avatar-medium rounded-circle object-fit-cover me-2",
-                  alt: "User avatar" %>
-          <% else %>
-            <%= image_tag "avatar_default.png", class: "avatar-medium rounded-circle object-fit-cover me-2", alt: "Default avatar" %>
-          <% end %>
-          <%= link_to other.username, user_conversation_path(conversation), class: "text-decoration-none text-OJ-text-main fw-bold" %>
+        <li class="py-2 d-flex gap-1">
+
+            <div>
+              <% if other.avatar.attached? %>
+                <%= cl_image_tag other.avatar.key,
+                      crop: :thumb,
+                      gravity: :face,
+                      class: "avatar-medium rounded-circle object-fit-cover me-2",
+                      alt: "User avatar" %>
+              <% else %>
+                <%= image_tag "avatar_default.png", class: "avatar-medium rounded-circle object-fit-cover me-2", alt: "Default avatar" %>
+              <% end %>
+            </div>
+
+            <%= link_to user_conversation_path(conversation), class: "text-decoration-none text-OJ-text-main" do %>
+              <div class="d-flex flex-column justify-content-center">
+                <div class="fw-bold">
+                  <%= other.username %>
+                </div>
+                  <% if conversation.user_conversation_messages.last.present?  %>
+                <div class="d-inline-block text-truncate small" style="max-width: 65vw">
+                    <%= conversation.user_conversation_messages.last.content %>
+                </div>
+                  <% end %>
+              </div>
+            <% end %>
+
         </li>
       <% end %>
     </ul>

@@ -9,7 +9,9 @@ class CreateChatAssistantMessageJob < ApplicationJob
     - Contrast québécois usage with standard French where helpful
     - Reference local culture (hockey, poutine, dépanneur, etc.)
     - Correct learners gently using québécois phrasing
-    - Use a clean layout for your answers. if you are answering a question , and you want to give examples, Divide the answer between explanation and example.
+    - Use a clean layout for your answers.
+    - If you are answering a question, and you want to give examples, Divide the answer between explanation and example.
+
 
       You have access to tools:
       -Creates a word in our saved words list with the required fields. When I give you a word to save, look up the definition, the english word, the word type, the gender of the word (masculine or feminine) and add them all to the saved word record.
@@ -61,6 +63,16 @@ class CreateChatAssistantMessageJob < ApplicationJob
         target: ActionView::RecordIdentifier.dom_id(assistant_message),
         partial: "messages/message",
         locals: { message: assistant_message }
+      )
+    end
+
+    broadcast_appended.each do |msg_id|
+      msg = Message.find(msg_id)
+      msg.broadcast_replace_to(
+        chat,
+        target: ActionView::RecordIdentifier.dom_id(msg),
+        partial: "messages/message",
+        locals: { message: msg }
       )
     end
 

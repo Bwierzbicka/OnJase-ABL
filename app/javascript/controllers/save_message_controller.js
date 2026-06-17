@@ -10,6 +10,13 @@ export default class extends Controller {
 
   save(event) {
     event.stopPropagation()
+    if (this._saving) return
+    this._saving = true
+
+    const btn = this.buttonTarget
+    btn.textContent = "..."
+    btn.disabled = true
+
     const csrfToken = document.querySelector("meta[name='csrf-token']").content
     fetch(this.urlValue, {
       method: "POST",
@@ -18,10 +25,15 @@ export default class extends Controller {
         "Content-Type": "application/x-www-form-urlencoded"
       },
       body: new URLSearchParams({ item: this.itemValue })
-    }).then(() => {
-      const btn = this.buttonTarget
-      btn.classList.add("save-message-btn--saved")
-      btn.textContent = "TIGUIDOU"
+    }).then(response => {
+      if (response.ok) {
+        btn.classList.add("save-message-btn--saved")
+        btn.textContent = "TIGUIDOU"
+      } else {
+        btn.textContent = "SAVE"
+        btn.disabled = false
+        this._saving = false
+      }
     })
   }
 }

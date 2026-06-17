@@ -1,3 +1,18 @@
-// border-display: none
-// font-family:
-// color:
+.search {
+  background-color: white;
+  border-radius: 18px 15px 15px 18px;
+  box-shadow: 2px 2px 5px $OJ-primary-light;
+}
+
+.name {
+  font-size: 14px;
+}
+
+.current-user {
+  color: $OJ-primary;
+  align-self: center;
+
+  p {
+    margin: 0;
+  }
+}

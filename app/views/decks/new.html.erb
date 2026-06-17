@@ -1,2 +1,6 @@
-<h1>Decks#new</h1>
-<p>Find me in app/views/decks/new.html.erb</p>
+<h1>Create a new deck</h1>
+
+<%= simple_form_for @deck do |d| %>
+  <%= d.input :name %>
+  <%= d.button :submit, "Create", class: "btn btn-primary" %>
+<% end %>

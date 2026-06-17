@@ -8,11 +8,11 @@ class PhrasesController < ApplicationController
   end
 
   def show
-    @phrase = Phrase.find(params[:id])
+    @phrase = current_user.saved_phrases.find(params[:id])
   end
 
   def destroy
-    @phrase = Phrase.find(params[:id])
+    @phrase = current_user.saved_phrases.find(params[:id])
     @phrase.destroy
 
     redirect_to saved_items_path
