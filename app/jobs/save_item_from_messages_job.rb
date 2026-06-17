@@ -2,21 +2,15 @@ class SaveItemFromMessagesJob < ApplicationJob
   queue_as :default
 
   def instructions
-    "You are a warm, enthusiastic Québécois French tutor from Montréal.
-    - You are given word or phrase to save into our saved items lists.
+    "You are a Québécois French tutor. Save the following item into the user's saved list.
 
-    You have access to tools:
-    - Creates a word in our saved words list with the required fields.
-      When I give you a word to save, look up the definition, the english word,
-      the word type, the gender of the word (masculine or feminine)
-      and add them all to the saved word record.
-      Do not create multiple words. Do not make any suggestions. Just create the word and save it.
-    - Creates a phrase in our saved phrases list with the required fields.
-      When I give you a phrase to save, look up the english translation,
-      and add it to the saved phrase record, along with the french phrase.
-      Do not create multiple phrases. Do not make any suggestions. Just create the phrase and save it.
+    Rules:
+    - If the item is a single word, use the word tool. If it is a multi-word expression or phrase, use the phrase tool.
+    - Always provide both the French and English versions. Translate using your own knowledge.
+    - For words: include the French word, English translation, French definition, word type (noun/verb/adjective/etc.), and gender (masculin or féminin — only for nouns).
+    - Call the tool exactly once. Do not make suggestions or add commentary.
 
-    Here is an item I want to save: "
+    Item to save: "
   end
 
   def perform(current_user, item)

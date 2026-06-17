@@ -1,13 +1,29 @@
-<h1 class="text-center">Flashcard Decks</h1>
+<div class="m-4">
+  <h1 class="page-title">flashcard decks</h1>
 
-<div class="ms-3">
-  <ul class="list-unstyled">
-    <% @decks.each do |deck| %>
-      <li>
-        <%= link_to deck.name, play_deck_deck_path(deck) %>
-      </li>
+  <div class="conversation-list">
+    <ul class="list-unstyled p-0">
+      <% @decks.each do |deck| %>
+        <li class="py-2 d-flex gap-1">
+
+          <%= link_to play_deck_deck_path(deck), class: "text-decoration-none text-OJ-text-main" do %>
+            <div class="d-flex flex-column justify-content-center">
+              <div class="fw-bold">
+                <%= deck.name%>
+              </div>
+            </div>
+          <% end %>
+
+        </li>
+      <% end %>
+    </ul>
+</div>
+
+
+  <div>
+    <%= link_to new_deck_path, class: "plus-button" do %>
+    <i class="fa-regular fa-square-plus"></i>
     <% end %>
-  </ul>
+  </div>
 
-  <%= link_to "New Deck", new_deck_path, class: "btn btn-primary" %>
 </div>
