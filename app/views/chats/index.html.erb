@@ -2,18 +2,23 @@
   <h1 class="page-title mb-3">OnJase chat</h1>
 
   <div class="chat-list">
-    <ul class="list-unstyled p-0">
+    <div class="bg-white rounded-3 overflow-hidden shadow-sm">
       <% if @chats.any? %>
-        <% @chats.reverse.each do |chat| %>
-        <li class="py-2 mb-3">
-          <div class="d-flex align-items-center">
-            <i class="fa-solid fa-hexagon-nodes text-OJ-primary fs-3 me-3"></i>
-            <%= link_to chat.title, chat_path(chat), class: "fw-bold text-decoration-none text-OJ-text-main" %>
-          </div>
-        </li>
+        <% @chats.reverse.each_with_index do |chat, index| %>
+          <%= link_to chat_path(chat), class: "text-decoration-none" do %>
+            <div class="d-flex align-items-center px-3 py-3 <%= index < @chats.size - 1 ? 'border-bottom border-OJ-background-color' : '' %>">
+              <div class="d-flex align-items-center justify-content-center rounded-3 me-3 flex-shrink-0">
+                <i class="fa-solid fa-hexagon-nodes text-OJ-primary fs-1 px-1"></i>
+              </div>
+              <div>
+                <div class="fw-semibold text-OJ-text-main"><%= chat.title %></div>
+                <div class="text-muted small"><%= chat.created_at.to_date == Date.today ? "Today" : chat.created_at.strftime("%b %d, %Y") %></div>
+              </div>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
-    </ul>
+    </div>
   </div>
 
   <div>
