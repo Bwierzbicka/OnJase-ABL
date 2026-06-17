@@ -2,6 +2,7 @@ class CreateWordTool < RubyLLM::Tool
   description "Creates a word in our saved words list with the required fields.
   Use this whenever the user wants to save, bookmark, or add a word to their list
   — for example: 'save this word','add this to my saved words'."
+
   param :french_add, desc: "The french word I want to add"
   # param :word_id, desc: "The ID of the word", type: :integer # not sure if needed, commented out for now
   param :english_add, desc: "The english translation of the word I want to add"
