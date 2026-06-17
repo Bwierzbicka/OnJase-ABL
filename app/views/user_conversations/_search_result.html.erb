@@ -2,10 +2,20 @@
 
   <ul class="list-unstyled p-0">
     <% results.each do |result| %>
-      <li>
+      <li class="mb-3">
         <%= form_with url: user_conversations_path, method: :post, scope: :user_conversation, data: { turbo: false } do |f| %>
           <%= f.hidden_field :username, value: result.username %>
-          <%= f.submit result.username, class: "btn btn-link p-0 fw-bold text-decoration-none text-OJ-text-main field" %>
+          <div class="d-flex align-items-center gap-2">
+            <% if result.avatar.attached? %>
+              <%= cl_image_tag result.avatar.key,
+                    width: 36, height: 36, crop: :fill,
+                    class: "rounded-circle object-fit-cover",
+                    alt: "User avatar" %>
+            <% else %>
+              <%= image_tag "avatar_default.png", class: "rounded-circle object-fit-cover", width: 36, height: 36, alt: "Default avatar" %>
+            <% end %>
+            <%= f.submit result.username, class: "btn btn-link p-0 fw-bold text-decoration-none text-OJ-text-main field" %>
+          </div>
         <% end %>
       </li>
     <% end %>
