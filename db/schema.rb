@@ -124,7 +124,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_16_203311) do
     t.datetime "updated_at", null: false
   end
 
-
   create_table "saved_items", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "saveable_id"
