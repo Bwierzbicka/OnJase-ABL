@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   resources :phrases, only: [:show, :destroy]
 
   resources :decks do
+    member do
+     get :play_deck
+   end
    resources :flashcards, only: [:index]
   end
 end

@@ -1,0 +1,30 @@
+<div class="container py-4" data-controller="flashcard">
+  <%= link_to "← Back to decks", decks_path, class: "btn btn-link text-muted ps-0 mb-3" %>
+  <h1 class="text-center mb-1"><%= @deck.name %></h1>
+  <p class="text-center text-muted mb-4" data-flashcard-target="counter"></p>
+
+  <% if @flashcards.empty? %>
+    <p class="text-center text-muted">This deck has no flashcards yet.</p>
+  <% else %>
+    <% @flashcards.each do |flashcard| %>
+      <div class="flashcard-wrapper d-none mx-auto"
+           data-flashcard-target="card"
+           data-action="click->flashcard#flip">
+        <div class="flashcard-inner">
+          <div class="flashcard-face flashcard-front">
+            <p class="fs-4 fw-semibold text-center"><%= flashcard.question %></p>
+            <small class="text-muted">Click to reveal answer</small>
+          </div>
+          <div class="flashcard-face flashcard-back">
+            <p class="fs-4 text-center"><%= flashcard.answer %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <button class="btn btn-outline-secondary" data-action="click->flashcard#prev">&#8592; Previous</button>
+      <button class="btn btn-primary" data-action="click->flashcard#next">Next &#8594;</button>
+    </div>
+  <% end %>
+</div>
