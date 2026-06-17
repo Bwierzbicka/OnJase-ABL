@@ -14,8 +14,8 @@ class CreatePhraseTool < RubyLLM::Tool
 
   def execute(french_phrase_add:, english_phrase_add:) # no need for phrase id
     phrase = Phrase.create!(french: french_phrase_add, english: english_phrase_add)
-    { success: true, id: phrase.id } # i asked claude to check and it said to add this. do i remove?
     SavedItem.create!(saveable: phrase, user: @user)
+    { success: true, id: phrase.id }
   rescue ActiveRecord::RecordInvalid => e
     { error: e.message }
   end
