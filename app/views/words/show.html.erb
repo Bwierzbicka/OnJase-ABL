@@ -8,9 +8,9 @@
       <div class="d-flex justify-content-between">
         <div>
           <span class="word-french fs-4">
-            <%if @word.gender == 'masculine'%>
+            <%if @word.gender == 'masculine' || @word.gender == 'masculin'%>
               <span class="text-success">un</span>
-            <% elsif @word.gender == 'feminine' %>
+            <% elsif @word.gender == 'feminine' || @word.gender == 'féminin'%>
               <span class="text-secondary">une</span>
             <% end %>
             <%= @word.french %>
@@ -20,11 +20,11 @@
         </div>
 
         <div class="d-flex flex-column gap-2 align-items-end pt-1">
-          <span class="badge word-type-badge word-type-badge--<%= @word.word_type %> ms-2"><%= @word.word_type %></span>
-          <%if @word.gender == 'masculine'%>
+          <span class="badge word-type-badge word-type-badge--<%=@word.word_type %> ms-2"><%= @word.word_type %></span>
+          <%if @word.gender == 'masculine' || @word.gender == 'masculin'%>
             <span class="badge word-type-badge bg-success ms-2">masculin</span>
-          <% elsif @word.gender == 'feminine' %>
-            <span class="badge word-type-badge bg-secondary ms-2">feminin</span>
+          <% elsif @word.gender == 'feminine' || @word.gender == 'féminin'%>
+            <span class="badge word-type-badge bg-secondary ms-2">féminin</span>
           <% end %>
         </div>
 

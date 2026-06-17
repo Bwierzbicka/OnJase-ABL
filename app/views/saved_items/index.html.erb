@@ -24,9 +24,9 @@
             <div class="saved-item-card d-flex justify-content-between align-items-baseline gap-2">
               <div>
                 <span class="word-french">
-                  <%if word.gender == 'masculine'%>
+                  <%if word.gender == 'masculine' || word.gender == 'masculin'%>
                     un
-                  <% elsif word.gender == 'feminine' %>
+                  <% elsif word.gender == 'feminine' || word.gender == 'féminin' %>
                     une
                   <% end %>
                   <%= word.french %>
