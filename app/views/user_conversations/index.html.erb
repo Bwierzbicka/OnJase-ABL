@@ -20,13 +20,15 @@
             </div>
 
             <%= link_to user_conversation_path(conversation), class: "text-decoration-none text-OJ-text-main" do %>
-              <div>
+              <div class="d-flex flex-column justify-content-center">
                 <div class="fw-bold">
                   <%= other.username %>
                 </div>
+                  <% if conversation.user_conversation_messages.last.present?  %>
                 <div class="d-inline-block text-truncate small" style="max-width: 65vw">
-                  <%= conversation.user_conversation_messages.last.content %>
+                    <%= conversation.user_conversation_messages.last.content %>
                 </div>
+                  <% end %>
               </div>
             <% end %>
 
