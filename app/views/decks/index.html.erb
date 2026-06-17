@@ -4,16 +4,8 @@
   <div class="conversation-list">
     <ul class="list-unstyled p-0">
       <% @decks.each do |deck| %>
-        <li class="py-2 d-flex gap-1">
-
-          <%= link_to play_deck_deck_path(deck), class: "text-decoration-none text-OJ-text-main" do %>
-            <div class="d-flex flex-column justify-content-center">
-              <div class="fw-bold">
-                <%= deck.name%>
-              </div>
-            </div>
-          <% end %>
-
+        <li class="py-2">
+          <%= render "deck_card", deck: deck %>
         </li>
       <% end %>
     </ul>

@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["card", "counter", "scoreButtons", "nav", "results", "scoreDisplay"]
+  static targets = ["card", "counter", "nav", "results", "scoreDisplay"]
   static values  = { recordScoreUrl: String }
 
   connect() {
@@ -9,11 +9,8 @@ export default class extends Controller {
     this.showCard(0)
   }
 
-  flip(event) {
-    const card = event.currentTarget
-    card.classList.toggle("flipped")
-    const isFlipped = card.classList.contains("flipped")
-    this.scoreButtonsTarget.classList.toggle("d-none", !isFlipped)
+  flip() {
+    this.cardTargets[this.currentIndex].classList.add("flipped")
   }
 
   next() {
@@ -49,11 +46,20 @@ export default class extends Controller {
 
   showResults(score) {
     this.cardTargets.forEach(card => card.classList.add("d-none"))
-    this.scoreButtonsTarget.classList.add("d-none")
     this.navTarget.classList.add("d-none")
     this.counterTarget.textContent = ""
     this.scoreDisplayTarget.textContent = score !== null ? `${Math.round(score * 100)}%` : "N/A"
     this.resultsTarget.classList.remove("d-none")
+  }
+
+  #toFrench(n) {
+    const words = [
+      '', 'une', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix',
+      'onze', 'douze', 'treize', 'quatorze', 'quinze', 'seize', 'dix-sept', 'dix-huit', 'dix-neuf', 'vingt',
+      'vingt et une', 'vingt-deux', 'vingt-trois', 'vingt-quatre', 'vingt-cinq',
+      'vingt-six', 'vingt-sept', 'vingt-huit', 'vingt-neuf', 'trente'
+    ]
+    return words[n] ?? n
   }
 
   showCard(index) {
@@ -61,7 +67,6 @@ export default class extends Controller {
       card.classList.toggle("d-none", i !== index)
       card.classList.remove("flipped")
     })
-    this.scoreButtonsTarget.classList.add("d-none")
-    this.counterTarget.textContent = `Card ${index + 1} of ${this.cardTargets.length}`
+    this.counterTarget.textContent = `Carte ${this.#toFrench(index + 1)} sur ${this.#toFrench(this.cardTargets.length)}`
   }
 }
