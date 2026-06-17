@@ -6,5 +6,10 @@
   <%= f.input :question %>
   <%= f.input :answer %>
 
+  <%= f.association :decks,
+        collection: current_user.decks,
+        as: :check_boxes,
+        label: "Assign to decks" %>
+
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
