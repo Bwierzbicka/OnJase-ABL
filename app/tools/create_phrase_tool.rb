@@ -2,6 +2,7 @@ class CreatePhraseTool < RubyLLM::Tool
   description "Creates a phrase in our saved phrases list with the required fields.
   Use this whenever the user wants to save, bookmark, or add a phrase to their list
   — for example: 'save this phrase','add this to my saved phrases'."
+
   param :french_phrase_add, desc: "The french phrase I want to add"
   # param :phrase_id, desc: "The ID of the phrase", type: :integer # not sure if needed, commented out for now
   param :english_phrase_add, desc: "The english translation of the phrase I want to add"

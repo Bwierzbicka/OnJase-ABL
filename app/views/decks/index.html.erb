@@ -4,7 +4,7 @@
   <ul class="list-unstyled">
     <% @decks.each do |deck| %>
       <li>
-        <%= link_to deck.name, deck_path(deck) %>
+        <%= link_to deck.name, play_deck_deck_path(deck) %>
       </li>
     <% end %>
   </ul>

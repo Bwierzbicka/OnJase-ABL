@@ -1,5 +1,5 @@
 class DecksController < ApplicationController
-  before_action :set_deck, only: %i[show edit update destroy]
+  before_action :set_deck, only: %i[show edit update destroy play_deck]
 
   def index
     @decks = current_user.decks
@@ -22,7 +22,8 @@ class DecksController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if @deck.update(deck_params)
@@ -35,6 +36,10 @@ class DecksController < ApplicationController
   def destroy
     @deck.destroy
     redirect_to decks_path
+  end
+
+  def play_deck
+    @flashcards = @deck.flashcards
   end
 
   private

@@ -4,6 +4,8 @@ class Deck < ApplicationRecord
   has_many :deck_flashcards, dependent: :destroy
   has_many :flashcards, through: :deck_flashcards
 
+  validates :name, presence: true
+
   # Returns a Float 0.0–1.0 across all attempted cards, or nil if none attempted yet.
   def score
     attempted = deck_flashcards.where("attempt_count > 0")
