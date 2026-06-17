@@ -25,14 +25,14 @@ word1 = Word.create!(
   french: "maison",
   english: "house",
   definition: "A building used as a home",
-  word_type: "noun"
+  word_type: "nom"
 )
 
 word2 = Word.create!(
   french: "courir",
   english: "to run",
   definition: "To move swiftly on foot",
-  word_type: "verb"
+  word_type: "verbe"
 )
 
 phrase1 = Phrase.create!(
@@ -125,21 +125,21 @@ end
 
 POS_PATTERNS = {
 
-noun: /\(n\./, # (n.m. (n.f. (n.m. et f. — all just "noun"
+nom: /\(n\./, # (n.m. (n.f. (n.m. et f. — all just "nom"
 
-verb: /\(v\./,
+verbe: /\(v\./,
 
 article: /\(art\./, # didn't find any in CSV
 
-adjective: /\(adj\./,
+adjectif: /\(adj\./,
 
-pronoun: /\(pron\./, # didn't find any in CSV
+pronom: /\(pron\./, # didn't find any in CSV
 
-adverb: /\(adv\./,
+adverbe: /\(adv\./,
 
 preposition: /\(prép\./,
 
-conjunction: /\(conj\./, # didn't find any in CSV
+conjonction: /\(conj\./, # didn't find any in CSV
 
 interjection: /\(interj\./
 
