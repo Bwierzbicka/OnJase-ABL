@@ -137,7 +137,7 @@ pronom: /\(pron\./, # didn't find any in CSV
 
 adverbe: /\(adv\./,
 
-preposition: /\(prép\./,
+préposition: /\(prép\./,
 
 conjonction: /\(conj\./, # didn't find any in CSV
 
