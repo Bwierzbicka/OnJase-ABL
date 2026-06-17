@@ -10,6 +10,10 @@ export default class extends Controller {
 
   save(event) {
     event.stopPropagation()
+    const btn = this.buttonTarget
+    if (btn.disabled) return
+    btn.disabled = true
+
     const csrfToken = document.querySelector("meta[name='csrf-token']").content
     fetch(this.urlValue, {
       method: "POST",
@@ -19,7 +23,6 @@ export default class extends Controller {
       },
       body: new URLSearchParams({ item: this.itemValue })
     }).then(() => {
-      const btn = this.buttonTarget
       btn.classList.add("save-message-btn--saved")
       btn.textContent = "TIGUIDOU"
     })
