@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get "decks/index"
-  get "decks/show"
-  get "decks/new"
-  get "decks/edit"
   get "up" => "rails/health#show", as: :rails_health_check
 
   authenticate :user, ->(user) { user.admin? } do
@@ -22,6 +18,9 @@ Rails.application.routes.draw do
       get  :call_assistant
       get  :call_typing_assistant
       post :save_item_to_saveable_items
+    end
+    collection do
+      post :retrieve_users
     end
   end
 
