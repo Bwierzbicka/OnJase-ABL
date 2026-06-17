@@ -5,8 +5,8 @@ class MessagesController < ApplicationController
     @message.chat = @chat
     @message.role = "user"
 
-    if @message.valid?
-      CreateChatAssistantMessageJob.perform_later(@chat, current_user, @message.content)
+    if @message.save
+      CreateChatAssistantMessageJob.perform_later(@chat, current_user)
 
       respond_to do |format|
         format.turbo_stream do
@@ -19,7 +19,6 @@ class MessagesController < ApplicationController
         format.html { redirect_to chat_path(@chat) }
       end
     else
-      render "chats/show", status: :unprocessable_entity
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace("new_message_container", partial: "messages/form",

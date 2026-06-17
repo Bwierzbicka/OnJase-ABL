@@ -26,15 +26,15 @@
 }
 
 $word-type-colors: (
-  "noun": $orange,
-  "verb": $teal,
+  "nom": $orange,
+  "verbe": $teal,
   "article": $OJ-primary,
-  "adjective": $dark-blue,
-  "pronoun": $OJ-primary,
-  "adverb": $yellow,
-  "preposition": $purple,
-  "conjunction": $OJ-primary,
-  "interjection": $brown,
+  "adjectif": $dark-blue,
+  "pronom": $OJ-primary,
+  "adverbe": $yellow,
+  "préposition": $purple,
+  "conjonction": $OJ-primary,
+  "interjection": $brown
 );
 
 .word-type-badge {

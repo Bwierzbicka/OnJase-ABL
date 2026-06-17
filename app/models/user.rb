@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :user_conversations_as_user1, class_name: "UserConversation", foreign_key: :user_id_1, dependent: :destroy
   has_many :user_conversations_as_user2, class_name: "UserConversation", foreign_key: :user_id_2, dependent: :destroy
   has_many :flashcards, dependent: :destroy
+  has_many :decks, dependent: :destroy
 
   def user_conversations
     UserConversation.where("user_id_1 = ? OR user_id_2 = ?", id, id)

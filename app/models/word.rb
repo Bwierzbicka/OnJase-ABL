@@ -1,5 +1,5 @@
 class Word < ApplicationRecord
-  WORD_TYPE = %w[noun verb article adjective pronoun adverb preposition conjunction interjection]
+  WORD_TYPE = %w[nom verbe article adjectif pronom adverbe préposition conjonction interjection]
 
   has_many :saved_items, as: :saveable
 
