@@ -5,7 +5,7 @@
 
   <div class="conversation-list">
     <ul id="conversations" class="list-unstyled p-0">
-      <% @user_conversations.reverse.each do |conversation| %>
+      <% @user_conversations.each do |conversation| %>
         <%= render 'conversation', conversation: conversation %>
       <% end %>
     </ul>
