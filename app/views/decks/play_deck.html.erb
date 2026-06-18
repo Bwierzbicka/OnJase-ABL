@@ -1,12 +1,19 @@
-<div class="container py-4"
+<div class=""
      data-controller="flashcard"
      data-flashcard-record-score-url-value="<%= record_score_deck_path(@deck) %>">
-  <%= link_to decks_path, class: "text-decoration-none me-3 mb-3 d-inline-block" do %>
-    <i class="fa-solid fa-chevron-left fs-4 text-OJ-text-main"></i>
-  <% end %>
-  <h5 class="mb-1"><%= @deck.name %></h5>
-  <p class="mb-4 flashcard-counter fs-3" data-flashcard-target="counter"></p>
+  <div class="d-flex align-items-center p-3 bg-white border-bottom sticky-top shadow-sm">
+    <%= link_to decks_path, class: 'text-decoration-none me-3' do %>
+      <i class="fa-solid fa-chevron-left fs-4 text-OJ-text-main"></i>
+    <% end %>
+    <div class="w-100 d-flex justify-content-between align-items-center">
+      <h2 class="d-inline m-0 fs-5 fw-semibold"><%= @deck.name %></h2>
+    </div>
+  </div>
+<div class="m-4">
 
+<p class="mb-4 mt-5 flashcard-counter fs-4 text-center" data-flashcard-target="counter"></p>
+
+<div class="mx-3">
   <% if @flashcards.empty? %>
     <p class="text-center text-muted">This deck has no flashcards yet.</p>
   <% else %>
@@ -17,29 +24,30 @@
         <div class="flashcard-inner">
           <div class="flashcard-face flashcard-front">
             <p class="fs-4 fw-semibold text-center"><%= flashcard.question %></p>
-            <button class="btn btn-outline-primary mt-3" data-action="click->flashcard#flip">Show Answer</button>
+            <button class="btn btn-outline-OJ-primary mt-3" data-action="click->flashcard#flip">Show Answer</button>
           </div>
           <div class="flashcard-face flashcard-back">
             <p class="fs-4 text-center mb-3"><%= flashcard.answer %></p>
             <div class="d-flex justify-content-center gap-3">
-              <button class="btn btn-success" data-action="click->flashcard#score" data-correct="true">Yes ✓</button>
-              <button class="btn btn-danger"  data-action="click->flashcard#score" data-correct="false">No ✗</button>
+              <button class="btn btn-outline-success text-success" data-action="click->flashcard#score" data-correct="true">Yes ✓</button>
+              <button class="btn btn-outline-danger text-danger"  data-action="click->flashcard#score" data-correct="false">No ✗</button>
             </div>
           </div>
         </div>
       </div>
     <% end %>
-
-    <div class="d-flex justify-content-center gap-3 mt-3" data-flashcard-target="nav">
-      <button class="btn btn-outline-secondary" data-action="click->flashcard#prev">&#8592; Previous</button>
-      <button class="btn btn-primary" data-action="click->flashcard#next">Next &#8594;</button>
+</div>
+    <div class="d-flex justify-content-center gap-3 mt-4" data-flashcard-target="nav">
+      <button class="btn btn-outline-OJ-primary" data-action="click->flashcard#prev">&#8592; Previous</button>
+      <button class="btn btn-OJ-primary-light text-OJ-primary" data-action="click->flashcard#next">Next &#8594;</button>
     </div>
 
     <div class="d-none text-center py-4" data-flashcard-target="results">
-      <h2 class="mb-3">Deck complete!</h2>
-      <p class="fs-4 mb-4">Current score: <strong data-flashcard-target="scoreDisplay"></strong></p>
-      <%= link_to "Play again", play_deck_deck_path(@deck), class: "btn btn-primary me-2" %>
-      <%= link_to "Back to decks", decks_path, class: "btn btn-outline-secondary" %>
+      <h2 class="mb-3 text-OJ-primary">Deck complete!</h2>
+      <p class="fs-4 mb-5">Current score: <strong data-flashcard-target="scoreDisplay"></strong></p>
+      <%= link_to "Play again", play_deck_deck_path(@deck), class: "btn btn-OJ-primary text-white me-2" %>
+      <%= link_to "Back to decks", decks_path, class: "btn btn-outline-OJ-primary" %>
     </div>
   <% end %>
+</div>
 </div>
