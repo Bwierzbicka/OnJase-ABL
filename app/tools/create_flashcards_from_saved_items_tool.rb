@@ -8,7 +8,7 @@ class CreateFlashcardsFromSavedItemsTool < RubyLLM::Tool
   def initialize(current_user, saved_items)
     # super()
     @user = current_user
-    @saved_items
+    @saved_items = saved_items
   end
 
   def execute(deck_name:)
