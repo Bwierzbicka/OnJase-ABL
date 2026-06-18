@@ -15,4 +15,11 @@ class Deck < ApplicationRecord
     total_attempts = attempted.sum(:attempt_count)
     total_correct.to_f / total_attempts
   end
+
+  def score_tier
+    return :none if score.nil?
+    return :low  if score < 0.5
+    return :medium if score < 0.75
+    :high
+  end
 end

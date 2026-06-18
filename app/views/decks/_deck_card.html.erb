@@ -1,0 +1,17 @@
+<% tier = deck.score_tier %>
+
+<%= link_to play_deck_deck_path(deck), class: "text-decoration-none" do %>
+  <div class="deck-card deck-card--<%= tier %>">
+    <div class="deck-card__name"><%= deck.name %></div>
+    <div class="deck-card__score mt-1">
+      <% if deck.score %>
+        Score: <span><%= (deck.score * 100).round %>%</span>
+      <% else %>
+        No attempts yet
+      <% end %>
+    </div>
+    <div class="deck-card__status">
+      <%= { none: "Not started", low: "Needs practice", medium: "Getting there", high: "Looking good!" }[tier] %>
+    </div>
+  </div>
+<% end %>
