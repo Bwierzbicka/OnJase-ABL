@@ -1,5 +1,5 @@
 class CreateFlashcardsFromSavedItemsTool < RubyLLM::Tool
-  description "Create Flashcards from saved words.You will be given a set of saved words.
+  description "Create Decks of flashcards from saved words.You will be given a set of saved words.
   Use this whenever the user wants to save, or bookmark flashcards
   — for example: 'create flashcards','create these flashcards', 'bookmark these flashcards'."
   param :deck_name, desc: "The name of the deck I'm creating"
