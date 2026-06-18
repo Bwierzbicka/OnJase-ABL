@@ -38,6 +38,16 @@ class DecksController < ApplicationController
     redirect_to decks_path
   end
 
+  def create_deck
+    embedded_query = RubyLLM.embed(params[:query]).vectors
+    # TODO: run embedded query into tool
+    results = SavedItem.nearest_neighbors(:embedding, embedded_query, distance: "euclidean").first(15)
+    chat = RubyLLM.chat
+    chat.with_tool(CreateFlashcardsFromSavedItemsTool.new(current_user, results))
+    response = chat.ask("Create a deck of flashcards with the given tool with the name #{params[:query]}")
+    puts response.content
+  end
+
   def play_deck
     @flashcards = @deck.flashcards
   end

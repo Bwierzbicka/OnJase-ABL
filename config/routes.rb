@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   resources :phrases, only: [:show, :destroy]
 
   resources :decks do
+    collection do
+      post :create_deck
+    end
     member do
       get  :play_deck
       post :record_score
