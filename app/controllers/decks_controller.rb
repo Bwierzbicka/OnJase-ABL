@@ -39,9 +39,9 @@ class DecksController < ApplicationController
   end
 
   def create_deck
-    embedding = RubyLLM.embed(params[:query])
+    embedded_query = RubyLLM.embed(params[:query]).vectors
     # TODO: run embedded query into tool
-    SavedItem.nearest_neighbors(:embedding, embedded_query, distance: "euclidean").first(15)
+    results = SavedItem.nearest_neighbors(:embedding, embedded_query, distance: "euclidean").first(15)
   end
 
   def play_deck
