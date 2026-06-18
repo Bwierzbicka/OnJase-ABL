@@ -48,10 +48,154 @@ phrase2 = Phrase.create!(
   english: "I don't understand"
 )
 
+word3 = Word.create!(
+  french: "chat",
+  english: "cat",
+  definition: "A small domesticated carnivorous mammal",
+  word_type: "nom",
+  gender: "masculin"
+)
+
+word4 = Word.create!(
+  french: "manger",
+  english: "to eat",
+  definition: "To consume food for nourishment",
+  word_type: "verbe"
+)
+
+word5 = Word.create!(
+  french: "beau",
+  english: "beautiful / handsome",
+  definition: "Having qualities that give pleasure to the senses",
+  word_type: "adjectif"
+)
+
+word6 = Word.create!(
+  french: "dormir",
+  english: "to sleep",
+  definition: "To rest in a state of sleep",
+  word_type: "verbe"
+)
+
+word7 = Word.create!(
+  french: "eau",
+  english: "water",
+  definition: "A clear liquid essential for life",
+  word_type: "nom",
+  gender: "féminin"
+)
+
+word8 = Word.create!(
+  french: "grand",
+  english: "big / tall",
+  definition: "Of great size, extent, or intensity",
+  word_type: "adjectif"
+)
+
+word9 = Word.create!(
+  french: "livre",
+  english: "book",
+  definition: "A written or printed work consisting of pages",
+  word_type: "nom",
+  gender: "masculin"
+)
+
+word10 = Word.create!(
+  french: "parler",
+  english: "to speak",
+  definition: "To express oneself in spoken words",
+  word_type: "verbe"
+)
+
+word11 = Word.create!(
+  french: "ville",
+  english: "city",
+  definition: "A large, permanently inhabited place",
+  word_type: "nom",
+  gender: "féminin"
+)
+
+word12 = Word.create!(
+  french: "apprendre",
+  english: "to learn",
+  definition: "To acquire knowledge or a skill through study or experience",
+  word_type: "verbe"
+)
+
+phrase3 = Phrase.create!(
+  french: "S'il vous plaît",
+  english: "Please"
+)
+
+phrase4 = Phrase.create!(
+  french: "Merci beaucoup",
+  english: "Thank you very much"
+)
+
+phrase5 = Phrase.create!(
+  french: "De rien",
+  english: "You're welcome"
+)
+
+phrase6 = Phrase.create!(
+  french: "Excusez-moi",
+  english: "Excuse me"
+)
+
+phrase7 = Phrase.create!(
+  french: "Je m'appelle...",
+  english: "My name is..."
+)
+
+phrase8 = Phrase.create!(
+  french: "Parlez-vous anglais ?",
+  english: "Do you speak English?"
+)
+
+phrase9 = Phrase.create!(
+  french: "Je voudrais...",
+  english: "I would like..."
+)
+
+phrase10 = Phrase.create!(
+  french: "Où est... ?",
+  english: "Where is... ?"
+)
+
+phrase11 = Phrase.create!(
+  french: "Je suis désolé(e)",
+  english: "I'm sorry"
+)
+
+phrase12 = Phrase.create!(
+  french: "À bientôt",
+  english: "See you soon"
+)
+
 SavedItem.create!(user: user, saveable: word1)
 SavedItem.create!(user: user, saveable: word2)
+SavedItem.create!(user: user, saveable: word3)
+SavedItem.create!(user: user, saveable: word4)
+SavedItem.create!(user: user, saveable: word5)
+SavedItem.create!(user: user, saveable: word6)
+SavedItem.create!(user: user, saveable: word7)
+SavedItem.create!(user: user, saveable: word8)
+SavedItem.create!(user: user, saveable: word9)
+SavedItem.create!(user: user, saveable: word10)
+SavedItem.create!(user: user, saveable: word11)
+SavedItem.create!(user: user, saveable: word12)
 SavedItem.create!(user: user, saveable: phrase1)
 SavedItem.create!(user: user, saveable: phrase2)
+SavedItem.create!(user: user, saveable: phrase3)
+SavedItem.create!(user: user, saveable: phrase4)
+SavedItem.create!(user: user, saveable: phrase5)
+SavedItem.create!(user: user, saveable: phrase6)
+SavedItem.create!(user: user, saveable: phrase7)
+SavedItem.create!(user: user, saveable: phrase8)
+SavedItem.create!(user: user, saveable: phrase9)
+SavedItem.create!(user: user, saveable: phrase10)
+SavedItem.create!(user: user, saveable: phrase11)
+SavedItem.create!(user: user, saveable: phrase12)
 
 user2 = User.create!(
   email: "autre@example.com",
