@@ -14,7 +14,8 @@ class CreateFlashcardsFromSavedItemsTool < RubyLLM::Tool
   def execute(deck_name:)
     new_deck = Deck.create!(name: deck_name, user: @user)
     @saved_items.each do |saved_item|
-      Flashcard.create!(french: saved_item.saveable.french, english: saved_item.saveable.english, deck: new_deck)
+      flashcard = Flashcard.create!(question: saved_item.saveable.french, answer: saved_item.saveable.english, user: @user)
+      DeckFlashcard.create!(deck: new_deck, flashcard: flashcard)
     end
   end
 end

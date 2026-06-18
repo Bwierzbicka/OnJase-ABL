@@ -44,7 +44,8 @@ class DecksController < ApplicationController
     results = SavedItem.nearest_neighbors(:embedding, embedded_query, distance: "euclidean").first(15)
     chat = RubyLLM.chat
     chat.with_tool(CreateFlashcardsFromSavedItemsTool.new(current_user, results))
-    chat.ask("Create a deck of flashcards with the given tool")
+    response = chat.ask("Create a deck of flashcards with the given tool with the name #{params[:query]}")
+    puts response.content
   end
 
   def play_deck
