@@ -1,12 +1,11 @@
 <div class="m-4 pb-3 overflow-auto">
+  <%= turbo_stream_from current_user, "decks" %>
   <h1 class="page-title">Flashcard decks</h1>
 
   <div class="conversation-list">
-    <ul class="list-unstyled p-0">
+    <ul class="list-unstyled p-0" id="decks-list">
       <% @decks.each do |deck| %>
-        <li class="py-2">
-          <%= render "deck_card", deck: deck %>
-        </li>
+        <%= render "deck_card", deck: deck %>
       <% end %>
     </ul>
   <%= form_with url: create_deck_decks_path, method: :post do |f| %>

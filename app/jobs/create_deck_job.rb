@@ -35,8 +35,16 @@ class CreateDeckJob < ApplicationJob
       is short. #{modified_query}
     TEXT
 
+    tool = CreateFlashcardsFromSavedItemsTool.new(user, filtered_results)
     chat3 = RubyLLM.chat.with_instructions(instructions3)
-    chat3.with_tool(CreateFlashcardsFromSavedItemsTool.new(user, filtered_results))
+    chat3.with_tool(tool)
     chat3.ask("Create a new Deck of flashcards")
+
+    Turbo::StreamsChannel.broadcast_append_to(
+      [user, "decks"],
+      target: "decks-list",
+      partial: "decks/deck_card",
+      locals: { deck: tool.created_deck }
+    )
   end
 end

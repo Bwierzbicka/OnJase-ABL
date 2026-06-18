@@ -40,7 +40,7 @@ class DecksController < ApplicationController
 
   def create_deck
     CreateDeckJob.perform_later(current_user, params[:query])
-    redirect_to decks_path, notice: "Your deck is being created!"
+    head :ok
   end
 
   def play_deck
