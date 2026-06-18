@@ -5,6 +5,9 @@ class UserConversationsController < ApplicationController
 
   def index
     @user_conversations = current_user.user_conversations
+                                      .includes(:user_conversation_messages)
+                                      .sort_by { |c| c.user_conversation_messages.map(&:created_at).max || Time.at(0) }
+                                      .reverse
   end
 
   def create
