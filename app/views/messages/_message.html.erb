@@ -4,7 +4,7 @@
       <%= raw(render_markdown(message.content)) %>
     </div>
   </div>
-<% elsif message.role == "assistant" %>
+<% elsif message.role == "assistant" && !message.tool_calls.any? %>
   <div class="d-flex justify-content-start my-2" id="<%= dom_id(message) %>">
     <div class="chat-bubble bg-white rounded-4 px-3 py-2 border">
       <%= message.content.present? ? raw(render_markdown(message.content)) : "..." %>

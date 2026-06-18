@@ -68,12 +68,18 @@ class CreateChatAssistantMessageJob < ApplicationJob
 
     broadcast_appended.each do |msg_id|
       msg = Message.find(msg_id)
-      msg.broadcast_replace_to(
-        chat,
-        target: ActionView::RecordIdentifier.dom_id(msg),
-        partial: "messages/message",
-        locals: { message: msg }
-      )
+      if msg.tool_calls.any?
+        # This message became a tool-call intermediary (no user-visible content).
+        # Remove it from the DOM rather than re-rendering it as "...".
+        Turbo::StreamsChannel.broadcast_remove_to(chat, target: dom_id(msg))
+      else
+        msg.broadcast_replace_to(
+          chat,
+          target: ActionView::RecordIdentifier.dom_id(msg),
+          partial: "messages/message",
+          locals: { message: msg }
+        )
+      end
     end
 
     old_title = chat.title
