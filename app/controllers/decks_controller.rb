@@ -38,6 +38,12 @@ class DecksController < ApplicationController
     redirect_to decks_path
   end
 
+  def create_deck
+    embedding = RubyLLM.embed(params[:query])
+    # TODO: run embedded query into tool
+    SavedItem.nearest_neighbors(:embedding, embedded_query, distance: "euclidean").first(15)
+  end
+
   def play_deck
     @flashcards = @deck.flashcards
   end

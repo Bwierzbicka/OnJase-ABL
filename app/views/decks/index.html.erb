@@ -9,7 +9,12 @@
         </li>
       <% end %>
     </ul>
+  <%= form_with url: create_deck_decks_path, method: :post do |f| %>
+    <%= f.text_field :query, placeholder: "Search saved items..." %>
+    <%= f.submit "Create Deck" %>
+  <% end %>
 </div>
+
 
 
   <div>
