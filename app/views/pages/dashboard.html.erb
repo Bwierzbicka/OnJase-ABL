@@ -1,4 +1,4 @@
-<div class='m-4'>
+<div class='m-4 pb-3 overflow-auto'>
   <p class="fs-5 mb-4"><span class="page-title fs-1">Salut,</span>
     <% if current_user.display_name.present? %>
       <%= current_user.display_name %>
@@ -9,7 +9,7 @@
 
   <div class="d-flex flex-column gap-3 dashboard-container">
 
-    <div class="dashborad-card p-3 bg-white">
+    <div class="dashboard-card p-3 bg-white">
       <p class="text-OJ-primary"><strong>L'anecdote du jour</strong></p>
       <% if @fun_fact.present? %>
         <p id="gen-fun-fact" class="m-0"><%= @fun_fact.fact %></p>
@@ -20,7 +20,7 @@
 
 
     <%= link_to decks_path, class: 'text-OJ-primary text-decoration-none' do %>
-      <div class="dashborad-card text-center p-3 bg-white">
+      <div class="dashboard-card text-center p-3 bg-white">
         <strong class="fs-6">
            <p class="mb-2">FLASHCARD DECKS</p>
            <div class="d-flex gap-3 justify-content-center">
@@ -32,7 +32,7 @@
       </div>
     <% end %>
 
-    <div class="dashborad-card p-3 bg-white">
+    <div class="dashboard-card p-3 bg-white">
       <p class="text-OJ-primary"><strong>Enregistré récemment</strong></p>
       <% @recently_saved_phrases.reverse.each do |phrase| %>
         <%= link_to phrase_path(phrase), class: "text-decoration-none" do %>

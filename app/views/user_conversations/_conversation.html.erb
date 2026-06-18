@@ -1,0 +1,31 @@
+<li id="<%= dom_id(conversation) %>" class="py-2 d-flex gap-1">
+  <% other = conversation.other_participant(current_user) %>
+
+  <div class="position-relative me-2">
+    <% if other.avatar.attached? %>
+      <%= cl_image_tag other.avatar.key,
+            crop: :thumb,
+            gravity: :face,
+            class: "avatar-medium rounded-circle object-fit-cover",
+            alt: "User avatar" %>
+    <% else %>
+      <%= image_tag "avatar_default.png", class: "avatar-medium rounded-circle object-fit-cover", alt: "Default avatar" %>
+    <% end %>
+    <% if conversation.unread_for?(current_user) %>
+      <span class="position-absolute bottom-0 end-0 bg-OJ-primary rounded-circle border border-2 border-white" style="width:16px;height:16px;"></span>
+    <% end %>
+  </div>
+
+  <%= link_to user_conversation_path(conversation), class: "text-decoration-none text-OJ-text-main" do %>
+    <div class="d-flex flex-column justify-content-center">
+      <div class="fw-bold">
+        <%= other.username %>
+      </div>
+      <% if conversation.user_conversation_messages.last.present? %>
+        <div class="d-inline-block text-truncate small" style="max-width: 65vw">
+          <%= conversation.user_conversation_messages.last.content %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</li>
