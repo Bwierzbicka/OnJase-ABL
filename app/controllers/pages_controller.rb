@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   def dashboard
     @fun_fact = FunFact.all.sample
     @recently_saved_phrases = current_user.saved_phrases.last(3)
+    @needs_practice = Deck.low_score.sample
   end
 
   def profile

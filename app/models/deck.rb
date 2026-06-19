@@ -20,6 +20,14 @@ class Deck < ApplicationRecord
     return :none if score.nil?
     return :low  if score < 0.5
     return :medium if score < 0.75
+
     :high
   end
+
+  scope :low_score, lambda {
+    joins(:deck_flashcards)
+      .where("deck_flashcards.attempt_count > 0")
+      .group("decks.id")
+      .having("SUM(deck_flashcards.correct_count)::float / SUM(deck_flashcards.attempt_count) < ?", 0.4)
+  }
 end

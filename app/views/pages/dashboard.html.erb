@@ -20,15 +20,13 @@
 
 
     <%= link_to decks_path, class: 'text-OJ-primary text-decoration-none' do %>
-      <div class="dashboard-card text-center p-3 bg-white">
-        <strong class="fs-6">
-           <p class="mb-2">FLASHCARD DECKS</p>
-           <div class="d-flex gap-3 justify-content-center">
-            <i class="fs-3 fa-regular fa-face-smile-beam text-success"></i>
-            <i class="fs-3 fa-regular fa-face-meh text-warning"></i>
-            <i class="fs-3 fa-regular fa-face-frown text-danger"></i>
-           </div>
-        </strong>
+      <div class="dashboard-card p-3 bg-white d-flex flex-column ">
+        <p class="text-OJ-primary mb-0"><strong>Flashcard Decks</strong></p>
+          <span class="text-muted small mb-2">Needs practice:</span>
+        <div class="d-flex align-items-center justify-content-between gap-2 border border-2 p-2 bg-OJ-background-color rounded-4">
+          <strong class="flex-grow-1"><%= @needs_practice.name %></strong>
+          <span class="badge rounded-pill text-bg-warning fs-6 px-3 py-2 text-white"><%= (@needs_practice.score * 100).round %>%</span>
+        </div>
       </div>
     <% end %>
 
