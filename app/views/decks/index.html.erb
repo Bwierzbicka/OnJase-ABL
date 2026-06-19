@@ -8,15 +8,6 @@
         <%= render "deck_card", deck: deck %>
       <% end %>
     </ul>
-  <%= form_with url: create_deck_decks_path, method: :post,
-                data: { controller: "deck-search", action: "submit->deck-search#submit" } do |f| %>
-    <p class="mb-1">Create a new deck:</p>
-    <%= f.text_field :query, placeholder: "Make me a business terms deck...", class: "form-control",
-                     data: { "deck-search-target": "input" } %>
-    <div data-deck-search-target="status" class="d-none text-muted small mt-1">Searching…</div>
-    <div class="d-flex justify-content-end">
-      <%= f.submit "Create", class: "btn btn-OJ-primary fw-bold text-white mt-2" %>
-    </div>
-  <% end %>
+  <%= render "deck_form" %>
 </div>
 </div>
