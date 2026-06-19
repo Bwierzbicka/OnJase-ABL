@@ -1,6 +1,9 @@
 class ChatsController < ApplicationController
   def index
     @chats = current_user.chats
+                         .includes(:messages)
+                         .sort_by { |c| c.messages.map(&:created_at).max || Time.at(0) }
+                         .reverse
   end
 
   def new
