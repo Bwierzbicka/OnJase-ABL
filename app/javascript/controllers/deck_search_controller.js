@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["input", "status", "submit"]
+  static targets = ["input", "status", "submit", "overlay"]
 
   connect() {
     const list = document.getElementById("decks-list")
@@ -12,6 +12,15 @@ export default class extends Controller {
 
   disconnect() {
     this.observer?.disconnect()
+  }
+
+  open() {
+    this.overlayTarget.classList.remove("deck-overlay--hidden")
+    this.inputTarget.focus()
+  }
+
+  close() {
+    this.overlayTarget.classList.add("deck-overlay--hidden")
   }
 
   submit() {
@@ -27,5 +36,6 @@ export default class extends Controller {
     this.inputTarget.classList.remove("d-none")
     this.submitTarget.classList.remove("d-none")
     this.statusTarget.classList.add("d-none")
+    this.close()
   }
 }
