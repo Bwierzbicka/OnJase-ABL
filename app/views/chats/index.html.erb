@@ -4,7 +4,7 @@
   <div class="chat-list">
     <div class="bg-white rounded-3 overflow-hidden shadow-sm">
       <% if @chats.any? %>
-        <% @chats.reverse.each_with_index do |chat, index| %>
+        <% @chats.each_with_index do |chat, index| %>
           <%= link_to chat_path(chat), class: "text-decoration-none" do %>
             <div class="d-flex align-items-center px-3 py-3 <%= index < @chats.size - 1 ? 'border-bottom border-OJ-background-color' : '' %>">
               <div class="d-flex align-items-center justify-content-center rounded-3 me-3 flex-shrink-0">
@@ -12,7 +12,14 @@
               </div>
               <div>
                 <div class="fw-semibold text-OJ-text-main"><%= chat.title %></div>
+                <% if chat.messages.last.present? %>
+                  <div class="d-inline-block text-truncate small text-muted" style="max-width: 65vw"><%= chat.messages.last.content %></div>
+                <% end %>
+                <%if !chat.messages.empty? %>
+                <div class="text-muted small"><%= chat.messages.last.created_at.to_date == Date.today ? "Today" : chat.messages.last.created_at.strftime("%b %d, %Y") %></div>
+                <% else %>
                 <div class="text-muted small"><%= chat.created_at.to_date == Date.today ? "Today" : chat.created_at.strftime("%b %d, %Y") %></div>
+                <% end%>
               </div>
             </div>
           <% end %>
