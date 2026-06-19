@@ -31,6 +31,13 @@ arnold = User.create!( # user = current_user
   username: "Arnold"
 )
 
+arnoldTest = User.create!( # user = current_user
+  email: "arnoldTest@gmail.com",
+  password: "password123",
+  password_confirmation: "password123",
+  username: "Arnold_Test"
+)
+
 
 
 user10 = User.create!( # user = current_user
@@ -319,6 +326,25 @@ conversation4 = UserConversation.create!(user1: user3, user2: user13)
 conversation5 = UserConversation.create!(user1: user3, user2: user14)
 conversation6 = UserConversation.create!(user1: user3, user2: user15)
 conversation7 = UserConversation.create!(user1: user3, user2: arnold)
+conversation8 = UserConversation.create!(user1: user3, user2: arnoldTest)
+
+UserConversationMessage.create!(
+  user_conversation_id: conversation8.id,
+  user_id: arnoldTest.id.to_s,
+  content: "On se rencontre près du kiosque SAQ."
+)
+
+UserConversationMessage.create!(
+  user_conversation_id: conversation8.id,
+  user_id: user3.id.to_s,
+  content: "Je suis à la grande scène, on se voit là-bas."
+)
+
+UserConversationMessage.create!(
+  user_conversation_id: conversation8.id,
+  user_id: arnoldTest.id.to_s,
+  content: "Quoi de neuf Beata, est ce que t'as aimé le show pis la musique?"
+)
 
 UserConversationMessage.create!(
   user_conversation_id: conversation.id,
@@ -335,7 +361,13 @@ UserConversationMessage.create!(
 UserConversationMessage.create!(
   user_conversation_id: conversation7.id,
   user_id: user3.id.to_s,
-  content: "Je suis à la grosse scène, on se voit là-bas."
+  content: "Je suis à la grande scène, on se voit là-bas."
+)
+
+UserConversationMessage.create!(
+  user_conversation_id: conversation7.id,
+  user_id: arnold.id.to_s,
+  content: "Quoi de neuf Beata, est ce que t'as aimé le show pis la musique?"
 )
 
 UserConversationMessage.create!(
