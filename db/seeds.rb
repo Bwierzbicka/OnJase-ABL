@@ -231,6 +231,13 @@ phrase12 = Phrase.create!(
   english: "See you soon"
 )
 
+user3 = User.create!(
+  email: "b.wierzbicka90@gmail.com",
+  password: "password123",
+  password_confirmation: "password123",
+  username: "beata-1990"
+)
+
 SavedItem.create!(user: user, saveable: word1)
 SavedItem.create!(user: user, saveable: word2)
 SavedItem.create!(user: user, saveable: word3)
@@ -243,18 +250,18 @@ SavedItem.create!(user: user, saveable: word9)
 SavedItem.create!(user: user, saveable: word10)
 SavedItem.create!(user: user, saveable: word11)
 SavedItem.create!(user: user, saveable: word12)
-SavedItem.create!(user: user, saveable: phrase1)
-SavedItem.create!(user: user, saveable: phrase2)
-SavedItem.create!(user: user, saveable: phrase3)
-SavedItem.create!(user: user, saveable: phrase4)
-SavedItem.create!(user: user, saveable: phrase5)
-SavedItem.create!(user: user, saveable: phrase6)
-SavedItem.create!(user: user, saveable: phrase7)
-SavedItem.create!(user: user, saveable: phrase8)
-SavedItem.create!(user: user, saveable: phrase9)
-SavedItem.create!(user: user, saveable: phrase10)
-SavedItem.create!(user: user, saveable: phrase11)
-SavedItem.create!(user: user, saveable: phrase12)
+SavedItem.create!(user: user3, saveable: phrase1)
+SavedItem.create!(user: user3, saveable: phrase2)
+SavedItem.create!(user: user3, saveable: phrase3)
+SavedItem.create!(user: user3, saveable: phrase4)
+SavedItem.create!(user: user3, saveable: phrase5)
+SavedItem.create!(user: user3, saveable: phrase6)
+SavedItem.create!(user: user3, saveable: phrase7)
+SavedItem.create!(user: user3, saveable: phrase8)
+SavedItem.create!(user: user3, saveable: phrase9)
+SavedItem.create!(user: user3, saveable: phrase10)
+SavedItem.create!(user: user3, saveable: phrase11)
+SavedItem.create!(user: user3, saveable: phrase12)
 
 user2 = User.create!(
   email: "autre@example.com",
@@ -263,12 +270,7 @@ user2 = User.create!(
   username: "user 2"
 )
 
-user3 = User.create!(
-  email: "b.wierzbicka90@gmail.com",
-  password: "password123",
-  password_confirmation: "password123",
-  username: "beata-1990"
-)
+
 
 SavedItem.create!(user: user3, saveable: word1)
 SavedItem.create!(user: user3, saveable: word2)
