@@ -1,0 +1,27 @@
+<div data-controller="word-edit">
+  <a class="pe-2 text-decoration-none text-OJ-primary fw-bold"
+          data-action="click->word-edit#open">edit</a>
+
+  <div data-word-edit-target="overlay" class="deck-overlay deck-overlay--hidden">
+    <div class="deck-overlay__backdrop" data-action="click->word-edit#close"></div>
+    <div class="deck-overlay__panel m-4">
+      <button class="deck-overlay__close" data-action="click->word-edit#close">&times;</button>
+      <p class="mb-3 fw-bold">Edit word</p>
+
+      <%= form_with model: @word do |f| %>
+        <%= f.text_field :french, placeholder: "French", class: "form-control mb-2" %>
+        <%= f.text_field :english, placeholder: "English", class: "form-control mb-2" %>
+        <%= f.text_area :definition, placeholder: "Definition", class: "form-control mb-2", rows: 3 %>
+        <%=  f.select :gender,
+              options_for_select([['—', ''], ['masculin', 'masculin'], ['féminin', 'féminin']], @word.gender),
+              {}, class: "form-select mb-2" %>
+        <%= f.select :word_type,
+              options_for_select(Word::WORD_TYPE.map { |t| [t, t] }, @word.word_type),
+              {}, class: "form-select mb-2" %>
+        <div class="d-flex justify-content-end">
+          <%= f.submit "Save", class: "btn btn-OJ-primary fw-bold text-white mt-2" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
