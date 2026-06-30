@@ -1,0 +1,20 @@
+<div data-controller="saved-items-edit">
+  <a class="pe-2 text-decoration-none text-OJ-primary fw-bold"
+     data-action="click->saved-items-edit#open">edit</a>
+
+  <div data-saved-items-edit-target="overlay" class="deck-overlay deck-overlay--hidden">
+    <div class="deck-overlay__backdrop" data-action="click->saved-items-edit#close"></div>
+    <div class="deck-overlay__panel m-4">
+      <button class="deck-overlay__close" data-action="click->saved-items-edit#close">&times;</button>
+      <p class="mb-3 fw-bold">Edit phrase</p>
+
+      <%= form_with model: @phrase do |f| %>
+        <%= f.text_area :french, placeholder: "French", class: "form-control mb-2", rows: 3 %>
+        <%= f.text_area :english, placeholder: "English", class: "form-control mb-2", rows: 3 %>
+        <div class="d-flex justify-content-end">
+          <%= f.submit "Save", class: "btn btn-OJ-primary fw-bold text-white mt-2" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
