@@ -1,11 +1,11 @@
-<div data-controller="word-edit">
+<div data-controller="saved-items-edit">
   <a class="pe-2 text-decoration-none text-OJ-primary fw-bold"
-          data-action="click->word-edit#open">edit</a>
+          data-action="click->saved-items-edit#open">edit</a>
 
-  <div data-word-edit-target="overlay" class="deck-overlay deck-overlay--hidden">
-    <div class="deck-overlay__backdrop" data-action="click->word-edit#close"></div>
+  <div data-saved-items-edit-target="overlay" class="deck-overlay deck-overlay--hidden">
+    <div class="deck-overlay__backdrop" data-action="click->saved-items-edit#close"></div>
     <div class="deck-overlay__panel m-4">
-      <button class="deck-overlay__close" data-action="click->word-edit#close">&times;</button>
+      <button class="deck-overlay__close" data-action="click->saved-items-edit#close">&times;</button>
       <p class="mb-3 fw-bold">Edit word</p>
 
       <%= form_with model: @word do |f| %>
