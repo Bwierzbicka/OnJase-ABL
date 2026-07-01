@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
   resources :saved_items, only: [:index]
-  resources :words, only: [:show, :destroy]
+  resources :words, only: [:show, :destroy, :update]
   resources :phrases, only: [:show, :destroy, :update]
 
   resources :decks do
