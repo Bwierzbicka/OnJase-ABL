@@ -1,5 +1,8 @@
 <div class="m-4">
-  <%= link_to :back, class: 'text-decoration-none me-3' do %>
+  <%# javascript:history.back() asks the browser "what was the previous page in your history?"
+  <%# — which Turbo preserves correctly across form submissions regardless of where you navigated from. %>
+  <%# go back to saved items or dashboard, depends how we got to saved phrases %>
+  <%= link_to "javascript:history.back()", class: 'text-decoration-none me-3' do %>
     <i class="fa-solid fa-chevron-left fs-4 text-OJ-text-main"></i>
   <% end %>
 
@@ -9,6 +12,7 @@
     <p class="word-english fs-5 mb-0"><%= @phrase.english %></p>
   </div>
   <div class='d-flex justify-content-end'>
+    <%= render "phrase_form" %>
     <%= link_to "delete", phrase_path(@phrase), class: 'pe-2 text-decoration-none text-danger fw-bold',  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
   </div>
 </div>
