@@ -1,12 +1,22 @@
 <div class=""
      data-controller="flashcard"
      data-flashcard-record-score-url-value="<%= record_score_deck_path(@deck) %>">
-  <div class="d-flex align-items-center p-3 bg-white border-bottom sticky-top shadow-sm">
-    <%= link_to decks_path, class: 'text-decoration-none me-3' do %>
-      <i class="fa-solid fa-chevron-left fs-4 text-OJ-text-main"></i>
-    <% end %>
-    <div class="w-100 d-flex justify-content-between align-items-center">
-      <h2 class="d-inline m-0 fs-5 fw-semibold"><%= @deck.name %></h2>
+
+  <div class="d-flex justify-content-between p-3 bg-white border-bottom sticky-top shadow-sm">
+    <div class="d-flex align-items-center">
+      <div>
+        <%= link_to decks_path, class: 'text-decoration-none me-3' do %>
+          <i class="fa-solid fa-chevron-left fs-4 text-OJ-text-main"></i>
+        <% end %>
+      </div>
+      <div class="w-100 d-flex justify-content-between align-items-center">
+        <h2 class="d-inline m-0 fs-5 fw-semibold"><%= @deck.name %></h2>
+      </div>
+    </div>
+    <div>
+        <%= link_to deck_path(@deck), class: 'pe-2 text-decoration-none text-danger fw-bold', data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+          <i class="fa-regular fa-trash-can text-OJ-text-main fs-6"></i>
+        <% end %>
     </div>
   </div>
 <div class="m-4">
