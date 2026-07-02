@@ -1,7 +1,7 @@
 class Word < ApplicationRecord
   WORD_TYPE = %w[nom verbe article adjectif pronom adverbe préposition conjonction interjection]
 
-  has_many :saved_items, as: :saveable
+  has_many :saved_items, as: :saveable, dependent: :destroy
 
   validates :word_type, inclusion: { in: WORD_TYPE }
   validates :french, presence: true
