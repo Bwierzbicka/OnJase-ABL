@@ -1,0 +1,27 @@
+<div data-controller="add-new-saveable">
+  <button class="deck-overlay__trigger" data-action="click->add-new-saveable#open">
+    <i class="fa-solid fa-plus"></i>
+  </button>
+
+  <div data-add-new-saveable-target="overlay" class="deck-overlay deck-overlay--hidden">
+    <div class="deck-overlay__backdrop" data-action="click->add-new-saveable#close"></div>
+    <div class="deck-overlay__panel m-4">
+      <button class="deck-overlay__close" data-action="click->add-new-saveable#close">&times;</button>
+      <p class="mb-1 fw-bold">New word or phrase:</p>
+
+      <%= form_with url: saved_items_path, method: :post,
+                    data: { action: "submit->add-new-saveable#submit" } do |f| %>
+        <%= f.text_field :item, placeholder: "Enter a French or English word or phrase...", class: "form-control",
+                         data: { "add-new-saveable-target": "input" } %>
+        <div data-add-new-saveable-target="status" class="d-none text-muted small mt-1">
+          <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+          Saving…
+        </div>
+        <div class="d-flex justify-content-end">
+          <%= f.submit "Save", class: "btn btn-OJ-primary fw-bold text-white mt-2",
+                                 data: { "add-new-saveable-target": "submit" } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 <div class='m-4'>
+  <%= turbo_stream_from current_user, "saved_items" %>
   <h1 class="page-title mb-3">Saved</h1>
 
   <ul class="nav nav-tabs" id="savedTabs" role="tablist">
@@ -18,44 +19,23 @@
 
   <div class="tab-content pt-3" id="savedTabsContent">
     <div class="saved-list tab-pane fade show active" id="words-pane" role="tabpanel" aria-labelledby="words-tab">
-      <% if @saved_words.any? %>
+      <p class="text-muted <%= "d-none" if @saved_words.any? %>" data-add-new-saveable-target="wordsEmpty">No saved words yet.</p>
+      <div id="words-list">
         <% @saved_words.reverse.each do |word| %>
-          <%= link_to word_path(word), class: "saved-item-link text-decoration-none" do %>
-            <div class="saved-item-card d-flex justify-content-between align-items-baseline gap-2">
-              <div>
-                <span class="word-french">
-                  <%if word.gender == 'masculine' || word.gender == 'masculin'%>
-                    un
-                  <% elsif word.gender == 'feminine' || word.gender == 'féminin' %>
-                    une
-                  <% end %>
-                  <%= word.french %>
-                </span>
-                <span class="word-english text-muted"><%= word.english %></span>
-              </div>
-              <div>
-                <span class="badge word-type-badge word-type-badge--<%= word.word_type %> ms-2"><%= word.word_type %></span>
-              </div>
-            </div>
-          <% end %>
+          <%= render "word_card", word: word %>
         <% end %>
-      <% else %>
-        <p class="text-muted">No saved words yet.</p>
-      <% end %>
+      </div>
     </div>
 
     <div class="saved-list tab-pane fade" id="phrases-pane" role="tabpanel" aria-labelledby="phrases-tab">
-      <% if @saved_phrases.any? %>
+      <p class="text-muted <%= "d-none" if @saved_phrases.any? %>" data-add-new-saveable-target="phrasesEmpty">No saved phrases yet.</p>
+      <div id="phrases-list">
         <% @saved_phrases.reverse.each do |phrase| %>
-          <%= link_to phrase_path(phrase), class: "saved-item-link text-decoration-none" do %>
-            <div class="saved-item-card">
-              <span class="word-french"><%= phrase.french %></span>
-            </div>
-          <% end %>
+          <%= render "phrase_card", phrase: phrase %>
         <% end %>
-      <% else %>
-        <p class="text-muted">No saved phrases yet.</p>
-      <% end %>
+      </div>
     </div>
   </div>
+
+  <%= render "add_new_saveable" %>
 </div>

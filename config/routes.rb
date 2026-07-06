@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   resources :chats, only: [:index, :new, :create, :show, :destroy] do
     resources :messages, only: [:create]
   end
-  resources :saved_items, only: [:index]
+  resources :saved_items, only: [:index, :create]
   resources :words, only: [:show, :destroy, :update]
   resources :phrases, only: [:show, :destroy, :update]
 

@@ -4,12 +4,8 @@ class SavedItemsController < ApplicationController
     @saved_phrases = current_user.saved_phrases
   end
 
-  #   def new
-  #   @saved_item = SavedItem.new
-  #   @saved_item
-  # end
-
-  # def create
-
-  # end
+  def create
+    SaveItemFromMessagesJob.perform_later(current_user, params[:item].to_s)
+    head :ok
+  end
 end
