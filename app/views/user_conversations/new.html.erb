@@ -1,10 +1,12 @@
 <div class='m-4'>
 
-  <%= link_to user_conversations_path, class: 'text-decoration-none' do %>
-    <i class="fa-solid fa-chevron-left fs-4 text-OJ-text-main"></i>
-  <% end %>
+  <div class="d-flex align-items-center">
+    <%= link_to user_conversations_path, class: 'text-decoration-none' do %>
+      <i class="fa-solid fa-chevron-left fs-4 text-OJ-text-main"></i>
+    <% end %>
 
-  <h1 class="page-title">new message </h1>
+    <h1 class="page-title ms-2 mb-0">New message </h1>
+  </div>
 
   <div class="mt-5 pt-5" data-controller="partial-user-search">
     <%= simple_form_for @user_conversation do |f| %>
