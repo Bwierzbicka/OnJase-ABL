@@ -3,12 +3,15 @@ class CreateWordTool < RubyLLM::Tool
   Use this whenever the user wants to save, bookmark, or add a word to their list
   — for example: 'save this word','add this to my saved words'."
 
-  param :french_add, desc: "The french word I want to add"
+  param :french_add, desc: "The French word I want to add"
   # param :word_id, desc: "The ID of the word", type: :integer # not sure if needed, commented out for now
-  param :english_add, desc: "The english translation of the word I want to add"
-  param :definition_add, desc: "The french definition of the word I want to add"
-  param :word_type_add, desc: "The word type of the word I want to add"
-  param :gender_add, desc: "The gender of the word I want to add"
+  param :english_add, desc: "The English translation of the word I want to add"
+  param :definition_add, desc: "The French definition of the word I want to add"
+  param :word_type_add, desc: "The part of speech of the word (e.g. noun, verb, adjective, adverb)."
+  param :gender_add, desc: "The grammatical gender of the word (masculin or féminin).
+                            Required only if the word is a noun."
+
+  attr_reader :created_word
 
   # When calling this tool you need to initialise it with an isntance of User
   def initialize(current_user)
