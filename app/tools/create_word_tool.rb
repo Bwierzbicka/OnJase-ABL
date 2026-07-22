@@ -22,10 +22,7 @@ class CreateWordTool < RubyLLM::Tool
     word = Word.create!(french: french_add,
                         english: english_add, definition: definition_add,
                         gender: gender_add, word_type: word_type_add)
-    saved_item = SavedItem.create!(saveable: word, user: @user)
-    embedding = RubyLLM.embed("#{word.english},#{word.french}")
-    saved_item.update!(embedding: embedding.vectors)
-    @created_word = word
+    SavedItem.create!(saveable: word, user: @user)
   rescue ActiveRecord::RecordInvalid => e
     { error: e.message }
   end

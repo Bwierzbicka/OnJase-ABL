@@ -15,7 +15,7 @@ class CreateDeckJob < ApplicationJob
     embedded_query = RubyLLM.embed(modified_query).vectors
 
     results = SavedItem.nearest_neighbors(:embedding, embedded_query, distance: "euclidean").first(10)
-    items = results.map { |r| { id: r.id, french: r.saveable.french, english: r.saveable.english } }
+    items = results.filter_map { |r| { id: r.id, french: r.saveable.french, english: r.saveable.english } if r.saveable }
 
     instructions2 = <<~TEXT
       You are a filter. The user has a learning goal described below. You will be given a list of vocabulary items,
