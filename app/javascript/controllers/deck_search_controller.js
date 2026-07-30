@@ -15,12 +15,12 @@ export default class extends Controller {
   }
 
   open() {
-    this.overlayTarget.classList.remove("deck-overlay--hidden")
+    this.overlayTarget.classList.remove("create-new-overlay--hidden")
     this.inputTarget.focus()
   }
 
   close() {
-    this.overlayTarget.classList.add("deck-overlay--hidden")
+    this.overlayTarget.classList.add("create-new-overlay--hidden")
   }
 
   submit() {
