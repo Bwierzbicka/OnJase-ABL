@@ -1,83 +1,81 @@
-<div class="background-img">
-  <header>
-    <div class="nav">
-      <div class="logo">
-        <%= link_to "#" do %>
-          <%= image_tag "OnJase_logo.png", alt: "OnJase logo" %>
-        <% end %>
-          OnJase
-      </div>
-      <div class="nav-cta">
-        <%= link_to "Log in", new_user_session_path, class: "my-nav-link text-decoration-none" %>
-      </div>
+<header>
+  <div class="nav">
+    <div class="logo">
+      <%= link_to "#" do %>
+        <%= image_tag "OnJase_logo.png", alt: "OnJase logo" %>
+      <% end %>
+        OnJase
     </div>
-  </header>
-
-  <div class="hero-section">
-    <div class="hero-content">
-      <div class="hero-badge"><span class="dot"></span> Built for Québec French, not textbook French</div>
-      <h2 class="hero-title">Master French <em>the way</em> it’s actually spoken.</h2>
-      <p>OnJase teaches real Québec French through authentic conversations, spaced repetition, and the culture behind the words - so you sound like a local, not a phrasebook.</p>
-      <%= link_to "Start Learning  →", new_user_registration_path, class: 'btn btn-OJ-primary my-btn' %>
+    <div class="nav-cta">
+      <%= link_to "Log in", new_user_session_path, class: "my-nav-link text-decoration-none" %>
     </div>
   </div>
+</header>
 
-  <div class="cards-section">
-    <div class="section-head">
-      <div class="why">WHY ONJASE</div>
-      <h2>Built for how Québec really talks</h2>
-      <p>Most apps teach Parisian French from a script. OnJase is built around the rhythm, slang, and warmth of everyday Québécois conversation.</p>
+<div class="hero-section">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Built for Québec French, not textbook French</div>
+    <h2 class="hero-title">Master French <em>the way</em> it’s actually spoken.</h2>
+    <p>OnJase teaches real Québec French through authentic conversations, spaced repetition, and the culture behind the words - so you sound like a local, not a phrasebook.</p>
+    <%= link_to "Start Learning  →", new_user_registration_path, class: 'btn btn-OJ-primary my-btn' %>
+  </div>
+</div>
+
+<div class="cards-section">
+  <div class="section-head">
+    <div class="why">WHY ONJASE</div>
+    <h2>Built for how Québec really talks</h2>
+    <p>Most apps teach Parisian French from a script. OnJase is built around the rhythm, slang, and warmth of everyday Québécois conversation.</p>
+  </div>
+  <div class="home-cards">
+
+    <div class="home-card">
+      <div>
+        <i class="fa-solid fa-brain"></i>
+      </div>
+      <div>
+        <strong>Learn Smarter</strong>
+        <p>
+          Built on learning psychology, spaced repetition, and real conversational patterns.
+        </p>
+      </div>
     </div>
-    <div class="home-cards">
+
+    <div class="home-card">
+      <div>
+        <i class="fa-solid fa-earth-americas"></i>
+      </div>
+      <div>
+        <strong>Language & Culture</strong>
+        <p>
+          Explore local humor, expressions, and daily life for natural fluency.
+        </p>
+      </div>
+    </div>
 
       <div class="home-card">
-        <div>
-          <i class="fa-solid fa-brain"></i>
-        </div>
-        <div>
-          <strong>Learn Smarter</strong>
-          <p>
-            Built on learning psychology, spaced repetition, and real conversational patterns.
-          </p>
-        </div>
+      <div>
+        <i class="fa-solid fa-comments"></i>
       </div>
+      <div>
+        <strong>Real Conversations</strong>
+        <p>
+          Practice with authentic French text exchanges, not scripted drills.
+        </p>
+      </div>
+    </div>
 
       <div class="home-card">
-        <div>
-          <i class="fa-solid fa-earth-americas"></i>
-        </div>
-        <div>
-          <strong>Language & Culture</strong>
-          <p>
-            Explore local humor, expressions, and daily life for natural fluency.
-          </p>
-        </div>
+      <div>
+        <i class="fa-solid fa-rocket"></i>
       </div>
-
-       <div class="home-card">
-        <div>
-          <i class="fa-solid fa-comments"></i>
-        </div>
-        <div>
-          <strong>Real Conversations</strong>
-          <p>
-           Practice with authentic French text exchanges, not scripted drills.
-          </p>
-        </div>
+      <div>
+        <strong>Build Confidence</strong>
+        <p>
+          Get instant AI help with translations, tone, and phrasing.
+        </p>
       </div>
-
-       <div class="home-card">
-        <div>
-          <i class="fa-solid fa-rocket"></i>
-        </div>
-        <div>
-          <strong>Build Confidence</strong>
-          <p>
-           Get instant AI help with translations, tone, and phrasing.
-          </p>
-        </div>
-      </div>
-
     </div>
+
   </div>
 </div>

@@ -6,9 +6,9 @@ header {
 }
 
 .nav {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 16px 32px;
   max-width: 1200px;
   margin: 0 auto;
@@ -23,9 +23,9 @@ header {
 }
 
 .nav-cta {
-  display:flex;
-  align-items:center;
-  gap:20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .hero-section {
@@ -143,6 +143,7 @@ header {
 @media (min-width: 768px) {
   .hero-section {
     background-image: url('background-img-desktop.png');
+    background-position: bottom;
     padding-inline: 50px;
   }
 
