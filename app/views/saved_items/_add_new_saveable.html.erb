@@ -1,12 +1,12 @@
 <div data-controller="add-new-saveable">
-  <button class="deck-overlay__trigger" data-action="click->add-new-saveable#open">
+  <button class="create-new-overlay__trigger" data-action="click->add-new-saveable#open">
     <i class="fa-solid fa-plus"></i>
   </button>
 
-  <div data-add-new-saveable-target="overlay" class="deck-overlay deck-overlay--hidden">
-    <div class="deck-overlay__backdrop" data-action="click->add-new-saveable#close"></div>
-    <div class="deck-overlay__panel m-4">
-      <button class="deck-overlay__close" data-action="click->add-new-saveable#close">&times;</button>
+  <div data-add-new-saveable-target="overlay" class="create-new-overlay create-new-overlay--hidden">
+    <div class="create-new-overlay__backdrop" data-action="click->add-new-saveable#close"></div>
+    <div class="create-new-overlay__panel m-4">
+      <button class="create-new-overlay__close" data-action="click->add-new-saveable#close">&times;</button>
       <p class="mb-1 fw-bold">New word or phrase:</p>
 
       <%= form_with url: saved_items_path, method: :post,

@@ -1,4 +1,4 @@
-.deck-overlay__trigger {
+.create-new-overlay__trigger {
   position: fixed;
   bottom: 110px;
   right: 30px;
@@ -21,7 +21,7 @@
   }
 }
 
-.deck-overlay {
+.create-new-overlay {
   position: fixed;
   inset: 0;
   z-index: 900;
